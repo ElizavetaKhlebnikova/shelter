@@ -1,0 +1,106 @@
+[
+  {
+    "model": "pets.pet",
+    "pk": 1,
+    "fields": {
+      "name": "Мироша",
+      "description": "Нежный, ручной котёнок был выброшен перед заморозками на улицу, обработан от паразитов, сейчас сидит в боксе стационара в ожидании семьи!",
+      "image": "product_images/Miron.png",
+      "category": 2,
+      "is_hospitalized": true,
+      "gender": "m",
+      "status": 5
+    }
+  },
+  {
+    "model": "pets.pet",
+    "pk": 2,
+    "fields": {
+      "name": "Гриша",
+      "description": "Гришу принес курьер Самоката на работу, и сказал смеясь, что зарежет его и съест. Услышав это Артемий @sh.drgn.hk решил выкупить его сторговавшись на две тысячи рублей.",
+      "image": "product_images/Grisha.png",
+      "category": 1,
+      "is_hospitalized": false,
+      "gender": "m",
+      "status": 2
+    }
+  },
+  {
+    "model": "pets.pet",
+    "pk": 3,
+    "fields": {
+      "name": "Ваня",
+      "description": "Очень дружелюбный котик возрастом 10-12 месяцев был найден в парке Ивантеевки у пруда. Малыш беззаботно бегал и охотился на уток, подбегал к людям, к детям, не боялся, гуляющих собак. Но мимо такого золотого парня проходили прохожие, останавливались только дети, чтобы пожмакать, а он был и не против, разрешая все с собой делать.",
+      "image": "product_images/Vania.png",
+      "category": 2,
+      "is_hospitalized": false,
+      "gender": "m",
+      "status": 5
+    }
+  },
+  {
+    "model": "pets.pet",
+    "pk": 4,
+    "fields": {
+      "name": "Пончик",
+      "description": "Мы забрали малыша с заправки, где он выживал совсем один. В играх с друзьями Пончик получил серьезные травмы и чуть не погиб, но все обошлось и зайчик быстро поправился.\r\nСейчас здоровый, привитый, невероятно трогательный, любознательный и неутомимый ребенок ищет свой самый уютный, заботливый и понимающий дом",
+      "image": "product_images/Ponchik.png",
+      "category": 3,
+      "is_hospitalized": false,
+      "gender": "m",
+      "status": 3
+    }
+  },
+  {
+    "model": "pets.pet",
+    "pk": 5,
+    "fields": {
+      "name": "Персик",
+      "description": "-",
+      "image": "product_images/Persik.png",
+      "category": 1,
+      "is_hospitalized": false,
+      "gender": "m",
+      "status": 2
+    }
+  },
+  {
+    "model": "pets.pet",
+    "pk": 6,
+    "fields": {
+      "name": "Белка",
+      "description": "пуполик",
+      "image": "product_images/IMG_20200415_155945.jpg",
+      "category": 1,
+      "is_hospitalized": false,
+      "gender": "f",
+      "status": 2
+    }
+  },
+  {
+    "model": "pets.pet",
+    "pk": 7,
+    "fields": {
+      "name": "Белка2",
+      "description": "пуполик",
+      "image": "product_images/IMG_20200415_173838.jpg",
+      "category": 1,
+      "is_hospitalized": false,
+      "gender": "f",
+      "status": 2
+    }
+  },
+  {
+    "model": "pets.pet",
+    "pk": 8,
+    "fields": {
+      "name": "Белка3",
+      "description": ".",
+      "image": "product_images/IMG_20200415_160309.jpg",
+      "category": 1,
+      "is_hospitalized": false,
+      "gender": "f",
+      "status": 2
+    }
+  }
+]

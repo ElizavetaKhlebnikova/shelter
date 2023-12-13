@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% block css_additional %}{% endblock %}
+    <link href="{% static 'base/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <title>{% block title %} {% endblock %}</title>
+  </head>
+  <body>
+    {% include 'includes/navbar.html' %}
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'base/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- FontAwesome script -->
+    <script src="static/vendor/fontawesome/fontawesome-icons.js" crossorigin="anonymous"></script>
+
+  </body>
+</html>

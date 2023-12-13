@@ -1,0 +1,30 @@
+[
+  {
+    "model": "pets.petscategory",
+    "pk": 1,
+    "fields": {
+      "name": "Кролики"
+    }
+  },
+  {
+    "model": "pets.petscategory",
+    "pk": 2,
+    "fields": {
+      "name": "Коты и кошки"
+    }
+  },
+  {
+    "model": "pets.petscategory",
+    "pk": 3,
+    "fields": {
+      "name": "Собаки"
+    }
+  },
+  {
+    "model": "pets.petscategory",
+    "pk": 4,
+    "fields": {
+      "name": "Птицы"
+    }
+  }
+]

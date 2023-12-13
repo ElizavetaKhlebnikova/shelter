@@ -1,0 +1,1 @@
+[{"model": "pets.petstatus", "pk": 2, "fields": {"status": "Дома"}}, {"model": "pets.petstatus", "pk": 3, "fields": {"status": "Ищет дом"}}, {"model": "pets.petstatus", "pk": 4, "fields": {"status": "Ищет передержку"}}, {"model": "pets.petstatus", "pk": 5, "fields": {"status": "Ищет дом или передержку"}}]
