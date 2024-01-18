@@ -1,7 +1,7 @@
 from django.db import models
-
+from django.urls import reverse
 from users.models import User
-
+from pytils.translit import slugify
 # Create your models here.
 
 class PetsCategory(models.Model):
@@ -25,6 +25,7 @@ class Pet(models.Model):
     description = models.TextField(verbose_name=u"Описание")
     image = models.ImageField(upload_to='product_images', verbose_name=u"Фото животного")
     category = models.ForeignKey(to=PetsCategory, on_delete=models.CASCADE, verbose_name=u"Вид животного")
+    slug = models.SlugField(default='', null=False)
     MALE = 'm'
     FEMALE = 'f'
     GENDERS = [
@@ -41,6 +42,12 @@ class Pet(models.Model):
     def __str__(self):
         return f'Имя подопечного: {self.name} | Вид: {self.category}'
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    # def get_url(self):
+    #     return reverse('one_pet', args=[self.slug])
 
 class Basket(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)

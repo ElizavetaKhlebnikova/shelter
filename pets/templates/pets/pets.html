@@ -5,6 +5,7 @@
 {% block css_additional %}
     <!-- Custom styles for this template -->
     <link href="{% static 'vendor/css/pets.css'%}" rel="stylesheet">
+    <link href="{% static 'vendor/css/pet.css'%}" rel="stylesheet">
 
 {% endblock %}
 
@@ -60,14 +61,14 @@
                 {% for pet in object_list %}
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                        <a href="#" class="card_image">
+                        <a href="{% url 'pets:one_pet' pet_name=pet.slug %}" class="card_image">
                             <img class="card-img-top"
                                  src="{{ pet.image.url }}"
                                  alt="">
                         </a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">{{ pet.name }}</a>
+                                <a href="{% url 'pets:one_pet' pet_name=pet.slug %}">{{ pet.name }}</a>
                             </h4>
                             <h5>{% if pet.gender == 'f' %}
                                 Девочка
@@ -115,10 +116,5 @@
 <!-- /.container -->
 
 <!-- Footer -->
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Store 2022</p>
-    </div>
-    <!-- /.container -->
-</footer>
+{% include 'includes/footer.html' %}
 {% endblock %}

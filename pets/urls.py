@@ -9,4 +9,5 @@ urlpatterns = [
     path('page/<int:page>', views.PetsListView.as_view(), name='paginator'),
     path('baskets/add/<int:pet_id>', views.basket_add, name='basket_add'),
     path('baskets/remove/<int:basket_id>', views.basket_remove, name='basket_remove'),
+    path('pet/<slug:pet_name>', views.PetView.as_view(), name='one_pet'),
 ]
