@@ -19,13 +19,18 @@ class PetStatus(models.Model):
     def __str__(self):
         return self.status
 
+    class Meta:
+        verbose_name = 'Статус подопечного'
+        verbose_name_plural = 'Статусы подопечных'
+
 
 class Pet(models.Model):
     name = models.CharField(max_length=256, verbose_name=u"Кличка животного")
     description = models.TextField(verbose_name=u"Описание")
     image = models.ImageField(upload_to='product_images', verbose_name=u"Фото животного")
     category = models.ForeignKey(to=PetsCategory, on_delete=models.CASCADE, verbose_name=u"Вид животного")
-    slug = models.SlugField(default='', null=False)
+    slug = models.SlugField(default='', null=True)
+    needs = models.TextField(verbose_name=u"Нужды в настоящий момент", null=True)
     MALE = 'm'
     FEMALE = 'f'
     GENDERS = [
@@ -37,8 +42,8 @@ class Pet(models.Model):
     status = models.ForeignKey(to=PetStatus, on_delete=models.CASCADE, verbose_name=u"Статус")
 
     class Meta:
-        verbose_name = 'животное'
-        verbose_name_plural = 'животные'
+        verbose_name = 'подопечный'
+        verbose_name_plural = 'Подопечные'
     def __str__(self):
         return f'Имя подопечного: {self.name} | Вид: {self.category}'
 
@@ -46,8 +51,6 @@ class Pet(models.Model):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
-    # def get_url(self):
-    #     return reverse('one_pet', args=[self.slug])
 
 class Basket(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
@@ -58,6 +61,11 @@ class PetHistory(models.Model):
     pet = models.ForeignKey(to=Pet, on_delete=models.CASCADE, verbose_name=u"Кличка подопечного")
     time = models.DateField(auto_now_add=False, verbose_name=u"Дата")
     node = models.TextField(verbose_name=u"Новость из жизни подопечного")
+    class Meta:
+        verbose_name = 'История подопечного'
+        verbose_name_plural = 'Истории подопечных'
+    def __str__(self):
+        return f'Событие из жизни подопечного: {self.pet.name} | Дата: {self.time}'
 
 
 
