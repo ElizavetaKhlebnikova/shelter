@@ -53,3 +53,11 @@ class Basket(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     pet = models.ForeignKey(to=Pet, on_delete=models.CASCADE)
     created_timestamp = models.DateTimeField(auto_now_add=True)
+
+class PetHistory(models.Model):
+    pet = models.ForeignKey(to=Pet, on_delete=models.CASCADE, verbose_name=u"Кличка подопечного")
+    time = models.DateField(auto_now_add=False, verbose_name=u"Дата")
+    node = models.TextField(verbose_name=u"Новость из жизни подопечного")
+
+
+
