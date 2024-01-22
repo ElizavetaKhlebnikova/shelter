@@ -1,46 +1,72 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="{% url 'index'%}">Store</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'pets:index' %}">Каталог <i class="fas fa-shopping-bag"></i> </a>
+
+{% load static %}
+
+<nav class="navbar">
+    <!--    <div class="container">-->
+
+    <div class="pet-navigation">
+        <ul class="headers">
+            <li class="nav">
+                <a class="link" href="{% url 'pets:index' %}">Наши подопечные</a>
+            </li>
+            <li class="nav">
+                <a class="item" href="#about-me">Обо мне</a>
+            </li>
+            <li class="nav">
+                <a class="item" href="#">Как помочь животным</a>
+            </li>
+            <li class="nav">
+                <a class="item" href="#">Контакты</a>
+            </li>
+        </ul>
+        </div>
+
+    <div class="ribbon-3">
+        <span>
+            <a class="brand" href="{% url 'index'%}">
+            <img src="{% static 'vendor/img/index/2bf9b6.png' %}" alt="HappyVeganShelter" width="150" height="100"
+                 class="d-inline-block align-text-top">
+                <p class="brand">HAPPY VEGAN SHELTER</p>
+            </a>
+
+        </span>
+    </div>
+
+    <!--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"-->
+    <!--                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">-->
+    <!--            <span class="navbar-toggler-icon"></span>-->
+    <!--        </button>-->
+
+    <div class="user-navigation">
+            {% if user.is_authenticated %}
+            <ul class="menu">
+                <li class="nav">
+                    <a class="item" href="{% url 'users:profile' %}">Профиль</a>
                 </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-circle"></i>
+                {% if user.is_superuser or user.is_staff %}
+                <li class="nav"><a class="item" href="/admin">Админ-панель</a></li>
+                {% endif %}
+                <li class="nav">
+                    <a class="item" href="{% url 'users:logout'  %}">
+                        Выйти
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a>
-                        </li>
-                        <li><a class="dropdown-item" href="orders/orders.html">Заказы</a></li>
-                        {% if user.is_superuser or user.is_staff %}
-                            <li><a class="dropdown-item" href="/admin">Админ-панель</a></li>
-                        {% endif %}
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{% url 'users:logout'  %}">
-                                Выйти
-                            </a>
-                        </li>
-                    </ul>
                 </li>
+                </ul>
                 {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users:login' %}">Войти <i class="fas fa-sign-in-alt"></i></a>
+            <ul class="menu">
+                <li  class="nav">
+                    <a class="link" href="{% url 'users:login' %}">Войти </a>
+                </li>
+                <li  class="nav">
+                    <a class="link" href="{% url 'users:registration' %}">Регистрация </a>
                 </li>
                 {% endif %}
             </ul>
         </div>
+
+
     </div>
+    <!--        <img src="static/vendor/img/337495686_756529406143427_4504678268467595324_n.jpg">-->
+    <!--    </div>-->
 </nav>

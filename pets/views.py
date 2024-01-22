@@ -6,7 +6,7 @@ from django.core.cache import cache
 
 from common.views import TitleMixin
 
-from .models import Basket, Pet, PetsCategory
+from .models import Basket, Pet, PetsCategory, PetHistory
 
 
 class IndexView(TitleMixin, TemplateView):
@@ -48,7 +48,9 @@ class PetView(TemplateView):
         context = super().get_context_data(**kwargs)
         pet_name = kwargs['pet_name']
         feedback = Pet.objects.get(slug=pet_name)
+        history = PetHistory.objects.filter(pet=feedback)
         context['pet'] = feedback
+        context['history'] = history
         return context
 
 @login_required
