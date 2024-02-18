@@ -2,71 +2,50 @@
 
 {% load static %}
 
-<nav class="navbar">
-    <!--    <div class="container">-->
-
-    <div class="pet-navigation">
-        <ul class="headers">
-            <li class="nav">
-                <a class="link" href="{% url 'pets:index' %}">Наши подопечные</a>
-            </li>
-            <li class="nav">
-                <a class="item" href="#about-me">Обо мне</a>
-            </li>
-            <li class="nav">
-                <a class="item" href="#">Как помочь животным</a>
-            </li>
-            <li class="nav">
-                <a class="item" href="#">Контакты</a>
-            </li>
-        </ul>
-        </div>
-
-    <div class="ribbon-3">
-        <span>
-            <a class="brand" href="{% url 'index'%}">
-            <img src="{% static 'vendor/img/index/2bf9b6.png' %}" alt="HappyVeganShelter" width="150" height="100"
-                 class="d-inline-block align-text-top">
-                <p class="brand">HAPPY VEGAN SHELTER</p>
-            </a>
-
-        </span>
-    </div>
-
-    <!--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"-->
-    <!--                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">-->
-    <!--            <span class="navbar-toggler-icon"></span>-->
-    <!--        </button>-->
-
-    <div class="user-navigation">
-            {% if user.is_authenticated %}
-            <ul class="menu">
-                <li class="nav">
-                    <a class="item" href="{% url 'users:profile' %}">Профиль</a>
+<nav class="navbar navbar-expand-lg bg-body-tertiary complex">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'pets:index' %}">Наши подопечные</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'index'%}">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Как помочь животным</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Контакты</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'users:profile' %}">Профиль</a>
                 </li>
                 {% if user.is_superuser or user.is_staff %}
-                <li class="nav"><a class="item" href="/admin">Админ-панель</a></li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/admin">Админ-панель</a>
+                </li>
                 {% endif %}
-                <li class="nav">
-                    <a class="item" href="{% url 'users:logout'  %}">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'users:logout'  %}">
                         Выйти
                     </a>
                 </li>
-                </ul>
                 {% else %}
-            <ul class="menu">
-                <li  class="nav">
-                    <a class="link" href="{% url 'users:login' %}">Войти </a>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'users:login' %}">Войти </a>
                 </li>
-                <li  class="nav">
-                    <a class="link" href="{% url 'users:registration' %}">Регистрация </a>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"
+                       href="{% url 'users:registration' %}">Регистрация </a>
                 </li>
                 {% endif %}
             </ul>
         </div>
-
-
     </div>
-    <!--        <img src="static/vendor/img/337495686_756529406143427_4504678268467595324_n.jpg">-->
-    <!--    </div>-->
 </nav>

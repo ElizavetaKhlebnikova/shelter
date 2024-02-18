@@ -6,12 +6,19 @@ from django.core.cache import cache
 
 from common.views import TitleMixin
 
-from .models import Basket, Pet, PetsCategory, PetHistory
+from .models import Basket, Pet, PetsCategory, PetHistory, News
 
 
 class IndexView(TitleMixin, TemplateView):
     template_name = 'pets/index.html'
     title = 'HappyVeganShelter'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        feedback = News.objects.order_by('index_number')
+        context['news'] = feedback
+        context['news_len'] = len(feedback)
+        return context
 
 
 class PetsListView(TitleMixin, ListView):  # за ListView зарезервировано название object_list

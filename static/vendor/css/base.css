@@ -1,6 +1,8 @@
 body {
-  font-size: 16px;
+  font-size: 24px;
   line-height: 1.1;
-  font-family: 'Kanit', sans-serif;
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: 'Cormorant Garamond', serif !important;
+  background-color: #e2dcd9 !important;
+  background-image: url(../img/index/oblaka.png);
+  background-repeat: repeat;
 }

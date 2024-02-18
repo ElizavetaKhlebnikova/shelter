@@ -17,16 +17,6 @@
             <div class="col-lg-12 text-center">
                 <img src="{% if user.image %} {{user.image.url}} {% else %} {% static 'vendor/img/users/default_avatar.jpg' %} {% endif %}"
                      class="img-thumbnail" style="max-width: 40%;">
-                <div class="form-row mb-2" style="padding-top: 20px;">
-                    <div class="col-lg-12">
-                        <div class="custom-file">
-                            <input type="file" name="image" class="custom-file-input" accept="image/*" id="id_image">
-                            <label class="custom-file-label" for="id_image">
-                                Выберите изображение
-                            </label>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <form action="{% url 'users:profile'%}" method="post" enctype="multipart/form-data">
@@ -45,7 +35,16 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="form-row mb-2" style="padding-top: 20px;">
+                    <div class="col-lg-12">
+                        <div class="custom-file">
+                            {{ form.image }}
+                            <label class="custom-file-label" for="{{ form.image.id_for_label }}">
+                                Выберите изображение
+                            </label>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-row">
                     <div class="col-lg-6" style="width: 100%;">
                         <label class="small mb-1" for="{{ form.username.id_for_label }}">Имя пользователя</label>

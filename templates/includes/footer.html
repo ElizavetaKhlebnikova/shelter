@@ -1,6 +1,29 @@
+{% load static %}
+
 <footer class="footer">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; HappyVeganShelter 2024</p>
+    <div class="footer">
+        <div class="footer-logo">
+        <button style="background-color: #f0f8ff00; border: none;">
+            <a class="brand" href="{% url 'index'%}">
+            <img class='rabbit-logo' src="{% static 'vendor/img/index/logo.png' %}" alt="logo">
+        </a>
+        </button>
+        </div>
+        <div class="footer-icons">
+            <p>Социальные сети:</p>
+            <div class="footer-icons-row">
+            <a style="display: none;" href="https://www.instagram.com/happyveganshelter/">
+            <img src="{% static 'vendor/img/index/instagram.png' %}" alt="instagram">
+            </a>
+            <a href="https://t.me/happyveganshelter">
+            <img src="{% static 'vendor/img/index/tg.png' %}" alt="telegram">
+            </a>
+            <a href="https://vk.com/hvshelter">
+            <img src="{% static 'vendor/img/index/vk.png' %}" alt="vk">
+            </a>
+          </div>
+        </div>
     </div>
-    <!-- /.container -->
+
+
 </footer>

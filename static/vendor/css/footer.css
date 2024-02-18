@@ -1,7 +1,99 @@
 footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 27vh;
+  background-color: #db85b19c;
+  box-shadow: 0 0 20px 0px #db85b19c;
+}
+
+div.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.footer-logo {
+  height: 20vh;
+
+  button {
+    height: 100%;
+    background-color: #f0f8ff00;
+    border: none;
+  }
+}
+
+.rabbit-logo {
+  height: 100%;
+}
+
+.rabbit-logo:hover {
+  transition: 0.5s;
+  scale: 120%;
+}
+
+.footer-icons {
+  width: 27%;
+}
+
+.footer-icons p {
+  margin-top: 0;
+  color: white;
+  font-weight: 600;
+  line-height: 1.3;
+  font-size: 24px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.footer-icons-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.footer-icons-row img {
+  width: 10vh;
+  filter: invert(100%);
+  transition: 0.5s; /* Время изменения цвета изображения */
+}
+
+.footer-icons-row img:hover {
+  scale: 120%; /* Цветное изображение при наведении */
+}
+
+@media screen and (min-width: 460px) and (max-width: 635px) {
+  .footer-icons {
+    width: 30%;
+  }
+  .footer-icons-row {
+    justify-content: space-between;
+    img {
+      width: 8vh;
+    }
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 460px) {
+  .footer {
+    padding: 10px;
+    align-items: center;
+  }
+  .footer-logo {
+    height: 20vh;
+    padding: 10px;
+  }
+  .footer-icons {
+    width: auto;
+    p {
+      font-size: 20px;
+    }
+  }
+  .footer-icons-row {
+    img {
+      width: 7vh;
+    }
+  }
 }
