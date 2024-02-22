@@ -24,7 +24,7 @@ class IndexView(TitleMixin, TemplateView):
 class PetsListView(TitleMixin, ListView):  # за ListView зарезервировано название object_list
     model = Pet
     template_name = 'pets/pets.html'
-    paginate_by = 4
+    paginate_by = 9
     title = 'Store - Каталог'
 
     # вместо object_list можно задать context_object_name = ''

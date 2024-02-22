@@ -3,9 +3,9 @@
 {% block title %} Store - Каталог {% endblock %}
 
 {% block css_additional %}
-    <!-- Custom styles for this template -->
-    <link href="{% static 'vendor/css/pets.css'%}" rel="stylesheet">
-    <link href="{% static 'vendor/css/pet.css'%}" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="{% static 'vendor/css/pets.css'%}" rel="stylesheet">
+<link href="{% static 'vendor/css/pet.css'%}" rel="stylesheet">
 
 {% endblock %}
 
@@ -13,26 +13,30 @@
 <!-- Page Content -->
 <div class="container" style="padding-top: 100px;">
 
-    <div class="row">
+    <div class="row-к">
 
-        <div class="col-lg-3">
-            <div class="list-group">
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false">
+                Категория
+            </a>
+
+            <ul class="dropdown-menu">
                 {% for category in categories %}
-                <a href="{% url 'pets:category' category.id %}" class="list-group-item">
+                <li><a class="dropdown-item" href="{% url 'pets:category' category.id %}">
                     {{ category.name }}
-                </a>
+                </a></li>
                 {% endfor %}
-            </div>
-
+            </ul>
         </div>
         <!-- /.col-lg-3 -->
 
-        <div class="col-lg-9">
+        <div class="col-lg-13">
 
             <div class="row">
 
                 {% for pet in object_list %}
-                <div class="col-lg-4 col-md-6 mb-4">
+                <div class="col-lg-4 col-md-4 mb-3">
                     <div class="card h-100">
                         <a href="{% url 'pets:one_pet' pet_name=pet.slug %}" class="card_image">
                             <img class="card-img-top"
@@ -43,6 +47,7 @@
                             <h4 class="card-title">
                                 <a href="{% url 'pets:one_pet' pet_name=pet.slug %}">{{ pet.name }}</a>
                             </h4>
+                            <div class="solid"></div>
                             <h5>{% if pet.gender == 'f' %}
                                 Девочка
                                 {% else %}
@@ -64,22 +69,22 @@
             </div>
 
             <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-        <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
-            <a class="page-link"
-               href="{% if page_obj.has_previous %} ?page={{ page_obj.previous_page_number }} {% else %} # {% endif %}"
-               tabindex="-1" aria-disabled="true">Предыдущая</a>
-        </li>
-        {% for page in page_obj.paginator.page_range %}
-            <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
-        {% endfor %}
-        <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
-            <a class="page-link"
-               href="{% if page_obj.has_next %} ?page={{ page_obj.next_page_number }} {% else %} # {% endif %}"
-               tabindex="-1" aria-disabled="true">Следующая</a>
-        </li>
-    </ul>
-</nav>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                        <a class="page-link"
+                           href="{% if page_obj.has_previous %} ?page={{ page_obj.previous_page_number }} {% else %} # {% endif %}"
+                           tabindex="-1" aria-disabled="true">Предыдущая</a>
+                    </li>
+                    {% for page in page_obj.paginator.page_range %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                    {% endfor %}
+                    <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                        <a class="page-link"
+                           href="{% if page_obj.has_next %} ?page={{ page_obj.next_page_number }} {% else %} # {% endif %}"
+                           tabindex="-1" aria-disabled="true">Следующая</a>
+                    </li>
+                </ul>
+            </nav>
 
         </div>
 
