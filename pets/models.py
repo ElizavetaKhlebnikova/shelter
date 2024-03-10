@@ -27,10 +27,10 @@ class PetStatus(models.Model):
 class Pet(models.Model):
     name = models.CharField(max_length=256, verbose_name=u"Кличка животного")
     description = models.TextField(verbose_name=u"Описание")
-    image = models.ImageField(upload_to='product_images', verbose_name=u"Фото животного")
+    image = models.ImageField(upload_to='pet_images', verbose_name=u"Фото животного", null=True, blank=True,)
     category = models.ForeignKey(to=PetsCategory, on_delete=models.CASCADE, verbose_name=u"Вид животного")
-    slug = models.SlugField(default='', null=True)
-    needs = models.TextField(verbose_name=u"Нужды в настоящий момент", null=True)
+    slug = models.SlugField(default='', null=True, blank=True,)
+    needs = models.TextField(verbose_name=u"Нужды в настоящий момент", null=True, blank=True,)
     MALE = 'm'
     FEMALE = 'f'
     GENDERS = [
@@ -66,6 +66,16 @@ class PetHistory(models.Model):
         verbose_name_plural = 'Истории подопечных'
     def __str__(self):
         return f'Событие из жизни подопечного: {self.pet.name} | Дата: {self.time}'
+
+class PetImage(models.Model):
+    pet = models.ForeignKey(to=Pet, on_delete=models.CASCADE, verbose_name=u"Кличка подопечного")
+    image = models.ImageField(upload_to='pet_images', verbose_name=u"Фото животного")
+    index_number = models.IntegerField(verbose_name=u"Порядок отображения")
+    class Meta:
+        verbose_name = 'Фотография подопечного'
+        verbose_name_plural = 'Фотогафии подопечных'
+    def __str__(self):
+        return f'Фотография подопечного: {self.pet.name}'
 
 class News(models.Model):
     index_number = models.IntegerField(verbose_name=u"Порядок отображения")

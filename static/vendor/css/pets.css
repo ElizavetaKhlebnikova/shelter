@@ -2,6 +2,53 @@ body {
   background-image: url(../img/index/lepestki.png) !important;
 }
 
+.filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #f4f1f0;
+  padding: 20px;
+  box-shadow: 0px 0px 7px 8px #bdb5b88f;
+  font-family: "El Messiri";
+}
+.one-filter {
+  padding: 10px;
+  label {
+    padding-bottom: 10px;
+    font-family: "El Messiri";
+    text-align: center;
+    width: 100%;
+    font-size: 18px;
+  }
+  .form-select {
+    font-family: "El Messiri";
+    text-align: center;
+    background-color: #1cafa536;
+  }
+}
+.filter-button {
+  height: 100px;
+  width: 150px;
+
+  input {
+    font-family: "El Messiri";
+    padding-bottom: 10px;
+    border: unset;
+    height: 100px;
+    width: 150px;
+    background-image: url(../img/index/heart-button.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+  }
+  input:hover {
+    transition: 0.5s;
+    scale: 120%;
+  }
+}
+
 .col-lg-13 {
   padding: 50px !important;
 }
@@ -13,6 +60,7 @@ body {
   backdrop-filter: blur(16px) saturate(180%);
   background-color: #ffffffc2;
   filter: drop-shadow(0 30px 10px rgba(0, 0, 0, 0.125));
+  box-shadow: 0px 0px 7px 8px #bdb5b88f;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,6 +94,18 @@ body {
     width: 0;
   }
 }
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .col-md-4 {
+    width: 50% !important;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 770px) {
+  .one-filter label {
+    width: unset;
+    text-align: left;
+  }
+}
 
 .card-body {
   font-size: 14px;
@@ -59,6 +119,7 @@ body {
   }
   h5 {
     margin-bottom: 0px;
+    font-size: 14px;
   }
   .solid {
     margin: 10px;
@@ -76,12 +137,11 @@ body {
 }
 
 .card-title {
-  font-size: 24px;
-  font-weight: 400;
+  font-size: 22px;
+  font-weight: 600;
   a {
     text-decoration: none;
-    text-transform: uppercase;
-    font-family: "Bad Script", cursive;
+    font-family: "Bad Script";
     color: black;
   }
 }
@@ -110,10 +170,61 @@ body {
   --bs-gradient: none;
 }
 
+.page-item {
+  margin: 2px;
+}
+
+.page-link {
+  background-color: #99ddd6 !important;
+  color: white !important;
+  font-size: 20px !important;
+  font-weight: 600;
+  font-family: "El Messiri";
+  margin: 2px;
+  border: unset !important;
+  box-shadow: unset !important;
+}
+.page-link.active {
+  scale: 108%;
+  border: unset;
+  background-color: #5ac0bb !important;
+  margin: 2px;
+}
+
+.page-link:not(.no-transition):hover {
+  transition: 0.5s;
+  scale: 105%;
+  background-color: #5ac0bb !important;
+}
+
 .col-lg-4-р {
   background-color: #f9f8f7;
 }
 
 .list-group-item {
   background-color: transparent !important;
+}
+
+@media screen and (min-width: 0px) and (max-width: 1040px) {
+  .col-lg-13 {
+    padding: 20px !important;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 770px) {
+  .filter {
+    flex-direction: column;
+  }
+  .one-filter {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .form-select {
+    width: 50% !important;
+  }
+  .filter-button {
+    padding: 10px;
+  }
 }

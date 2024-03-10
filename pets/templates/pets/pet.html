@@ -3,49 +3,103 @@
 {% block title %}  {% endblock %}
 
 {% block css_additional %}
-    <!-- Custom styles for this template -->
-    <link href="{% static 'vendor/css/pet.css'%}" rel="stylesheet">
-    <link href="{% static 'vendor/css/footer.css'%}" rel="stylesheet">
-    <link href="{% static 'vendor/css/index_navbar.css'%}" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="{% static 'vendor/css/pet.css'%}" rel="stylesheet">
 
 {% endblock %}
 
 {% block content %}
 <!-- Page Content -->
-<div class="pet-content">
-        <div class="pet-row">
-            <img src="{{ pet.image.url }}" class="pet image">
-            <div class="pet letter">
-                <h1>Привет, друг, меня зовут <span>{{pet.name}}</span></h1>
-                <h3>{{pet.description}}</h3>
-            </div>
+
+
+<div class="happy-images">
+    <div class="info">
+        <div class="about-me">
+            <h1>Привет, друг, меня зовут <span>{{pet.name}}</span></h1>
+            <h3>{{pet.description}}</h3>
+            <button class="button-background-move" role="button">Хочу помочь!</button>
         </div>
 
+    </div>
+    <div class="photos">
+        <div class="pet image">
+            <img class="figure" src="{{ pet.image.url }}">
+        </div>
+    </div>
+    <h1 class="small-screen-title">Привет, друг, меня зовут <span>{{pet.name}}</span></h1>
+</div>
 
-        <div class="history-list">
-            <ul>
+<div class="history">
+    {% if images|length == 1 %}
+    <div class="photos">
+        {% for image in images %}
+        <div class="pet image"><img class="figure" src="{{image.image.url}}"></div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="photos" style="width: 150%;">
+        <div class="pet image">
+            <div class='slider' id="news">
+                {% for n in images %}
+                {% if n.index_number == 1 %}
+                <input type="radio" name="slider" id="slider{{n.index_number}}" checked="checked">
+                <div class="slide">
+                    <img src='{{n.image.url}}' alt=''>
+                </div>
+                <label for="slider{{ images|length }}"></label>
+                <label for="slider{{ n.index_number|add:'1' }}"></label>
+                {% elif n.index_number == images|length %}
+                <input type="radio" name="slider" id="slider{{n.index_number}}">
+                <div class="slide">
+                    <img src='{{n.image.url}}' alt=''>
+                </div>
+                <label for="slider{{ n.index_number|add:'-1' }}"></label>
+                <label for="slider1"></label>
+                {% else %}
+                <input type="radio" name="slider" id="slider{{n.index_number}}">
+                <div class="slide">
+                    <img src='{{n.image.url}}' alt=''>
+                </div>
+                <label for="slider{{ n.index_number|add:'-1' }}"></label>
+                <label for="slider{{ n.index_number|add:'1' }}"></label>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+    <div class="history-list">
+        {% if history %}
+        <h1>Вот моя история:</h1>
+        <ul>
             {% for node in history %}
             <li><span>{{ node.node }}</span></li>
             {% endfor %}
         </ul>
-        </div>
-        <div class="pet-needs">
-            <h1>Сейчас я очень нуждаюсь в:</h1>
-            <h2>{{pet.needs}}</h2>
-            <h1>Буду очень благодарна за твою помощь!</h1>
-        </div>
-
-
-
+        {% else %}
+        <h2>Скоро здесь будет моя история</h2>
+        <br>
+        <br>
+        {% endif %}
+        <button class="button-background-move" role="button">Хочу помочь!</button>
     </div>
 
+</div>
+
+{% if pet.needs %}
+<div class="needs">
+    <div class="pet-needs">
+        <h1>Сейчас я очень нуждаюсь в:</h1>
+        <h2>{{pet.needs}}</h2>
+        <h1>Буду очень благодарна за твою помощь!</h1>
+        <button class="button-background-move" role="button">Хочу помочь!</button>
     </div>
 </div>
+{% endif %}
 <!-- /.container -->
 
 <!-- Footer -->
 
 {% endblock %}
+<!--celery -A shelter worker -l INFO -P solo-->

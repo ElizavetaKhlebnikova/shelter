@@ -11,16 +11,27 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="col-lg-7">
+    <div class="row" style="justify-content: space-between;">
+        <div class="col-lg-3">
+            <div class="profile">
             <h4 class="mt-3 mb-3">Профиль</h4>
-            <div class="col-lg-12 text-center">
+
                 <img src="{% if user.image %} {{user.image.url}} {% else %} {% static 'vendor/img/users/default_avatar.jpg' %} {% endif %}"
-                     class="img-thumbnail" style="max-width: 40%;">
-            </div>
+                     class="img-thumbnail">
+
 
             <form action="{% url 'users:profile'%}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
+                <div class="form-row mb-2" style="padding-top: 20px;">
+                    <div class="col-lg-12">
+                        <div class="custom-file">
+                            {{ form.image }}
+                            <label class="custom-file-label" for="{{ form.image.id_for_label }}">
+                                Выберите изображение
+                            </label>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-row">
                     <div class="col-lg-6" style="width: 100%;" >
                         <div class="form-group">
@@ -35,16 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-row mb-2" style="padding-top: 20px;">
-                    <div class="col-lg-12">
-                        <div class="custom-file">
-                            {{ form.image }}
-                            <label class="custom-file-label" for="{{ form.image.id_for_label }}">
-                                Выберите изображение
-                            </label>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="form-row">
                     <div class="col-lg-6" style="width: 100%;">
                         <label class="small mb-1" for="{{ form.username.id_for_label }}">Имя пользователя</label>
@@ -64,11 +66,13 @@
                 </div>
             </form>
         </div>
-        <div class="col-lg-5">
+            </div>
+        <div class="col-lg-8">
+            <div class="row">
             {% include 'pets/baskets.html' %}
+            </div>
         </div>
     </div>
 </div>
 
-{% include 'includes/footer.html' %}
 {% endblock %}

@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -41,11 +40,13 @@ INSTALLED_APPS = [
     'django_dump_load_utf8',
 
     'sass_processor',
+    'django_filters',
+    'spurl',
 
     'debug_toolbar',
 
     'pets',
-    'users'
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -173,11 +174,11 @@ LOGOUT_REDIRECT_URL = '/'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'hlebnikovabelkahappy@yandex.ru'
-EMAIL_HOST_PASSWORD = 'iuyufwnawmqtlued' #lizabelka28101997!
+EMAIL_HOST_PASSWORD = 'iuyufwnawmqtlued'  # lizabelka28101997!
 EMAIL_USE_SSL = True
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 INTERNAL_IPS = [
@@ -185,6 +186,6 @@ INTERNAL_IPS = [
     'localhost'
 ]
 
-#celery
+# celery
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'

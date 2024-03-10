@@ -1,12 +1,15 @@
+import requests
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect, render, get_object_or_404
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.core.cache import cache
+from .filters import PetFilter
+from requests import get
 
 from common.views import TitleMixin
 
-from .models import Basket, Pet, PetsCategory, PetHistory, News
+from .models import Basket, Pet, PetsCategory, PetHistory, News, PetStatus, PetImage
 
 
 class IndexView(TitleMixin, TemplateView):
@@ -27,24 +30,34 @@ class PetsListView(TitleMixin, ListView):  # за ListView зарезервир�
     paginate_by = 9
     title = 'Store - Каталог'
 
-    # вместо object_list можно задать context_object_name = ''
-
-    def get_queryset(self):  # метод для получения данных из БД, с помощью которого можно также отфильтровать кверисет
+    def get_queryset(self):
         queryset = super(PetsListView, self).get_queryset()
-        category_id = self.kwargs.get('category_id')
-        pet_list = cache.get('pet_list' + str(category_id))
-        if not pet_list:
-            queryset = queryset.filter(category_id=category_id) if category_id != None else queryset
-            cache.set('pet_list' + str(category_id), queryset, 60)
-        else:
-            queryset = pet_list
+        category_id = self.request.GET.get('category')
+        # pet_list = cache.get('pet_list' + f'http://127.0.0.1:8003/pets/?category=1&gender=f&statuses=2')
+        #
+        # if not pet_list:
+            # добавляем новые фильтры
+        gender = self.request.GET.get('gender')
+        status_id = self.request.GET.get('status')
+        filters = {}
+        if gender not in (None, '-'):
+            filters['gender'] = gender
+        if status_id not in (None, '-'):
+            filters['status_id'] = status_id
+        if category_id not in (None, '-'):
+            filters['category_id'] = category_id
+        if filter:
+            queryset = queryset.filter(**filters)
+            # cache.set('pet_list' + str(category_id), queryset, 60)
+        # else:
+        #     queryset = pet_list
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):  # добавляем данные в контекст
         context = super(PetsListView, self).get_context_data()
         context['categories'] = PetsCategory.objects.all()
-        context['category_id'] = self.kwargs.get(
-            'category_id')  # передаётся id категории, которую мы выбрали, которая вынимается из кваргов при нажатии на ссылку
+        category_id = self.request.GET.get('category')
+        context['statuses'] = PetStatus.objects.all()
         return context
 
 
@@ -58,6 +71,8 @@ class PetView(TemplateView):
         history = PetHistory.objects.filter(pet=feedback)
         context['pet'] = feedback
         context['history'] = history
+        images = PetImage.objects.filter(pet=feedback)
+        context['images'] = images
         return context
 
 @login_required

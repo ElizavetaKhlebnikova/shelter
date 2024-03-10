@@ -9,11 +9,11 @@ from users.tasks import send_email_verification
 
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4',
+        'class': 'form-control-cast',
         'placeholder': "Введите имя пользователя"
     }))
     password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'form-control py-4',
+        'class': 'form-control-cast',
         'placeholder': "Введите пароль"
     }))
 
@@ -24,27 +24,27 @@ class UserLoginForm(AuthenticationForm):
 
 class UserRegistrationForm(UserCreationForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4',
+        'class': 'form-control-cast',
         'placeholder': "Введите имя"
     }))
     last_name = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4',
+        'class': 'form-control-cast',
         'placeholder': "Введите фамилию"
     }))
     username = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4',
+        'class': 'form-control-cast',
         'placeholder': "Введите логин"
     }))
     email = forms.CharField(widget=forms.EmailInput(attrs={
-        'class': 'form-control py-4',
+        'class': 'form-control-cast',
         'placeholder': "Введите адрес электронной почты"
     }))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'form-control py-4',
+        'class': 'form-control-cast',
         'placeholder': "Введите пароль"
     }))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'form-control py-4',
+        'class': 'form-control-cast',
         'placeholder': "Повторите пароль"
     }))
 
@@ -60,22 +60,22 @@ class UserRegistrationForm(UserCreationForm):
 
 class UserProfileForm(UserChangeForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4',
+        'class': 'form-control-cast',
         'placeholder': "Введите имя"
     }))
     last_name = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4',
+        'class': 'form-control-cast',
     }))
     username = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4',
+        'class': 'form-control-cast',
         'readonly': True,
     }))
     email = forms.CharField(widget=forms.EmailInput(attrs={
-        'class': 'form-control py-4',
+        'class': 'form-control-cast',
         'readonly': True,
     }))
     image = forms.ImageField(widget=forms.FileInput(attrs={
-        'class': 'custom-file-input',
+        'class': 'custom-file-input-cast',
     }), required=False)
 
     class Meta:

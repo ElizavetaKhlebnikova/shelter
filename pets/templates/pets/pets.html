@@ -1,11 +1,11 @@
 {% extends 'basic.html' %}
 {% load static %}
 {% block title %} Store - Каталог {% endblock %}
+{% load spurl %}
 
 {% block css_additional %}
 <!-- Custom styles for this template -->
 <link href="{% static 'vendor/css/pets.css'%}" rel="stylesheet">
-<link href="{% static 'vendor/css/pet.css'%}" rel="stylesheet">
 
 {% endblock %}
 
@@ -15,20 +15,38 @@
 
     <div class="row-к">
 
-        <div class="dropdown">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-               aria-expanded="false">
-                Категория
-            </a>
 
-            <ul class="dropdown-menu">
-                {% for category in categories %}
-                <li><a class="dropdown-item" href="{% url 'pets:category' category.id %}">
-                    {{ category.name }}
-                </a></li>
-                {% endfor %}
-            </ul>
-        </div>
+        <form class='filter' method="GET" action="{% url 'pets:index' %}">
+            <div class="one-filter">
+                <label for="category">Вид животного:</label>
+                <select class='form-select' name="category" id="category">
+                    <option value="-" {% if request.GET.category == None %} selected {% endif %}>Не выбран</option>
+                    {% for category in categories %}
+                            <option value={{category.id}} {% if  request.GET.category|add:"0" == category.id %} selected {% endif %} > {{ category.name }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="one-filter">
+                <label for="gender">Пол:</label>
+                <select class='form-select' name="gender" id="gender">
+                    <option value="-" {% if request.GET.gender == None %} selected {% endif %}>Не выбран</option>
+                    <option value="m" {% if request.GET.gender == "m" %} selected {% endif %}> Мужской </option>
+                    <option value="f" {% if request.GET.gender == "f" %} selected {% endif %}> Женский </option>
+                </select>
+            </div>
+            <div class="one-filter">
+                <label for="status_id">Статус:</label>
+                <select class='form-select' name="status" id="status">
+                    <option value="-" {% if request.GET.status == None %} selected {% endif %}>Не выбран</option>
+                    {% for status in statuses %}
+                            <option value={{status.id}} {% if  request.GET.status|add:"0" == status.id %} selected {% endif %}  > {{ status }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="filter-button">
+                <input type="submit" value="Поиск">
+            </div>
+        </form>
         <!-- /.col-lg-3 -->
 
         <div class="col-lg-13">
@@ -45,15 +63,17 @@
                         </a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="{% url 'pets:one_pet' pet_name=pet.slug %}">{{ pet.name }}</a>
+                                <a href="{% url 'pets:one_pet' pet_name=pet.slug %}">{{ pet.name|title }}</a>
                             </h4>
-                            <div class="solid"></div>
                             <h5>{% if pet.gender == 'f' %}
-                                Девочка
+                                (девочка)
                                 {% else %}
-                                Мальчик
+                                (мальчик)
                                 {% endif %}
                             </h5>
+
+                            <div class="solid"></div>
+
                             <p class="card-text">{{ pet.description }}</p>
                             <h5 class="status">{{ pet.status }}</h5>
                         </div>
@@ -68,30 +88,50 @@
 
             </div>
 
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
-                        <a class="page-link"
-                           href="{% if page_obj.has_previous %} ?page={{ page_obj.previous_page_number }} {% else %} # {% endif %}"
-                           tabindex="-1" aria-disabled="true">Предыдущая</a>
+
+                    {% if page_obj.has_other_pages %}
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center my-3">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="{% spurl query=request.GET set_query='page={{ page_obj.previous_page_number }}'%}">Предыдущая</a>
                     </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link no-transition" style='background-color: #bdc0c0 !important;'>Пердыдущая</a>
+                    </li>
+                    {% endif %}
+
                     {% for page in page_obj.paginator.page_range %}
-                    <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                        {% if  request.GET.page|add:"0" == page %}
+                        <li class="page-item"><a class="page-link active no-transition" href="{% spurl query=request.GET set_query='page={{ page }}'%}">{{ page }}</a></li>
+                        {% else %}
+                            {% if request.GET.page == None and page == 1 %}
+                                <li class="page-item"><a class="page-link active no-transition" href="{% spurl query=request.GET set_query='page={{ page }}'%}">{{ page }}</a></li>
+                            {% else %}
+                        <li class="page-item"><a class="page-link" href="{% spurl query=request.GET set_query='page={{ page }}'%}">{{ page }}</a></li>
+                        {% endif %}
+                        {% endif %}
+
                     {% endfor %}
-                    <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
-                        <a class="page-link"
-                           href="{% if page_obj.has_next %} ?page={{ page_obj.next_page_number }} {% else %} # {% endif %}"
-                           tabindex="-1" aria-disabled="true">Следующая</a>
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="{% spurl query=request.GET set_query='page={{ page_obj.next_page_number }}'%}">Следующая</a>
                     </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link no-transition" style='background-color: #bdc0c0 !important;'>Следующая</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </nav>
-
+            {% endif %}
         </div>
 
     </div>
 
 </div>
 
-</div>
 <!-- /.container -->
 {% endblock %}

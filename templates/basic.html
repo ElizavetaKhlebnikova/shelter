@@ -2,33 +2,34 @@
 {% load static %}
 
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     {% block css_additional %}{% endblock %}
-    <link href="{% static 'vendor/css/index_navbar.css'%}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'vendor/css/navbar.css'%}">
     <link href="{% static 'vendor/css/footer.css'%}" rel="stylesheet">
     <link href="{% static 'vendor/css/base.css'%}" rel="stylesheet">
-    <link href="{% static 'base/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'base/css/bootstrap.min.css' %}" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&family=Montserrat:ital,wght@0,100;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,300;1,400;1,500;1,600&family=El+Messiri:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Palanquin+Dark:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <title>{% block title %} {% endblock %}</title>
-  </head>
-  <body>
-    {% include 'includes/navbar.html' %}
+</head>
+<body>
+{% include 'includes/navbar.html' %}
 
-    {% block content %}
+{% block content %}
 
-    {% endblock %}
-    {% include 'includes/footer.html' %}
+{% endblock %}
+{% include 'includes/footer.html' %}
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'base/js/bootstrap.bundle.min.js' %}"></script>
-    <!-- FontAwesome script -->
-    <script src="static/vendor/fontawesome/fontawesome-icons.js" crossorigin="anonymous"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'base/js/bootstrap.bundle.min.js' %}"></script>
+<!-- FontAwesome script -->
+<script src="static/vendor/fontawesome/fontawesome-icons.js" crossorigin="anonymous"></script>
 
-  </body>
+</body>
 </html>
