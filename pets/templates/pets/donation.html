@@ -1,0 +1,113 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block css_additional %}
+
+<link href="{% static 'vendor/css/donation.css'%}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<div class="introdaction">
+    <div class="info">
+        <div class="about-me">
+            <h1> Дорогой друг, я очень рада, что ты хочешь помочь животным!</h1>
+            <p>Есть несколько способов это сделать:
+                <br>
+                1. Нам всегда необходима <a class="link" href="#donation">финансовая помощь</a>! Мы будем рады асолютно любой сумме. <br>
+                2. Подопечные очень нуждаются в любящем человеке, если у тебя есть возможность взять кого-то на
+                <a class="link" href="#home">передержку</a> или же
+                <a class="link" href="#home">стать хозяином</a> животных, обязательно дай знать! <br>
+                3. Также можно <a class="link" href="#order">заказать</a> корм, сено или засушку для животных. <br>
+                4. У тебя есть возможность помогать другим, покупая красивое для себя в магазине <a class="link" href="#RabbitStones">Rabbit Stones</a>. Таким
+                образом можно
+                получить двойную радость от обладания милой вещицей и причастности к спасению животных!
+            </p>
+        </div>
+    </div>
+    <div class="photos">
+        <div class="pet image">
+            <img class="figure" src="{% static 'vendor/img/index/kitten.jpg' %}">
+        </div>
+    </div>
+    <h1 class="small-screen-title">Дорогой друг, я очень рада, что ты хочешь помочь животным!</h1>
+</div>
+
+<div class="donation" id="donation">
+    <div class="text-donation">
+        <div class="invoices-for-payment">
+            <img src="{% static 'vendor/img/donation/schet.png' %}">
+            <img src="{% static 'vendor/img/donation/schet1.png' %}">
+            <img src="{% static 'vendor/img/donation/schet2.png' %}">
+            <img src="{% static 'vendor/img/donation/schet3.png' %}">
+            <img src="{% static 'vendor/img/donation/schet4.png' %}">
+            <img src="{% static 'vendor/img/donation/schet5.png' %}">
+            <img src="{% static 'vendor/img/donation/schet6.png' %}">
+            <img src="{% static 'vendor/img/donation/schet7.png' %}">
+        </div>
+        <div class="donation-text">
+            <h2 class="donation-info">Регулярно кому-нибудь из моих подобечных требуется медицинская помощь и, к сожалению, ветеринарные услуги стоят очень дорого.<br>
+            Кроме этого многие животные сейчас  находятся на платных передержках, на которые ежемесячно ведуться сборы. <br>
+                Помимо этого покупка пропитания, лекарств и наполнителей тоже требует финансовых волжений.<br>
+                Давайте помогать животным вместе, без вас мы не справимся!
+            </h2>
+        <h2 class="payment-details">
+            Реквизиты:<br>
+‌Сбербанк 4274 3200 7622 5674<br>
+Тинькофф 5536 9138 5424 2480<br>
+        </h2>
+        </div>
+
+    </div>
+</div>
+
+<div class="home" id="home">
+    <div class="card">
+  <h1>Coronavirus - Facts, advice and measures</h1>
+
+  <details class="warning">
+    <summary>Facts and knowledge about COVID-19</summary>
+    <form class='cat-form' method="POST" action="{% url 'pets:help' %}">
+        {% csrf_token %}
+<!--            <div class="cat-form-group">-->
+<!--                {{form.user_name }}-->
+<!--                {{form.email}}-->
+<!--                {{form.pet}}-->
+<!--                {{form.city}}-->
+<!--                {{form.condition_one}}-->
+<!--                {{form.condition_two}}-->
+<!--            </div>-->
+        <div class="filter-button">
+                <input type="submit" value="Отправить">
+            </div>
+    </form>
+  </details>
+
+  <details class="info">
+    <summary>For the public</summary>
+    <p>Social distance, quarantine and isolation</p>
+    <p>Hand hygiene, cough etiquette, cleaning and laundry</p>
+    <p>When children have acute respiratory tract infections</p>
+    <p>Risk groups and their relatives</p>
+  </details>
+
+  <details class="alert">
+    <summary>Facts and knowledge about COVID-19</summary>
+    <p>Some text to be hidden.</p>
+    <p>Some text to be hidden.</p>
+    <p>Some text to be hidden.</p>
+    <p>Some text to be hidden.</p>
+  </details>
+</div>
+</div>
+
+<div class="order" id="order">
+
+</div>
+
+<div class="RabbitStones" id="RabbitStones">
+
+</div>
+{% endblock %}

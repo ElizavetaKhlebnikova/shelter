@@ -91,3 +91,34 @@ class News(models.Model):
         verbose_name_plural = 'Новости'
     def __str__(self):
         return f'Новость № {self.index_number}: {self.title}'
+
+
+# class RequestForCatGuardianship(models.Model):
+#     user_name = models.CharField(max_length=256, verbose_name=u"Имя пользователя")
+#     email = models.EmailField(unique=True, verbose_name=u"Электронная почта для связи")
+#     cats_id = PetsCategory.objects.get(name='Коты и кошки')
+#     pet = models.ForeignKey(to=Pet, on_delete=models.CASCADE, verbose_name=u"Кличка подопечного")
+#     city = models.CharField(max_length=256, verbose_name=u"Имя пользователя")
+#     condition_one = models.BooleanField(default=False, verbose_name=u"Вы готовы поставить защиту от кошек на окно?")
+#     condition_two = models.BooleanField(default=False, verbose_name=u"Вы готовы лечить питомца в рекомендованных клиниках?")
+#     created = models.DateTimeField(auto_now_add=True)
+#
+#     def __str__(self):
+#         return f'Запрос на опекунство {self.pet.name} ({self.pet.category})  от  пользователя {self.user_name}'
+
+    # def send_verification_email(self):
+    #     link = reverse('users:email_verification', kwargs={'email': self.user.email, 'code': self.code})
+    #     verification_link = f'{settings.DOMAIN_NAME}{link}'
+    #     subject = f'Подтверждение учётной записи для {self.user.username}'
+    #     message = 'Для подтверждения учетной записи для {} перейдите по ссылке {}, {}'.format(
+    #         self.user.username,
+    #         verification_link,
+    #         self.expiration
+    #     )
+    #     send_mail(
+    #         subject=subject,
+    #         message=message,
+    #         from_email=settings.EMAIL_HOST_USER,
+    #         recipient_list=[self.user.email],
+    #         fail_silently=False,
+    #     )

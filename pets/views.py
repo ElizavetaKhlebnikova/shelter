@@ -6,6 +6,7 @@ from django.views.generic.list import ListView
 from django.core.cache import cache
 from .filters import PetFilter
 from requests import get
+# from .forms import CatGuardianshipForm
 
 from common.views import TitleMixin
 
@@ -21,6 +22,14 @@ class IndexView(TitleMixin, TemplateView):
         feedback = News.objects.order_by('index_number')
         context['news'] = feedback
         context['news_len'] = len(feedback)
+        return context
+
+class DonationView(TitleMixin, TemplateView, ):
+    template_name = 'pets/donation.html'
+    title = 'Варианты помощи'
+    # form_class = CatGuardianshipForm
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         return context
 
 

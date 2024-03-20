@@ -17,7 +17,9 @@
         <div class="about-me">
             <h1>Привет, друг, меня зовут <span>{{pet.name}}</span></h1>
             <h3>{{pet.description}}</h3>
-            <button class="button-background-move" role="button">Хочу помочь!</button>
+            <button class="button-background-move" role="button">
+            <a class="nav-link active" aria-current="page" href="{% url 'pets:help' %}">Хочу помочь!</a>
+        </button>
         </div>
 
     </div>
@@ -82,7 +84,9 @@
         <br>
         <br>
         {% endif %}
-        <button class="button-background-move" role="button">Хочу помочь!</button>
+        <button class="button-background-move" role="button">
+            <a class="nav-link active" aria-current="page" href="{% url 'pets:help' %}">Хочу помочь!</a>
+        </button>
     </div>
 
 </div>
@@ -93,7 +97,9 @@
         <h1>Сейчас я очень нуждаюсь в:</h1>
         <h2>{{pet.needs}}</h2>
         <h1>Буду очень благодарна за твою помощь!</h1>
-        <button class="button-background-move" role="button">Хочу помочь!</button>
+        <button class="button-background-move" role="button">
+            <a class="nav-link active" aria-current="page" href="{% url 'pets:help' %}">Хочу помочь!</a>
+        </button>
     </div>
 </div>
 {% endif %}

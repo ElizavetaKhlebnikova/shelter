@@ -1,0 +1,403 @@
+.introdaction {
+  height: 600px;
+  display: flex;
+  background-image: unset;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #e2dcd9 !important;
+  position: sticky;
+}
+
+.info {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: justify;
+  justify-content: center;
+  .about-me {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: justify;
+    justify-content: center;
+    width: 85%;
+    span {
+      color: #0ec6b7;
+    }
+    h1 {
+      font-family: "Bad Script";
+      font-size: 34px;
+      text-align: center;
+      padding-bottom: 20px;
+      line-height: 1.5;
+    }
+    p {
+      font-family: "Cormorant Garamond";
+      font-weight: 400;
+      font-size: 20px;
+      line-height: revert;
+      a {
+        outline: none;
+        text-decoration: none;
+        color: #0ec6b7;
+        transition-property: font-weight;
+        transition-duration: 200ms;
+      }
+      .link:hover {
+        transition: 0.5s;
+        text-decoration: underline;
+        color: #e74691;
+      }
+    }
+  }
+}
+
+.photos {
+  height: 440px;
+  width: 30%;
+}
+
+.small-screen-title {
+  display: none;
+}
+
+.pet.image {
+  height: 90%;
+  width: auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  img {
+    max-height: 100%;
+    max-width: 100%;
+    border: solid #1bb0a6;
+    border-color: #1ab0a6;
+    float: left;
+    border-width: 7px 7px 7px 7px;
+    border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+    transform: rotate(2deg);
+  }
+}
+
+/* ======= media ========= */
+
+@media screen and (min-width: 991px) and (max-width: 1168px) {
+  .info {
+    width: 50%;
+  }
+  .info {
+    h1 {
+      font-size: 30px;
+    }
+    p {
+      font-size: 18px;
+    }
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 991px) {
+  .introdaction {
+    height: 100%;
+    background: none;
+    flex-direction: column-reverse;
+    padding-bottom: 50px;
+  }
+  .info {
+    padding: 50px;
+    padding-top: 0px;
+    width: 100%;
+    height: 30%;
+    .about-me {
+      padding-top: 30px;
+    }
+    h1 {
+      display: none;
+    }
+    p {
+      font-size: 16px;
+    }
+    .pet.image {
+      height: 100%;
+      width: auto;
+    }
+  }
+  .small-screen-title {
+    padding: 20px;
+    font-size: 24px;
+    display: block;
+    font-family: "Bad Script";
+    text-align: center;
+    padding-bottom: 20px;
+    line-height: 1.5;
+    span {
+      color: #0ec6b7;
+    }
+  }
+  .photos {
+    max-height: 440px;
+    width: auto;
+  }
+  .slider {
+    margin-top: 0;
+  }
+}
+@media screen and (min-width: 334px) and (max-width: 600px) {
+  .info {
+    height: 50%;
+  }
+  .small-screen-title {
+    font-size: 24px !important;
+  }
+  .about-me p {
+    font-size: 18px !important;
+    padding-bottom: 50px;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 334px) {
+  .info {
+    height: 50%;
+    margin-top: 50px;
+    padding: 0;
+  }
+  .small-screen-title {
+    font-size: 20px !important;
+  }
+  .about-me p {
+    font-size: 16px !important;
+    padding-bottom: 50px;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 417px) {
+  .photos {
+    height: auto;
+    padding: 15px;
+  }
+}
+
+/* ====== donation ======== */
+
+.donation {
+  height: fit-content;
+  box-shadow: 0px 0px 7px 8px #9b9597bf;
+  background-color: #db85b19c;
+}
+.invoices-for-payment {
+  display: flex;
+  height: 300px;
+  background-color: #595246a8;
+  width: 100%;
+  justify-content: space-evenly;
+  border: #97d5d2 solid 10px;
+  overflow: hidden;
+}
+
+.donation-text {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 57px;
+
+  .donation-info {
+    width: 50%;
+    text-align: justify;
+    font-size: 24px;
+    color: white;
+    line-height: 1.5;
+  }
+  .payment-details {
+    text-align: center;
+    font-size: 24px;
+    color: white;
+  }
+}
+
+/* ====== donation-media ======== */
+
+@media screen and (min-width: 0) and (max-width: 1000px) {
+  .donation-info {
+    font-size: 20px !important;
+  }
+  .payment-details {
+    font-size: 20px !important;
+  }
+}
+
+@media screen and (min-width: 0) and (max-width: 770px) {
+  .donation-text {
+    flex-direction: column;
+    .donation-info {
+      padding-bottom: 50px;
+      width: unset;
+    }
+  }
+}
+
+@media screen and (min-width: 334px) and (max-width: 600px) {
+  .donation-info {
+    font-size: 18px !important;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 334px) {
+  .donation-text {
+    padding: 20px;
+  }
+  .donation-info {
+    font-size: 16px !important;
+  }
+}
+
+/* ====== home ====== */
+
+:root {
+  --color-bg: #eeedeb;
+  --color-title: #0e1c4e;
+  --color-summary-1: #fff6ee;
+  --color-summary-1-highlight: #ffc48b;
+  --color-summary-2: #fafaff;
+  --color-summary-2-highlight: #b4b3ff;
+  --color-summary-3: #fff0f3;
+  --color-summary-3-highlight: #ffb3c0;
+  --font-ibm-plex-sans: "IBM Plex Sans", sans-serif;
+}
+.home {
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background: white;
+  padding: 38px 36px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border-radius: 4px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  max-width: 30em;
+  width: 100%;
+}
+.card h1 {
+  font-family: var(--font-ibm-plex-sans);
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--color-title);
+  margin-bottom: 20px;
+}
+.card details {
+  display: flex;
+  border-radius: 5px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.05);
+  border-left: 15px solid gray;
+  padding: 15px;
+}
+.card details {
+  width: 100%;
+  margin-top: 15px;
+}
+.card details.warning {
+  --highlight: var(--color-summary-1-highlight);
+  background: var(--color-summary-1);
+  border-left-color: var(--color-summary-1-highlight);
+}
+.card details.warning p {
+  list-style-type: corona-warning;
+}
+.card details.info {
+  --highlight: var(--color-summary-2-highlight);
+  background: var(--color-summary-2);
+  border-left-color: var(--color-summary-2-highlight);
+}
+.card details.info p {
+  list-style-type: corona-info;
+}
+.card details.alert {
+  --highlight: var(--color-summary-3-highlight);
+  background: var(--color-summary-3);
+  border-left-color: var(--highlight);
+}
+.card details.alert p {
+  list-style-type: corona-alert;
+}
+.card details summary,
+.card details p {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: flex-start;
+  font-family: var(--font-ibm-plex-sans);
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  color: var(--color-title);
+  padding: 20px;
+  cursor: pointer;
+}
+.card details summary::-webkit-details-marker,
+.card details p::-webkit-details-marker {
+  display: none;
+}
+.card details summary:focus,
+.card details p:focus {
+  outline: solid 3px var(--highlight);
+}
+.card details summary::-moz-selection,
+.card details p::-moz-selection {
+  background-color: var(--highlight);
+}
+.card details summary::selection,
+.card details p::selection {
+  background-color: var(--highlight);
+}
+.card details p {
+  display: list-item;
+  cursor: default;
+  margin-left: 3rem;
+  list-style-type: corona;
+}
+.card details summary::before {
+  cursor: pointer;
+  position: absolute;
+  display: inline-flex;
+  width: 1rem;
+  height: 1rem;
+  left: 0rem;
+  margin-right: 0.5rem;
+  content: url("data:image/svg+xml,%3Csvg width='100%' height='100%' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M22.6066 12H1.3934' stroke='%23202842' stroke-width='1.875' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 1.39343V22.6066' stroke='%23202842' stroke-width='1.875' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+}
+.card details[open] summary {
+  font-weight: 700;
+}
+.card details[open] summary::before {
+  transform: rotate(45deg);
+  content: url("data:image/svg+xml,%3Csvg width='100%' height='100%' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M22.6066 12H1.3934' stroke='%23202842' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 1.39343V22.6066' stroke='%23202842' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+}
+
+@counter-style corona-warning {
+  system: cyclic;
+  symbols: 🧼 🩺 👩🏻‍⚕️ 🚑;
+  suffix: " ";
+}
+@counter-style corona-info {
+  system: cyclic;
+  symbols: 🧬;
+  suffix: " ";
+}
+@counter-style corona-alert {
+  system: fixed;
+  symbols: 💉 🩸 😷 🦠 🧫;
+  suffix: " ";
+}

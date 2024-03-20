@@ -1,4 +1,5 @@
 .navbar.navbar-expand-lg.complex {
+  z-index: 1;
   height: unset !important;
   background-color: #bed5d4;
   background-image: url(../img/index/pngwing24.png) !important;

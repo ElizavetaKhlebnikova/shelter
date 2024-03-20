@@ -13,7 +13,7 @@ body {
 
 /*----------------navbar-menu----------------------*/
 .happy-first-menu {
-  height: 85vh;
+  height: 618px;
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -253,7 +253,7 @@ img.arrow {
   width: 100%;
   margin: 0;
   padding-top: 60px;
-  height: 120vh;
+  height: fit-content;
   line-height: 130%;
   text-align: justify;
   font-size: 16px;
@@ -272,12 +272,12 @@ div.container.about {
 }
 
 .about {
-  margin: 0;
+  margin-bottom: 59px;
+  height: fit-content;
   margin-top: 15px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  height: 690px;
   width: 1268px;
 }
 
@@ -580,14 +580,12 @@ div.container.about {
 .advantages {
   padding-top: 90px;
   padding-bottom: 90px;
-  height: 120vh;
 }
 
 .adv-row {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  height: 90vh;
 }
 
 .adv-text {
