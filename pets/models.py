@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from users.models import User
 from pytils.translit import slugify
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your models here.
 
 class PetsCategory(models.Model):
@@ -92,33 +94,44 @@ class News(models.Model):
     def __str__(self):
         return f'Новость № {self.index_number}: {self.title}'
 
+class OtherPets(models.Model):
+    pets = models.CharField(max_length=20, verbose_name=u"Вид животного")
 
-# class RequestForCatGuardianship(models.Model):
-#     user_name = models.CharField(max_length=256, verbose_name=u"Имя пользователя")
-#     email = models.EmailField(unique=True, verbose_name=u"Электронная почта для связи")
-#     cats_id = PetsCategory.objects.get(name='Коты и кошки')
-#     pet = models.ForeignKey(to=Pet, on_delete=models.CASCADE, verbose_name=u"Кличка подопечного")
-#     city = models.CharField(max_length=256, verbose_name=u"Имя пользователя")
-#     condition_one = models.BooleanField(default=False, verbose_name=u"Вы готовы поставить защиту от кошек на окно?")
-#     condition_two = models.BooleanField(default=False, verbose_name=u"Вы готовы лечить питомца в рекомендованных клиниках?")
-#     created = models.DateTimeField(auto_now_add=True)
-#
-#     def __str__(self):
-#         return f'Запрос на опекунство {self.pet.name} ({self.pet.category})  от  пользователя {self.user_name}'
+    def __str__(self):
+        return self.pets
 
-    # def send_verification_email(self):
-    #     link = reverse('users:email_verification', kwargs={'email': self.user.email, 'code': self.code})
-    #     verification_link = f'{settings.DOMAIN_NAME}{link}'
-    #     subject = f'Подтверждение учётной записи для {self.user.username}'
-    #     message = 'Для подтверждения учетной записи для {} перейдите по ссылке {}, {}'.format(
-    #         self.user.username,
-    #         verification_link,
-    #         self.expiration
-    #     )
-    #     send_mail(
-    #         subject=subject,
-    #         message=message,
-    #         from_email=settings.EMAIL_HOST_USER,
-    #         recipient_list=[self.user.email],
-    #         fail_silently=False,
-    #     )
+class RequestForGuardianship(models.Model):
+    user_name = models.CharField(max_length=256, verbose_name=u"Имя пользователя")
+    email = models.EmailField(unique=True, verbose_name=u"Электронная почта для связи")
+    pet = models.CharField(max_length=256, verbose_name=u"Кличка подопечного")
+    city = models.CharField(max_length=256, verbose_name=u"Город проживания")
+    created = models.DateTimeField(auto_now_add=True)
+    goals = (
+        ('None', 'не выбрано'),
+        ('foster care', 'передержка'),
+        ('home', 'дом')
+    )
+    goal = models.CharField(max_length=20, choices=goals, verbose_name=u"Кем вы готовы стать для животного?")
+    other_pets = models.ManyToManyField(to=OtherPets, verbose_name=u"Если у вас уже есть питомцы, укажите, какие:")
+    other_pet = models.CharField(max_length=256, verbose_name=u"Укажите вид вашего питомца", null=True, blank=True)
+    conditions = models.BooleanField(verbose_name=u"Готовы ли вы выполнить все условия?")
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        subject = 'У вас новая заявка на опеку'
+        message = 'Дата создания обращения: {}\nПользователь: {}\nEmail: {}\nГород: {}\nЦель запроса: {}\nПитомец: {}\nГотовность выполнения условий: {}'.format(
+            self.created,
+            self.user_name,
+            self.email,
+            self.city,
+            {'None': 'не выбрано', 'foster care': 'передержка', 'home': 'дом'}[self.goal],
+            self.pet,
+            {False: "не готов", True: "готов"}[self.conditions]
+        )
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=['lizka-khlebnikova@yandex.ru'],
+            fail_silently=False,
+        )

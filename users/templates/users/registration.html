@@ -2,19 +2,21 @@
 {% load static %}
 
 <main>
-    <div class="authorisation">
-        <div class="inner">
-            <div class="image-holder">
-                <img src="{% static 'vendor/img/index/rabbits.png' %}" alt="">
-            </div>
-
-            {% if form.errors %}
+    {% if form.errors %}
             <div
-                    class="alert alert-warning alert-dismissible fade show"
+                    class="alert-new"
                     role="alert"
-                    style="margin-top: 50px"
             >
-                {{form.errors}}
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                    {% for error in errors%}
+                    <li>{{error}}</li>
+                    {%endfor%}
+                    {%endfor%}
+                </ul>
+
+
+
                 <button
                         type="button"
                         class="close"
@@ -25,6 +27,14 @@
                 </button>
             </div>
             {% endif %}
+    <div class="authorisation">
+
+        <div class="inner">
+            <div class="image-holder">
+                <img src="{% static 'vendor/img/index/rabbits.png' %}" alt="">
+            </div>
+
+
             <form action="{% url 'users:registration' %}" method="post" style="padding-top: 45px; padding-bottom: 45px;">
                 <h3 class="form-title">Создать аккаунт</h3>
                 {% csrf_token %}

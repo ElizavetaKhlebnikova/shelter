@@ -1,84 +1,4 @@
-@charset "UTF-8";
-
-input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px #f93e001a inset;
-}
-
-html {
-  font-family: sans-serif;
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-body {
-  color: #333;
-  font-size: 13px;
-  margin: 0;
-}
-
-input,
-textarea,
-select,
-button {
-  font-family: poppins-regular;
-  color: #333;
-  font-size: 13px;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-ul {
-  margin: 0;
-}
-
-main {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-img {
-  max-width: 100%;
-}
-
-ul {
-  padding-left: 0;
-  margin-bottom: 0;
-}
-
-a:hover {
-  text-decoration: none;
-}
-
-:focus {
-  outline: none;
-}
-
-body {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  text-align: left;
-  background-color: #fff;
-}
-
 .authorisation {
-  padding: 20px;
-  max-width: 850px;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -93,18 +13,17 @@ body {
   margin-bottom: 200px;
 }
 
-.Authentication_content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .inner {
   display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .inner .image-holder {
   width: 50%;
+  img {
+    width: 100%;
+  }
 }
 
 .inner form {
@@ -125,31 +44,43 @@ body {
   margin-bottom: 28px;
 }
 
-.form-group {
-  display: flex;
-}
-
-.form-group input {
-  width: 50%;
-}
-
-.form-group input:first-child {
-  margin-right: 25px;
-}
-
 .form-wrapper {
   position: relative;
   width: 100%;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  ul {
+    list-style-type: none;
+  }
+  i {
+    position: absolute;
+    bottom: 9px;
+    right: 0;
+  }
+  .label {
+    padding-right: 20px;
+  }
 }
 
-.form-wrapper i {
-  position: absolute;
-  bottom: 9px;
-  right: 0;
+.alert-new {
+  margin-top: 50px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-color: #be7d95b3 !important;
+  color: white !important;
+  font-weight: 600;
+  box-shadow: 0px 0px 7px 8px #bdb5b88f;
+  padding: 20px;
+  max-width: 850px;
+  ul {
+    padding-right: 100px;
+  }
 }
 
 .form-control-cast {
-  border: 1px solid #333;
+  border: 1px solid #4d4b4b;
   border-top: none;
   border-right: none;
   border-left: none;
@@ -158,11 +89,48 @@ body {
   height: 30px;
   padding: 0;
   margin-bottom: 25px;
-  background-color: transparent;
+  background-color: #fafafa;
+}
+
+.form-wrapper.checkbox {
+  padding-bottom: 20px;
+  justify-content: normal;
+}
+
+#id_other_pets,
+#id_conditions {
+  border: none;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  display: unset;
+  width: auto;
+  height: unset;
+  margin-bottom: unset;
+  background-color: unset;
+  li label input {
+    border: none;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    display: unset;
+    width: auto;
+    height: unset;
+    margin-bottom: unset;
+    background-color: unset;
+  }
+}
+
+#id_other_pet::placeholder {
+  display: none;
+}
+#id_goal,
+#id_pet {
+  width: 50%;
 }
 
 .form-control-cast::-webkit-input-placeholder {
-  font-size: 13px;
+  font-size: 16px;
   color: #333;
   font-family: poppins-regular;
 }
@@ -227,22 +195,6 @@ select option[value=""][disabled] {
   top: 7px;
   left: 7px;
   transition: 0.2s;
-}
-
-.alert-new {
-  margin-top: 50px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: #be7d95b3 !important;
-  color: white !important;
-  font-weight: 600;
-  box-shadow: 0px 0px 7px 8px #bdb5b88f;
-  padding: 20px;
-  max-width: 850px;
-  ul {
-    padding-right: 100px;
-  }
 }
 
 .button-background-move:hover:after {
@@ -354,8 +306,12 @@ select option[value=""][disabled] {
 }
 
 @media (max-width: 767px) {
+  .authorisation {
+    margin: 30px;
+  }
   .inner {
     display: block;
+    padding: 30px;
   }
 
   .inner .image-holder {
@@ -369,5 +325,24 @@ select option[value=""][disabled] {
 
   button {
     margin-top: 60px;
+  }
+}
+
+@media (max-width: 338px) {
+  .authorisation {
+    margin: 0;
+  }
+  .form-wrapper {
+    font-size: 14px;
+  }
+  .form-control-cast:-moz-placeholder {
+    font-size: 12px;
+  }
+  .form-control-cast option {
+    font-size: 12px;
+  }
+  #id_goal,
+  #id_pet {
+    width: 100%;
   }
 }

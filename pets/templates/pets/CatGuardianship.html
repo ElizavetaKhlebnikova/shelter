@@ -1,0 +1,95 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block css_additional %}
+
+<link href="{% static 'vendor/css/guardianship.css'%}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<main>
+    {% if form.errors %}
+            <div
+                    class="alert-new"
+                    role="alert"
+            >
+                <ul>
+                    {% for errors in form.errors.items %}
+                    <li>{{errors}}</li>
+                    {%endfor%}
+                </ul>
+
+
+
+                <button
+                        type="button"
+                        class="close"
+                        data-dismiss="alert"
+                        aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endif %}
+
+    <div class="authorisation">
+        <div class="inner">
+            <div class="image-holder">
+                <img src="{% static 'vendor/img/index/rabbits.png' %}" alt="">
+            </div>
+
+
+    <form method="post" style="padding-top: 45px; padding-bottom: 45px;">
+                {% csrf_token %}
+                <div class="form-wrapper">
+                    {{form.user_name}}
+                </div>
+
+                <div class="form-wrapper">
+                    {{form.email}}
+                </div>
+                <div class="form-wrapper">
+                    {{form.city}}
+                </div>
+                <div class="form-wrapper">
+                    {{form.goal.label}}
+                    {{form.goal}}
+                </div>
+
+                <div class="form-wrapper">
+                    {{form.pet.label}}
+                    {{form.pet}}
+                </div>
+
+                <div class="form-wrapper checkbox">
+                    <div class="label">
+                       {{form.conditions.label}}
+                    </div>
+                    {{form.conditions}}
+                </div>
+
+                <div class="form-wrapper checkbox">
+                    <div class="label">
+                    {{form.other_pets.label}}
+                    </div>
+                    {{form.other_pets}}
+                </div>
+
+                <div class="form-wrapper">
+                    {{form.other_pet}}
+                </div>
+
+
+                <button class="button-background-move" role="button">
+                    <input type="submit" value="Отправить анкету"/>
+                </button>
+    </form>
+        </div>
+    </div>
+</main>
+
+
+{% endblock %}
