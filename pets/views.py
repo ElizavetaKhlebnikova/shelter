@@ -36,6 +36,11 @@ class DonationView(TitleMixin, TemplateView):
     # success_message = 'Поздравляем! Вы успешно зарегистрированы!'
     title = 'моя помощь'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['range'] = range(7)
+        return context
+
 class RequestForCatGuardianship(TitleMixin, CreateView):
     template_name = 'pets/CatGuardianship.html'
     form_class = RequestForCatGuardianshipForm

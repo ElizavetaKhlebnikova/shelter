@@ -8,10 +8,32 @@
   align-items: center;
   justify-content: space-evenly;
   background-color: #e2dcd9 !important;
-  position: sticky;
+  z-index: -1;
+  .photos {
+    height: 440px;
+    width: 30%;
+  }
+  .pet.image {
+    height: 90%;
+    width: auto;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    img {
+      max-height: 100%;
+      max-width: 100%;
+      border: solid #1bb0a6;
+      border-color: #1ab0a6;
+      float: left;
+      border-width: 7px 7px 7px 7px;
+      border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+      transform: rotate(2deg);
+    }
+  }
 }
 
-.info {
+.introdaction-info {
   width: 50%;
   height: 100%;
   display: flex;
@@ -37,62 +59,36 @@
       padding-bottom: 20px;
       line-height: 1.5;
     }
-    p {
-      font-family: "Cormorant Garamond";
-      font-weight: 400;
-      font-size: 20px;
-      line-height: revert;
-      a {
-        outline: none;
-        text-decoration: none;
-        color: #0ec6b7;
-        transition-property: font-weight;
-        transition-duration: 200ms;
-      }
-      .link:hover {
-        transition: 0.5s;
-        text-decoration: underline;
-        color: #e74691;
-      }
-    }
   }
 }
 
-.photos {
-  height: 440px;
-  width: 30%;
+p {
+  font-family: "Cormorant Garamond";
+  font-weight: 400;
+  font-size: 20px;
+  line-height: revert;
+  a {
+    outline: none;
+    text-decoration: none;
+    color: #0ec6b7;
+    transition-property: font-weight;
+    transition-duration: 200ms;
+  }
+  .link:hover {
+    transition: 0.5s;
+    text-decoration: underline;
+    color: #e74691;
+  }
 }
-
 .small-screen-title {
   display: none;
-}
-
-.pet.image {
-  height: 90%;
-  width: auto;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-
-  img {
-    max-height: 100%;
-    max-width: 100%;
-    border: solid #1bb0a6;
-    border-color: #1ab0a6;
-    float: left;
-    border-width: 7px 7px 7px 7px;
-    border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
-    transform: rotate(2deg);
-  }
 }
 
 /* ======= media ========= */
 
 @media screen and (min-width: 991px) and (max-width: 1168px) {
-  .info {
+  .introdaction-info {
     width: 50%;
-  }
-  .info {
     h1 {
       font-size: 30px;
     }
@@ -109,7 +105,7 @@
     flex-direction: column-reverse;
     padding-bottom: 50px;
   }
-  .info {
+  .introdaction-info {
     padding: 50px;
     padding-top: 0px;
     width: 100%;
@@ -140,16 +136,19 @@
       color: #0ec6b7;
     }
   }
-  .photos {
-    max-height: 440px;
-    width: auto;
+  .introdaction {
+    .photos {
+      max-height: 440px;
+      width: auto;
+    }
   }
+
   .slider {
     margin-top: 0;
   }
 }
 @media screen and (min-width: 334px) and (max-width: 600px) {
-  .info {
+  .introdaction-info {
     height: 50%;
   }
   .small-screen-title {
@@ -162,7 +161,7 @@
 }
 
 @media screen and (min-width: 0px) and (max-width: 334px) {
-  .info {
+  .introdaction-info {
     height: 50%;
     margin-top: 50px;
     padding: 0;
@@ -177,9 +176,11 @@
 }
 
 @media screen and (min-width: 0px) and (max-width: 417px) {
-  .photos {
-    height: auto;
-    padding: 15px;
+  .introdaction {
+    .photos {
+      height: auto;
+      padding: 15px;
+    }
   }
 }
 
@@ -188,7 +189,7 @@
 .donation {
   height: fit-content;
   box-shadow: 0px 0px 7px 8px #9b9597bf;
-  background-color: #db85b19c;
+  background: linear-gradient(to top right, #dea6c0 23%, #00f6ef40 100%);
 }
 .invoices-for-payment {
   display: flex;
@@ -198,6 +199,7 @@
   justify-content: space-evenly;
   border: #97d5d2 solid 10px;
   overflow: hidden;
+  box-shadow: 0px 0px 7px 8px #9b9597bf;
 }
 
 .donation-text {
@@ -206,13 +208,6 @@
   align-items: center;
   padding: 57px;
 
-  .donation-info {
-    width: 50%;
-    text-align: justify;
-    font-size: 24px;
-    color: white;
-    line-height: 1.5;
-  }
   .payment-details {
     text-align: center;
     font-size: 24px;
@@ -220,10 +215,18 @@
   }
 }
 
+.info {
+  width: 50%;
+  text-align: justify;
+  font-size: 24px;
+  color: white;
+  line-height: 1.5;
+}
+
 /* ====== donation-media ======== */
 
 @media screen and (min-width: 0) and (max-width: 1000px) {
-  .donation-info {
+  .info {
     font-size: 20px !important;
   }
   .payment-details {
@@ -234,15 +237,19 @@
 @media screen and (min-width: 0) and (max-width: 770px) {
   .donation-text {
     flex-direction: column;
-    .donation-info {
-      padding-bottom: 50px;
-      width: unset;
-    }
+  }
+
+  .info {
+    padding-bottom: 50px;
+    width: unset;
+  }
+  .info.RS {
+    padding: 0;
   }
 }
 
 @media screen and (min-width: 334px) and (max-width: 600px) {
-  .donation-info {
+  .info {
     font-size: 18px !important;
   }
 }
@@ -251,7 +258,7 @@
   .donation-text {
     padding: 20px;
   }
-  .donation-info {
+  .info {
     font-size: 16px !important;
   }
 }
@@ -267,7 +274,6 @@
   --color-summary-2-highlight: #b4b3ff;
   --color-summary-3: #fff0f3;
   --color-summary-3-highlight: #ffb3c0;
-  --font-ibm-plex-sans: "IBM Plex Sans", sans-serif;
 }
 .home {
   height: fit-content;
@@ -278,7 +284,8 @@
 }
 
 .card {
-  background: white;
+  background-color: #ffffff;
+  filter: drop-shadow(0 30px 10px rgba(0, 0, 0, 0.125));
   padding: 38px 36px;
   margin-top: 40px;
   margin-bottom: 40px;
@@ -288,7 +295,7 @@
   width: 100%;
 }
 .card h1 {
-  font-family: var(--font-ibm-plex-sans);
+  text-align: center;
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
@@ -314,35 +321,23 @@
   ul {
     list-style-type: decimal;
   }
-  a {
-    outline: none;
-    text-decoration: none;
-    color: #0ec6b7;
-    transition-property: font-weight;
-    transition-duration: 200ms;
-  }
-  a:hover {
-    transition: 0.5s;
-    text-decoration: underline;
-    color: #e74691;
-  }
 }
 
-.card details.warning {
+.card details.cats {
   --highlight: #30b2acc2;
-  background: #00fff312;
+  background: #d1ffff;
   border-left-color: #69ccc7;
 }
 
-.card details.info {
+.card details.rabbits {
   --highlight: #d89674;
-  background: #d896741c;
+  background: #ffe8df;
   border-left-color: #d89674;
 }
 
-.card details.alert {
+.card details.dogs {
   --highlight: var(--color-summary-3-highlight);
-  background: var(--color-summary-3);
+  background: #ffdced;
   border-left-color: var(--highlight);
 }
 
@@ -352,7 +347,6 @@
   flex-direction: row;
   align-content: center;
   justify-content: flex-start;
-  font-family: var(--font-ibm-plex-sans);
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -360,13 +354,20 @@
   padding: 20px;
   cursor: pointer;
 }
+
+.card details summary:hover {
+  transition: 0.5s;
+  font-weight: bold;
+}
+
 .card details summary::-webkit-details-marker,
 .card details p::-webkit-details-marker {
   display: none;
 }
 .card details summary:focus,
 .card details p:focus {
-  outline: solid 3px var(--highlight);
+  text-decoration: underline;
+  font-weight: bold;
 }
 .card details summary::-moz-selection,
 .card details p::-moz-selection {
@@ -379,4 +380,294 @@
 
 .card details[open] summary {
   font-weight: 700;
+}
+
+@media screen and (min-width: 447px) and (max-width: 580px) {
+  .home {
+    padding: 50px;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 447px) {
+  .home {
+    padding: 0;
+  }
+  .card {
+    margin: 0;
+    padding: 38px 5px;
+  }
+  .donation {
+    padding-bottom: 100px;
+  }
+  .pet-info p {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 334px) and (max-width: 600px) {
+  .card h1 {
+    font-size: 20px !important;
+  }
+}
+
+/* ====== RabbitStones ====== */
+
+.RabbitStones {
+  height: fit-content;
+  padding: 50px;
+  padding-top: 100px;
+  padding-bottom: 150px;
+  background: linear-gradient(to top right, #00f6ef73 -14%, #dea6c0 100%);
+  box-shadow: 0px 0px 8px 8px #9b9597bf;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  overflow: hidden;
+}
+
+.photos {
+  width: 25%;
+  height: auto;
+}
+
+.pet.image {
+  height: 100%;
+  width: auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  img {
+    border: solid #1bb0a6;
+    border-color: #1ab0a6;
+    float: left;
+    border-width: 7px 7px 7px 7px;
+    border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+    transform: rotate(2deg);
+    width: 100%;
+  }
+}
+.slider {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin-top: 40px;
+}
+
+.slider > input {
+  display: none;
+}
+
+.slider > label {
+  display: none;
+}
+
+.slider > input:checked + div + label,
+.slider > input:checked + div + label + label {
+  display: block;
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  background-color: #ef8fbce6;
+  border: dotted #1ab0a6;
+
+  cursor: pointer;
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+.slider > input:checked + div + label:after,
+.slider > input:checked + div + label + label:after {
+  font-size: 30px;
+  color: #fff;
+  display: block;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  line-height: 80px;
+}
+
+.slider > input:checked + div + label {
+  left: -40px;
+}
+
+.slider > input:checked + div + label:after {
+  content: "◀";
+  left: 30%;
+}
+
+.slider > input:checked + div + label + label {
+  right: -40px;
+}
+
+.slider > input:checked + div + label + label:after {
+  content: "▶";
+  right: 30%;
+}
+
+.slider > div {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 0;
+}
+
+.slider > div {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.8s ease-out 0.1s, visibility 0.1s ease-out 0.9s;
+}
+
+.slider > input:checked + div {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.8s ease-out 0.1s, visibility 0.1s ease-out 0s;
+}
+
+.slider > div > p {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .slide-photo {
+    overflow: hidden;
+    border-radius: 6px;
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56),
+      0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 10vh;
+    left: 7%;
+    z-index: 1;
+    height: 410px;
+    min-width: 390px;
+    img {
+      height: 100%;
+    }
+  }
+  .slide-photo-thin {
+    display: none;
+  }
+}
+
+.info.RS {
+  padding-left: 100px;
+  padding-right: 100px;
+  font-size: 22px;
+  p {
+    a {
+      color: #c3005a;
+    }
+  }
+}
+
+@media only screen and (min-width: 980) and (max-width: 1200px) {
+  .photos {
+    width: 33%;
+  }
+}
+
+@media only screen and (min-width: 770px) and (max-width: 980px) {
+  .photos {
+    width: 43%;
+  }
+}
+
+@media only screen and (min-width: 940px) and (max-width: 1200px) {
+  .info.RS {
+    padding: 40px;
+  }
+}
+
+@media only screen and (min-width: 770px) and (max-width: 940px) {
+  .info.RS {
+    padding: 30px;
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 770px) {
+  .RabbitStones {
+    padding: 0;
+    flex-direction: column;
+    height: fit-content;
+    .photos {
+      height: 500px;
+      padding-left: 0;
+    }
+  }
+  .info.RS {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 80%;
+    padding: 0;
+  }
+}
+
+@media only screen and (min-width: 631px) and (max-width: 770px) {
+  .photos {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 536px) and (max-width: 631px) {
+  .photos {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 430px) and (max-width: 536px) {
+  .photos {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 430px) {
+  .photos {
+    width: 80%;
+  }
+  .slider > input:checked + div + label,
+  .slider > input:checked + div + label + label {
+    display: block;
+    width: 45px;
+    height: 45px;
+    border-radius: 40px;
+    background-color: #ef8fbce6;
+    border: dotted #1ab0a6;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+  }
+  .slider > input:checked + div + label + label:after {
+    right: 19%;
+  }
+  .slider > input:checked + div + label:after,
+  .slider > input:checked + div + label + label:after {
+    font-size: 24px;
+    line-height: unset;
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 300px) {
+  .info.RS {
+    margin-top: 0;
+    p {
+      font-size: 16px;
+    }
+  }
 }

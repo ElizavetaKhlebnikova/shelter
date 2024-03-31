@@ -11,18 +11,17 @@
 
 {% block content %}
 <div class="introdaction">
-    <div class="info">
+    <div class="introdaction-info">
         <div class="about-me">
             <h1> Дорогой друг, я очень рада, что ты хочешь помочь животным!</h1>
             <p>Есть несколько способов это сделать:
                 <br>
-                1. Нам всегда необходима <a class="link" href="#donation">финансовая помощь</a>! Мы будем рады асолютно
+                1. Нам всегда необходима <a class="link" href="#donation">финансовая помощь</a>! Мы будем рады абсолютно
                 любой сумме. <br>
                 2. Подопечные очень нуждаются в любящем человеке, если у тебя есть возможность взять кого-то на
                 <a class="link" href="#home">передержку</a> или же
                 <a class="link" href="#home">стать хозяином</a> животных, обязательно дай знать! <br>
-                3. Также можно <a class="link" href="#order">заказать</a> корм, сено или засушку для животных. <br>
-                4. У тебя есть возможность помогать другим, покупая красивое для себя в магазине <a class="link"
+                3. У тебя есть возможность помогать другим, покупая красивое для себя в магазине <a class="link"
                                                                                                     href="#RabbitStones">Rabbit
                     Stones</a>. Таким
                 образом можно
@@ -51,7 +50,7 @@
             <img src="{% static 'vendor/img/donation/schet7.png' %}">
         </div>
         <div class="donation-text">
-            <h2 class="donation-info">Регулярно кому-нибудь из моих подобечных требуется медицинская помощь и, к
+            <h2 class="info donat">Регулярно кому-нибудь из моих подобечных требуется медицинская помощь и, к
                 сожалению, ветеринарные услуги стоят очень дорого.<br>
                 Кроме этого многие животные сейчас находятся на платных передержках, на которые ежемесячно ведуться
                 сборы. <br>
@@ -72,7 +71,7 @@
     <div class="card">
         <h1>Заполните анкету для того, чтобы взять животное на передержку или стать постоянным хозяином.</h1>
 
-        <details class="warning">
+        <details class="cats">
             <summary>Хочу приютить кота/кошку</summary>
             <div class="pet-info">
                 <p>
@@ -97,7 +96,7 @@
             </div>
         </details>
 
-        <details class="info">
+        <details class="rabbits">
             <summary>Хочу приютить кролика/крольчиху</summary>
             <div class="pet-info">
                 <p>
@@ -121,7 +120,7 @@
             </div>
         </details>
 
-        <details class="alert">
+        <details class="dogs">
             <summary>Хочу приютить собаку</summary>
             <div class="pet-info">
                 <p>
@@ -144,12 +143,48 @@
     </div>
 </div>
 
-<div class="order" id="order">
-
-
-</div>
-
 <div class="RabbitStones" id="RabbitStones">
-
+    <div class="photos">
+        <div class="pet image">
+            <div class='slider' id="news">
+                {% for n in range %}
+                {% if n == 0 %}
+                <input type="radio" name="slider" id="slider{{n}}" checked="checked">
+                <div class="slide">
+                    <img src="{% static 'vendor/img/donation/rs' %}{{ n }}.png" alt=''>
+                </div>
+                <label for="slider6"></label>
+                <label for="slider{{ n|add:'1' }}"></label>
+                {% elif n == 6 %}
+                <input type="radio" name="slider" id="slider{{n}}">
+                <div class="slide">
+                    <img src="{% static 'vendor/img/donation/rs' %}{{ n }}.png" alt=''>
+                </div>
+                <label for="slider{{ n|add:'-1' }}"></label>
+                <label for="slider0"></label>
+                {% else %}
+                <input type="radio" name="slider" id="slider{{n}}">
+                <div class="slide">
+                    <img src="{% static 'vendor/img/donation/rs' %}{{ n }}.png" alt=''>
+                </div>
+                <label for="slider{{ n|add:'-1' }}"></label>
+                <label for="slider{{ n|add:'1' }}"></label>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="info RS">
+        <p>
+            Я спасаю животных, а еще делаю украшения для того, чтобы содержать своих спасенных малюток! <br>
+            Я придумала и открыла магазин украшений, потому что меня очень вдохновляют минералы, мне
+            нравится мысль, что их создает природа и немножко человек, украшения отличный подарок по
+            поводу и без, украшения это память на долгие годы.<br>
+            Если хочешь лучше ознакомиться с ассортиментом и выбрать украшения для себя или в подарок,
+            то заходи на <a class="link" href="https://www.instagram.com/p/Cz7FhaTr058/?show_story_unavailable=1&img_index=6">страничку* </a>
+            магазина! <br>
+            *Instagram, продукт компании Meta, которая признана экстремисткой организацией в России
+        </p>
+    </div>
 </div>
 {% endblock %}

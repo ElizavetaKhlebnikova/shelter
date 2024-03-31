@@ -228,3 +228,11 @@ body {
     padding: 10px;
   }
 }
+@media screen and (min-width: 0px) and (max-width: 370px) {
+  .one-filter {
+    flex-direction: column;
+  }
+  .form-select {
+    width: 150px !important;
+  }
+}
