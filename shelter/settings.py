@@ -177,8 +177,8 @@ EMAIL_HOST_USER = 'hlebnikovabelkahappy@yandex.ru'
 EMAIL_HOST_PASSWORD = 'iuyufwnawmqtlued'  # lizabelka28101997!
 EMAIL_USE_SSL = True
 
-# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 INTERNAL_IPS = [
