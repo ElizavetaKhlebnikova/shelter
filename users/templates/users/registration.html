@@ -1,6 +1,13 @@
-{% extends 'users/user_base.html' %} {% block content %}
+{% extends 'basic.html' %}
 {% load static %}
 
+{% block css_additional %}
+<!-- Custom styles for this template -->
+<link href="{% static 'vendor/css/auth.css'%}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
 <main>
     {% if form.errors %}
             <div

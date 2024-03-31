@@ -19,6 +19,109 @@
   padding: 10px;
   margin-top: 20px;
 }
+.custom-file-label {
+  padding: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+input:not(#id_image, .btn) {
+  border: 1px solid #333;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  display: block;
+  height: 30px;
+  padding: 0;
+  margin-bottom: 25px;
+  background-color: transparent;
+}
+
+.form-group {
+  padding: 10px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+  input {
+    width: 50%;
+  }
+}
+.button-background-move {
+  input {
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    font-family: "Cormorant Garamond";
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 0 !important;
+  }
+  padding: 13px 20px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-bottom: 20px;
+}
+
+.button-background-move:after {
+  content: "";
+  background-color: #70dcd4;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.button-background-move:hover:after {
+  top: 0px;
+  left: 0px;
+}
+
+.small {
+  margin: 10px;
+  width: fit-content;
+
+  a {
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    font-family: "El Messiri";
+  }
+}
+.small:hover {
+  transition-duration: 0.5s;
+  scale: 110%;
+  a {
+    color: #419a93;
+  }
+}
+
+@media (min-width: 768px) {
+  .button-background-move {
+    padding: 13px 50px 13px;
+  }
+}
+
+.form-row {
+  .col-lg-6 {
+    padding: 10px;
+    align-items: center;
+  }
+}
+.col-lg-6 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
 .col-lg-13 {
   padding: 50px !important;
@@ -107,6 +210,11 @@
   background-color: transparent !important;
   border-top: transparent !important;
   padding-bottom: 20px !important;
+  a {
+    button {
+      background-color: #dea6c0;
+    }
+  }
 }
 
 .card-title {
