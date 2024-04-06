@@ -1,5 +1,5 @@
 {% extends 'basic.html' %}
-{% load static %}
+{% load static cache %}
 
 {% block title %} {{ title }} {% endblock %}
 
@@ -10,7 +10,9 @@
 {% endblock %}
 
 {% block content %}
-<div class="introdaction">
+{% cache 30 content %}
+<div class="content">
+    <div class="introdaction">
     <div class="introdaction-info">
         <div class="about-me">
             <h1> Дорогой друг, я очень рада, что ты хочешь помочь животным!</h1>
@@ -187,4 +189,7 @@
         </p>
     </div>
 </div>
+</div>
+
+{% endcache %}
 {% endblock %}

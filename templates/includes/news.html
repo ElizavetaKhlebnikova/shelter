@@ -1,4 +1,4 @@
-{% load static %}
+{% load static cache %}
 
 {% block css_additional %}
     <link rel="stylesheet" href="{% static 'vendor/css/news.css'%}">
@@ -7,6 +7,7 @@
 
 <div class="news">
     <div class='slider' id="news">
+        {% cache 30 news %}
         {% for n in news %}
             {% if n.index_number == 1 %}
             <input type="radio" name="slider" id="slider{{n.index_number}}" checked="checked">
@@ -30,9 +31,9 @@
                     {% endif %}
                 </div>
             </div>
-                <label for="slider{{ news_len }}"></label>
+                <label for="slider{{ news|length }}"></label>
                 <label for="slider{{ n.index_number|add:'1' }}"></label>
-            {% elif n.index_number == news_len %}
+            {% elif n.index_number == news|length %}
                 <input type="radio" name="slider" id="slider{{n.index_number}}">
                 <div class="slide">
                 <div class="slide-photo">
@@ -82,5 +83,6 @@
                 <label for="slider{{ n.index_number|add:'1' }}"></label>
             {% endif %}
         {% endfor %}
+        {% endcache %}
     </div>
 </div>

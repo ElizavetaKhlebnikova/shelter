@@ -4,7 +4,7 @@ from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
 
 
 from users.models import User, EmailVerification
-# from users.tasks import send_email_verification
+from users.tasks import send_email_verification
 import uuid
 from datetime import timedelta
 
@@ -58,9 +58,7 @@ class UserRegistrationForm(UserCreationForm):
 
     def save(self, commit=True):  #метод сохранения данных пользователя
         user = super(UserRegistrationForm, self).save(commit=True)
-        expiration = now() + timedelta(hours=48)  # дата и время, когда код будет считаться недействительнам
-        record = EmailVerification.objects.create(code=uuid.uuid4(), user=user, expiration=expiration)
-        record.send_verification_email()
+        send_email_verification.delay(user.id)
         return user
 
 

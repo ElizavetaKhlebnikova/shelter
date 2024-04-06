@@ -24,9 +24,7 @@ class IndexView(TitleMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        feedback = News.objects.order_by('index_number')
-        context['news'] = feedback
-        context['news_len'] = len(feedback)
+        context['news'] = cache.get_or_set('news', News.objects.order_by('index_number'), 30)
         return context
 
 class DonationView(TitleMixin, TemplateView):
@@ -71,10 +69,6 @@ class PetsListView(TitleMixin, ListView):  # за ListView зарезервир�
     def get_queryset(self):
         queryset = super(PetsListView, self).get_queryset()
         category_id = self.request.GET.get('category')
-        # pet_list = cache.get('pet_list' + f'http://127.0.0.1:8003/pets/?category=1&gender=f&statuses=2')
-        #
-        # if not pet_list:
-            # добавляем новые фильтры
         gender = self.request.GET.get('gender')
         status_id = self.request.GET.get('status')
         filters = {}
@@ -86,9 +80,6 @@ class PetsListView(TitleMixin, ListView):  # за ListView зарезервир�
             filters['category_id'] = category_id
         if filter:
             queryset = queryset.filter(**filters)
-            # cache.set('pet_list' + str(category_id), queryset, 60)
-        # else:
-        #     queryset = pet_list
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):  # добавляем данные в контекст
@@ -105,12 +96,9 @@ class PetView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pet_name = kwargs['pet_name']
-        feedback = Pet.objects.get(slug=pet_name)
-        history = PetHistory.objects.filter(pet=feedback)
-        context['pet'] = feedback
-        context['history'] = history
-        images = PetImage.objects.filter(pet=feedback)
-        context['images'] = images
+        context['pet'] = cache.get_or_set('pet', Pet.objects.get(slug=pet_name), 30)
+        context['history'] = cache.get_or_set('history', PetHistory.objects.filter(pet=context['pet']), 30)
+        context['images'] = cache.get_or_set('images', PetImage.objects.filter(pet=context['pet']), 30)
         return context
 
 @login_required
