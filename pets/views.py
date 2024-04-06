@@ -8,9 +8,10 @@ from django.core.cache import cache
 from django.core.mail import send_mail
 from .filters import PetFilter
 from requests import get
-from .forms import RequestForCatGuardianshipForm, RequestForDogGuardianshipForm, RequestForRabbitGuardianshipForm
+from .forms import RequestForGuardianshipForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse, reverse_lazy
+from .tasks import send_email_about_request_for_guardianship_task
 
 
 from common.views import TitleMixin
@@ -29,9 +30,6 @@ class IndexView(TitleMixin, TemplateView):
 
 class DonationView(TitleMixin, TemplateView):
     template_name = 'pets/donation.html'
-    # form_class = CatGuardianshipForm
-    # success_url = reverse_lazy('pets:help')  # куда нужно перейти после сохранения данных
-    # success_message = 'Поздравляем! Вы успешно зарегистрированы!'
     title = 'моя помощь'
 
     def get_context_data(self, **kwargs):
@@ -39,26 +37,26 @@ class DonationView(TitleMixin, TemplateView):
         context['range'] = range(7)
         return context
 
-class RequestForCatGuardianship(TitleMixin, CreateView):
-    template_name = 'pets/CatGuardianship.html'
-    form_class = RequestForCatGuardianshipForm
-    success_url = reverse_lazy('pets:cat_guardianship')  # куда нужно перейти после сохранения данных
-    success_message = 'Поздравляем! Вы успешно зарегистрированы!'
-    title = 'моя помощь котам'
-class RequestForDogGuardianship(TitleMixin, CreateView):
-    template_name = 'pets/CatGuardianship.html'
-    form_class = RequestForDogGuardianshipForm
-    success_url = reverse_lazy('pets:cat_guardianship')  # куда нужно перейти после сохранения данных
-    success_message = 'Поздравляем! Вы успешно зарегистрированы!'
-    title = 'моя помощь котам'
-class RequestForRabbitGuardianship(TitleMixin, CreateView):
-    template_name = 'pets/CatGuardianship.html'
-    form_class = RequestForRabbitGuardianshipForm
-    success_url = reverse_lazy('pets:rabbit_guardianship')  # куда нужно перейти после сохранения данных
-    success_message = 'Поздравляем! Вы успешно зарегистрированы!'
-    title = 'моя помощь котам'
+class RequestForGuardianship(CreateView):
+    """ Добавить в модель категорий фотки и показывать их в окне формы слева """
+    template_name = 'pets/Guardianship.html'
+    form_class = RequestForGuardianshipForm
+    success_url = reverse_lazy('pets:my_help')  # куда нужно перейти после сохранения данных
+    success_message = 'Ваша заявка успешно отправлена, ждите ответа!'
 
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category_id = self.kwargs['category_id']
+        pet_list = ['не выбрано']
+        pets = [pet.name for pet in Pet.objects.filter(category=category_id)]
+        context['pet_list'] = pet_list + pets
+        return context
+    def form_valid(self, form):
+        if form.is_valid():
+            feedback = form.save(commit=True)
+            feedback_pk = feedback.pk
+            send_email_about_request_for_guardianship_task.delay(feedback_pk)
+        return super().form_valid(form)
 
 class PetsListView(TitleMixin, ListView):  # за ListView зарезервировано название object_list
     model = Pet

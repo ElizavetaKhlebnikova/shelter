@@ -2,8 +2,6 @@ from django.db import models
 from django.urls import reverse
 from users.models import User
 from pytils.translit import slugify
-from django.core.mail import send_mail
-from django.conf import settings
 # Create your models here.
 
 class PetsCategory(models.Model):
@@ -102,7 +100,7 @@ class OtherPets(models.Model):
 
 class RequestForGuardianship(models.Model):
     user_name = models.CharField(max_length=256, verbose_name=u"Имя пользователя")
-    email = models.EmailField(unique=True, verbose_name=u"Электронная почта для связи")
+    email = models.EmailField(verbose_name=u"Электронная почта для связи")
     pet = models.CharField(max_length=256, verbose_name=u"Кличка подопечного")
     city = models.CharField(max_length=256, verbose_name=u"Город проживания")
     created = models.DateTimeField(auto_now_add=True)
@@ -115,23 +113,3 @@ class RequestForGuardianship(models.Model):
     other_pets = models.ManyToManyField(to=OtherPets, verbose_name=u"Если у вас уже есть питомцы, укажите, какие:")
     other_pet = models.CharField(max_length=256, verbose_name=u"Укажите вид вашего питомца", null=True, blank=True)
     conditions = models.BooleanField(verbose_name=u"Готовы ли вы выполнить все условия?")
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        subject = 'У вас новая заявка на опеку'
-        message = 'Дата создания обращения: {}\nПользователь: {}\nEmail: {}\nГород: {}\nЦель запроса: {}\nПитомец: {}\nГотовность выполнения условий: {}'.format(
-            self.created,
-            self.user_name,
-            self.email,
-            self.city,
-            {'None': 'не выбрано', 'foster care': 'передержка', 'home': 'дом'}[self.goal],
-            self.pet,
-            {False: "не готов", True: "готов"}[self.conditions]
-        )
-        send_mail(
-            subject=subject,
-            message=message,
-            from_email=settings.EMAIL_HOST_USER,
-            recipient_list=['lizka-khlebnikova@yandex.ru'],
-            fail_silently=False,
-        )

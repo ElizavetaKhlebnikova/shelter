@@ -60,8 +60,14 @@
                 </div>
 
                 <div class="form-wrapper">
-                    {{form.pet.label}}
-                    {{form.pet}}
+                    <div class="label">
+                       Кличка подопечного:
+                    </div>
+                    <select name="pet" class="form-control-cast" placeholder="Выберете питомца:" id="id_pet">
+                        {% for pet in pet_list %}
+                            <option value={{pet}}>{{pet}}</option>
+                        {% endfor %}
+                    </select>
                 </div>
 
                 <div class="form-wrapper checkbox">

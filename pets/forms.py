@@ -23,21 +23,3 @@ class RequestForGuardianshipForm(forms.ModelForm):
                                        'placeholder': field.label})
             else:
                 field.widget.attrs.update({'class': 'form-control-cast'})
-
-class RequestForCatGuardianshipForm(RequestForGuardianshipForm):
-    cats_id = PetsCategory.objects.get(name='Коты и кошки')
-    pet_list = [('None', 'не выбрано')]
-    pets = [(cat.name, cat.name) for cat in Pet.objects.filter(category=cats_id)]
-    pet = forms.ChoiceField(choices=pet_list + pets, label = "Выберете питомца:", widget=forms.Select())
-
-class RequestForDogGuardianshipForm(RequestForGuardianshipForm):
-    cats_id = PetsCategory.objects.get(name='Собаки')
-    pet_list = [('None', 'не выбрано')]
-    pets = [(dog.name, dog.name) for dog in Pet.objects.filter(category=cats_id)]
-    pet = forms.ChoiceField(choices=pet_list + pets, label="Выберете питомца:", widget=forms.Select())
-
-class RequestForRabbitGuardianshipForm(RequestForGuardianshipForm):
-    cats_id = PetsCategory.objects.get(name='Кролики')
-    pet_list = [('None', 'не выбрано')]
-    pets = [(rabbit.name, rabbit.name) for rabbit in Pet.objects.filter(category=cats_id)]
-    pet = forms.ChoiceField(choices=pet_list + pets, label="Выберете питомца:", widget=forms.Select())
