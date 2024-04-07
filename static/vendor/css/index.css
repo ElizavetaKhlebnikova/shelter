@@ -98,11 +98,6 @@ body {
   border-radius: 50%;
 }
 
-a {
-  color: inherit !important;
-  text-decoration: none !important;
-}
-
 *,
 *::before,
 *::after {
