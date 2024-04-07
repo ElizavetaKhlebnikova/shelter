@@ -10,6 +10,7 @@ from common.views import TitleMixin
 
 from .forms import UserLoginForm, UserProfileForm, UserRegistrationForm
 from .models import EmailVerification, User
+from .tasks import send_email_verification
 
 
 class UserLoginView(LoginView):
@@ -27,6 +28,12 @@ class UserRegistrationView(TitleMixin, SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('users:login')  # куда нужно перейти после сохранения данных
     success_message = 'Поздравляем! Вы успешно зарегистрированы!'
     title = 'HappyVeganShelter - Регистрация'
+    def form_valid(self, form):
+        if form.is_valid():
+            feedback = form.save(commit=True)
+            feedback_pk = feedback.pk
+            send_email_verification.delay(feedback_pk)
+        return super().form_valid(form)
 
 
 

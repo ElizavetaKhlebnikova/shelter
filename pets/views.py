@@ -52,12 +52,12 @@ class RequestForGuardianship(CreateView):
         context['pet_list'] = pet_list + pets
         context['category'] = PetsCategory.objects.get(pk=category_id)
         return context
-    
+
     def form_valid(self, form):
         if form.is_valid():
             feedback = form.save(commit=True)
-            feedback_pk = feedback.pk
-            send_email_about_request_for_guardianship_task.delay(feedback_pk)
+            feedback_id = feedback.id
+            send_email_about_request_for_guardianship_task.delay(feedback_id)
         return super().form_valid(form)
 
 class PetsListView(TitleMixin, ListView):  # за ListView зарезервировано название object_list

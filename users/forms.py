@@ -56,10 +56,10 @@ class UserRegistrationForm(UserCreationForm):
         model = User
         fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2')
 
-    def save(self, commit=True):  #метод сохранения данных пользователя
-        user = super(UserRegistrationForm, self).save(commit=True)
-        send_email_verification.delay(user.id)
-        return user
+    # def save(self, commit=True):  #метод сохранения данных пользователя
+    #     user = super(UserRegistrationForm, self).save(commit=True)
+    #     send_email_verification.delay(user.id)
+    #     return user
 
 
 
