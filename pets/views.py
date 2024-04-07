@@ -41,7 +41,7 @@ class RequestForGuardianship(CreateView):
     """ Добавить в модель категорий фотки и показывать их в окне формы слева """
     template_name = 'pets/Guardianship.html'
     form_class = RequestForGuardianshipForm
-    success_url = reverse_lazy('pets:my_help')  # куда нужно перейти после сохранения данных
+    success_url = reverse_lazy('pets:help')  # куда нужно перейти после сохранения данных
     success_message = 'Ваша заявка успешно отправлена, ждите ответа!'
 
     def get_context_data(self, **kwargs):
@@ -50,7 +50,9 @@ class RequestForGuardianship(CreateView):
         pet_list = ['не выбрано']
         pets = [pet.name for pet in Pet.objects.filter(category=category_id)]
         context['pet_list'] = pet_list + pets
+        context['category'] = PetsCategory.objects.get(pk=category_id)
         return context
+    
     def form_valid(self, form):
         if form.is_valid():
             feedback = form.save(commit=True)

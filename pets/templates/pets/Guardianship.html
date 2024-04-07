@@ -38,7 +38,7 @@
     <div class="authorisation">
         <div class="inner">
             <div class="image-holder">
-                <img src="{% static 'vendor/img/index/rabbits.png' %}" alt="">
+                <img src="{{ category.image.url }}" alt="">
             </div>
 
 
@@ -46,24 +46,30 @@
                 {% csrf_token %}
                 <div class="form-wrapper">
                     {{form.user_name}}
+                    {{form.city}}
                 </div>
 
                 <div class="form-wrapper">
                     {{form.email}}
                 </div>
+
                 <div class="form-wrapper">
-                    {{form.city}}
-                </div>
-                <div class="form-wrapper">
-                    {{form.goal.label}}
-                    {{form.goal}}
+                    <div class="label">
+                       Кем вы готовы стать для животного?
+                    </div>
+                    <select name="goal" class="form-select" placeholder="Выберете питомца:" id="id_goal">
+                            <option value="None">не выбрано</option>
+                            <option value="foster care">передержка</option>
+                            <option value="home">дом</option>
+                    </select>
+
                 </div>
 
                 <div class="form-wrapper">
                     <div class="label">
                        Кличка подопечного:
                     </div>
-                    <select name="pet" class="form-control-cast" placeholder="Выберете питомца:" id="id_pet">
+                    <select name="pet" class="form-select" placeholder="Выберете питомца:" id="id_pet">
                         {% for pet in pet_list %}
                             <option value={{pet}}>{{pet}}</option>
                         {% endfor %}

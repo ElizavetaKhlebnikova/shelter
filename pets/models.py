@@ -6,6 +6,7 @@ from pytils.translit import slugify
 
 class PetsCategory(models.Model):
     name = models.CharField(max_length=128)
+    image = models.ImageField(upload_to='category_images', verbose_name=u"Фото категории", null=True, blank=True, )
     class Meta:
         verbose_name = 'категорию'
         verbose_name_plural = 'категории'

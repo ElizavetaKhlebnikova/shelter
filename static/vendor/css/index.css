@@ -11,69 +11,54 @@ body {
 }
 /*----------------navbar----------------------*/
 
-/*----------------navbar-menu----------------------*/
-.happy-first-menu {
-  height: 618px;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  background-color: #e2dcd9;
-  box-shadow: 0px 0px 20px 30px #e2dcd9e6;
-}
-
 .navbar.navbar-expand-lg.complex {
   height: unset !important;
-  background-color: #bed5d4;
-  background-image: url(../img/index/pngwing24.png) !important;
-  box-shadow: 0px 0px 7px 8px #9b9597bf;
-
+  background-color: #e2dcd9;
+  background-image: none !important;
+  box-shadow: none;
   .container-fluid {
-    background-color: #e2dcd9de;
-    box-shadow: 0px 0px 7px 8px #9d9d9dbf;
-    padding: 5px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-
-    .navbar-collapse {
-      font-family: "Bad Script";
-
-      .navbar-nav {
-        width: 100%;
-        justify-content: space-evenly;
-        align-items: center;
-
-        .nav-item {
-          transition-property: font-weight;
-          transition-duration: 200ms;
-          text-align: center;
-
-          .nav-link.active:hover {
-            color: #3e6e6b !important;
-            transition: 0.5s;
-            scale: 105%;
-            text-shadow: none;
-            width: fit-content;
-            background-image: url("../img/index/mazok.png");
-            background-size: contain;
-            font-weight: bold;
-            background-position: center;
-            background-repeat: no-repeat;
-          }
-        }
-      }
-    }
+    box-shadow: none;
   }
 }
 
-/*----------------navbar-presentation----------------------*/
-/*----------------navbar-presentation-info----------------------*/
-.happy-images {
-  display: flex;
-  height: 80%;
-  background-image: url("../img/index/animals.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right;
+/*----------------navbar-menu----------------------*/
+
+@media screen and (min-width: 1174px) {
+  .happy-first-menu {
+    height: 618px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    background-color: #e2dcd9;
+    box-shadow: 0px 0px 20px 30px #e2dcd9e6;
+    background-image: url("../img/index/animals.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+  .happy-images {
+    display: flex;
+    height: 80%;
+  }
+}
+
+@media screen and (max-width: 1174px) {
+  .happy-first-menu {
+    height: 618px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    background-color: #e2dcd9;
+    box-shadow: 0px 0px 20px 30px #e2dcd9e6;
+  }
+  .happy-images {
+    display: flex;
+    height: 80%;
+    background-image: url("../img/index/animals.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
 }
 
 .info {

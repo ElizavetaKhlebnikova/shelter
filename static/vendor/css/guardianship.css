@@ -9,8 +9,10 @@
   background-color: #ffffffc2;
   filter: drop-shadow(0 30px 10px rgba(0, 0, 0, 0.125));
   box-shadow: 0px 0px 7px 8px #bdb5b88f;
-  margin: 100px;
+  margin-top: 100px;
   margin-bottom: 200px;
+
+  max-width: 972px;
 }
 
 .inner {
@@ -89,7 +91,7 @@
   height: 30px;
   padding: 0;
   margin-bottom: 25px;
-  background-color: #fafafa;
+  background-color: #fafafa00;
 }
 
 .form-wrapper.checkbox {
@@ -129,28 +131,29 @@
   width: 50%;
 }
 
+#id_user_name,
+#id_city {
+  width: unset;
+}
+
 .form-control-cast::-webkit-input-placeholder {
-  font-size: 16px;
+  font-size: 14px;
   color: #333;
-  font-family: poppins-regular;
 }
 
 .form-control-cast::-moz-placeholder {
-  font-size: 13px;
+  font-size: 14px;
   color: #333;
-  font-family: poppins-regular;
 }
 
 .form-control-cast:-ms-input-placeholder {
-  font-size: 13px;
+  font-size: 14px;
   color: #333;
-  font-family: poppins-regular;
 }
 
 .form-control-cast:-moz-placeholder {
-  font-size: 13px;
+  font-size: 14px;
   color: #333;
-  font-family: poppins-regular;
 }
 
 select {
@@ -328,7 +331,7 @@ select option[value=""][disabled] {
   }
 }
 
-@media (max-width: 338px) {
+@media (max-width: 476px) {
   .authorisation {
     margin: 0;
   }
