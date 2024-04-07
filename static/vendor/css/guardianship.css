@@ -9,9 +9,8 @@
   background-color: #ffffffc2;
   filter: drop-shadow(0 30px 10px rgba(0, 0, 0, 0.125));
   box-shadow: 0px 0px 7px 8px #bdb5b88f;
+  margin-bottom: 100px;
   margin-top: 100px;
-  margin-bottom: 200px;
-
   max-width: 972px;
 }
 
@@ -154,6 +153,10 @@
 .form-control-cast:-moz-placeholder {
   font-size: 14px;
   color: #333;
+}
+
+:focus-visible {
+  outline: unset;
 }
 
 select {
@@ -318,7 +321,13 @@ select option[value=""][disabled] {
   }
 
   .inner .image-holder {
-    width: 100%;
+    height: 400px;
+    text-align: center;
+    width: auto;
+    img {
+      max-height: 100%;
+      width: auto;
+    }
   }
 
   .inner form {
