@@ -23,6 +23,6 @@ class RequestForGuardianshipForm(forms.ModelForm):
         for field in self.fields.values():
             if field != 'other_pet':
                 field.widget.attrs.update({'class': 'form-control-cast',
-                                       'placeholder': field.label})
+                                           'placeholder': field.label})
             else:
                 field.widget.attrs.update({'class': 'form-control-cast'})

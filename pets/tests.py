@@ -15,6 +15,7 @@ class IndexViewTestCase(TestCase):
         self.assertTemplateUsed(response, 'pets/index.html')
         self.assertEqual(response.context_data['title'], 'HappyVeganShelter')
 
+
 class PetListTestCase(TestCase):
     fixtures = ['pet_category.json', 'pet_status.json', 'pets.json']
 
@@ -30,7 +31,8 @@ class PetListTestCase(TestCase):
             page += 1
             path = reverse('pets:paginator', kwargs={'page': page})
             response = self.client.get(path)
-            self.assertQuerysetEqual(response.context_data.get('object_list'), Pet.objects.all()[left:right], ordered=False)
+            self.assertQuerysetEqual(response.context_data.get('object_list'), Pet.objects.all()[left:right],
+                                     ordered=False)
             self.assertEqual(response.status_code, HTTPStatus.OK)
             self.assertTemplateUsed(response, 'pets/pets.html')
             data_len -= self.paginate_by
@@ -48,7 +50,3 @@ class PetListTestCase(TestCase):
                 self.assertTrue('is_paginated' in response.context)
                 self.assertTrue(response.context['is_paginated'] == True)
                 self.assertTrue(len(response.context['object_list']) == self.paginate_by)
-
-
-
-

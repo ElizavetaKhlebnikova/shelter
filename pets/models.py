@@ -3,15 +3,18 @@ from pytils.translit import slugify
 
 from users.models import User
 
+
 # Create your models here.
 
 
 class PetsCategory(models.Model):
     name = models.CharField(max_length=128)
     image = models.ImageField(upload_to='category_images', verbose_name=u"Фото категории", null=True, blank=True, )
+
     class Meta:
         verbose_name = 'категорию'
         verbose_name_plural = 'категории'
+
     def __str__(self):
         return self.name
 
@@ -30,10 +33,10 @@ class PetStatus(models.Model):
 class Pet(models.Model):
     name = models.CharField(max_length=256, verbose_name=u"Кличка животного")
     description = models.TextField(verbose_name=u"Описание")
-    image = models.ImageField(upload_to='pet_images', verbose_name=u"Фото животного", null=True, blank=True,)
+    image = models.ImageField(upload_to='pet_images', verbose_name=u"Фото животного", null=True, blank=True, )
     category = models.ForeignKey(to=PetsCategory, on_delete=models.CASCADE, verbose_name=u"Вид животного")
-    slug = models.SlugField(default='', null=True, blank=True,)
-    needs = models.TextField(verbose_name=u"Нужды в настоящий момент", null=True, blank=True,)
+    slug = models.SlugField(default='', null=True, blank=True, )
+    needs = models.TextField(verbose_name=u"Нужды в настоящий момент", null=True, blank=True, )
     MALE = 'm'
     FEMALE = 'f'
     GENDERS = [
@@ -94,8 +97,8 @@ class News(models.Model):
     text = models.TextField(max_length=400, verbose_name=u"Текст новости")
     image = models.ImageField(upload_to='news_images', verbose_name=u"Фото")
     connection = models.BooleanField(default=False, verbose_name=u"Нужна ссылка на подопечного?")
-    pet = models.ForeignKey(to=Pet, null=True, blank=True, on_delete=models.CASCADE, verbose_name=u"Подопечный, на которого даётся ссылка")
-
+    pet = models.ForeignKey(to=Pet, null=True, blank=True, on_delete=models.CASCADE,
+                            verbose_name=u"Подопечный, на которого даётся ссылка")
 
     class Meta:
         verbose_name = 'Новость'

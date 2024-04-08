@@ -54,14 +54,23 @@ class EmailVerificationView(TitleMixin, TemplateView):
     title = 'HappyVeganShelter - подтверждение электронной почты'
     template_name = 'users/email_verification.html'
 
-    def get(self, request, *args, **kwargs): #сюда прилетает code и email
+    def get(self, request, *args, **kwargs):  # сюда прилетает code и email
+        """Написть функцию проверки наличия объекта верификации и функцию передачи параметра
+         верификации для пользователя.
+         Прописать строки документации сласскам и функциям.
+         Создать логику обновления пароля.
+         Создать логику сброса пароля.
+         Создать отправку писем пользователям?
+         Создать шаблон успешной отправки запроса на опеку.
+         """
         code = kwargs['code']
         user = User.objects.get(email=kwargs['email'])
-        email_verifications = EmailVerification.objects.filter(user=user, code=code) #ищем оъект, соответствующий параметрам user, code
-        if email_verifications.exists() and not email_verifications.first().is_expired():  #если таковой имеется, то:
-            user.is_verified_email = True  #меняем данный параметр объекта пользователя
-            user.save()    #сохраняем
+        email_verifications = EmailVerification.objects.filter(user=user,
+                                                               code=code)  # ищем оъект, соответствующий параметрам user, code
+        if email_verifications.exists() and not email_verifications.first().is_expired():  # если таковой имеется, то:
+            user.is_verified_email = True  # меняем данный параметр объекта пользователя
+            user.save()  # сохраняем
             return super(EmailVerificationView, self).get(request, *args, **kwargs)
-            #возвращаем супер для отображения шаблона и срабатывания логики
+            # возвращаем супер для отображения шаблона и срабатывания логики
         else:
             return HttpResponseRedirect(reverse('/'))

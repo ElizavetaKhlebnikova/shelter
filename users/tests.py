@@ -5,7 +5,7 @@ from django.test import Client, TestCase
 from django.urls import reverse
 from django.utils.timezone import now
 
-from users.forms import UserLoginForm, UserProfileForm, UserRegistrationForm
+from users.forms import UserLoginForm, UserProfileForm
 from users.models import EmailVerification, User
 
 
@@ -80,7 +80,7 @@ class UserLoginViewTestCase(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'users/login.html')
         self.assertIsInstance(response.context['form'], UserLoginForm)
-        #UserLoginViewTestCase.test_login_page_loads_successfully
+        # UserLoginViewTestCase.test_login_page_loads_successfully
 
     def test_login_successful(self):
         data = {
