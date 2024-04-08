@@ -18,7 +18,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-from django.views.decorators.cache import cache_page
 from pets.views import IndexView
 
 admin.site.site_header = "Администрирование"

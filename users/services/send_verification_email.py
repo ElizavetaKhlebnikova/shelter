@@ -1,7 +1,13 @@
-from django.conf import settings
-from users.models import User, EmailVerification
 import uuid
 from datetime import timedelta
+
+from django.conf import settings
+from django.core.mail import send_mail
+from django.urls import reverse
+from django.utils.timezone import now
+
+from users.models import EmailVerification, User
+
 
 def send_verification_email(record):
     link = reverse('users:email_verification', kwargs={'email': record.user.email, 'code': record.code})
@@ -19,6 +25,7 @@ def send_verification_email(record):
         recipient_list=[record.user.email],
         fail_silently=False,
     )
+
 
 def create_email_verification_object(user_id):
     user = User.objects.get(id=user_id)

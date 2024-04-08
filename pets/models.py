@@ -1,8 +1,10 @@
 from django.db import models
-from django.urls import reverse
-from users.models import User
 from pytils.translit import slugify
+
+from users.models import User
+
 # Create your models here.
+
 
 class PetsCategory(models.Model):
     name = models.CharField(max_length=128)
@@ -45,6 +47,7 @@ class Pet(models.Model):
     class Meta:
         verbose_name = 'подопечный'
         verbose_name_plural = 'Подопечные'
+
     def __str__(self):
         return f'Имя подопечного: {self.name} | Вид: {self.category}'
 
@@ -58,25 +61,32 @@ class Basket(models.Model):
     pet = models.ForeignKey(to=Pet, on_delete=models.CASCADE)
     created_timestamp = models.DateTimeField(auto_now_add=True)
 
+
 class PetHistory(models.Model):
     pet = models.ForeignKey(to=Pet, on_delete=models.CASCADE, verbose_name=u"Кличка подопечного")
     time = models.DateField(auto_now_add=False, verbose_name=u"Дата")
     node = models.TextField(verbose_name=u"Новость из жизни подопечного")
+
     class Meta:
         verbose_name = 'История подопечного'
         verbose_name_plural = 'Истории подопечных'
+
     def __str__(self):
         return f'Событие из жизни подопечного: {self.pet.name} | Дата: {self.time}'
+
 
 class PetImage(models.Model):
     pet = models.ForeignKey(to=Pet, on_delete=models.CASCADE, verbose_name=u"Кличка подопечного")
     image = models.ImageField(upload_to='pet_images', verbose_name=u"Фото животного")
     index_number = models.IntegerField(verbose_name=u"Порядок отображения")
+
     class Meta:
         verbose_name = 'Фотография подопечного'
         verbose_name_plural = 'Фотогафии подопечных'
+
     def __str__(self):
         return f'Фотография подопечного: {self.pet.name}'
+
 
 class News(models.Model):
     index_number = models.IntegerField(verbose_name=u"Порядок отображения")
@@ -90,14 +100,17 @@ class News(models.Model):
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
+
     def __str__(self):
         return f'Новость № {self.index_number}: {self.title}'
+
 
 class OtherPets(models.Model):
     pets = models.CharField(max_length=20, verbose_name=u"Вид животного")
 
     def __str__(self):
         return self.pets
+
 
 class RequestForGuardianship(models.Model):
     user_name = models.CharField(max_length=256, verbose_name=u"Имя пользователя")

@@ -19,22 +19,20 @@ class UserLoginView(LoginView):
     form_class = UserLoginForm
 
 
-
 class UserRegistrationView(TitleMixin, SuccessMessageMixin, CreateView):
-    model = User  # куда сохраняем данные из формы
-    form_class = UserRegistrationForm  # сама форма
-    # fields = ['name', 'surname'] - поля, которые будут отображаться в форме
-    template_name = 'users/registration.html'  # шаблон для отображения данных
-    success_url = reverse_lazy('users:login')  # куда нужно перейти после сохранения данных
+    model = User
+    form_class = UserRegistrationForm
+    template_name = 'users/registration.html'
+    success_url = reverse_lazy('users:login')
     success_message = 'Поздравляем! Вы успешно зарегистрированы!'
     title = 'HappyVeganShelter - Регистрация'
+
     def form_valid(self, form):
         if form.is_valid():
             feedback = form.save(commit=True)
             feedback_pk = feedback.pk
             send_email_verification.delay(feedback_pk)
         return super().form_valid(form)
-
 
 
 class UserProfileView(TitleMixin, LoginRequiredMixin, UpdateView):
@@ -50,7 +48,6 @@ class UserProfileView(TitleMixin, LoginRequiredMixin, UpdateView):
         user = queryset.get(
             pk=self.request.user.id)  # вытаскиваем объект пользователя, по его primary key - это нужно для того, чтобы в роуте мы не прописывали pk (здесь он равен айдишнику)
         return user  # строим на основании данных юзера его профиль
-
 
 
 class EmailVerificationView(TitleMixin, TemplateView):

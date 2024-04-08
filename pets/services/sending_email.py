@@ -1,7 +1,8 @@
-from django.core.mail import send_mail
 from django.conf import settings
-from datetime import date
+from django.core.mail import send_mail
+
 from ..models import RequestForGuardianship
+
 
 def send_email_about_request_for_guardianship(request_pk):
     request_for_guardianship = RequestForGuardianship.objects.get(pk=request_pk)

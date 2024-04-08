@@ -1,5 +1,7 @@
 from django import forms
-from .models import RequestForGuardianship, Pet, PetsCategory, OtherPets
+
+from .models import RequestForGuardianship
+
 
 class RequestForGuardianshipForm(forms.ModelForm):
     goals = (
@@ -7,7 +9,8 @@ class RequestForGuardianshipForm(forms.ModelForm):
         ('foster care', 'передержка'),
         ('home', 'дом')
     )
-    goal = forms.ChoiceField(choices=goals, label = "Кем вы готовы стать для животного?", widget=forms.Select())
+    goal = forms.ChoiceField(choices=goals, label="Кем вы готовы стать для животного?", widget=forms.Select())
+
     class Meta:
         model = RequestForGuardianship
         fields = ['user_name', 'email', 'pet', 'city', 'goal', 'other_pets', 'other_pet', 'conditions']
