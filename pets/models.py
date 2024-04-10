@@ -55,7 +55,9 @@ class Pet(models.Model):
         return f'Имя подопечного: {self.name} | Вид: {self.category}'
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        """Генерирует слаг на основании клички и вида животного"""
+        string = self.name + '_' + self.category.name
+        self.slug = slugify(string)
         super().save(*args, **kwargs)
 
 

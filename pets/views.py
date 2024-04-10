@@ -19,6 +19,7 @@ class IndexView(TitleMixin, TemplateView):
     title = 'HappyVeganShelter'
 
     def get_context_data(self, **kwargs):
+        """Возвращает в шаблон список объектов новостей"""
         context = super().get_context_data(**kwargs)
         context['news'] = cache.get_or_set('news', News.objects.order_by('index_number'), 30)
         return context
@@ -29,19 +30,20 @@ class DonationView(TitleMixin, TemplateView):
     title = 'моя помощь'
 
     def get_context_data(self, **kwargs):
+        """Возвращает в шаблон объект range для отображения фотографий RabbitStones"""
         context = super().get_context_data(**kwargs)
         context['range'] = range(7)
         return context
 
 
 class RequestForGuardianship(CreateView):
-    """ Добавить в модель категорий фотки и показывать их в окне формы слева """
     template_name = 'pets/Guardianship.html'
     form_class = RequestForGuardianshipForm
     success_url = reverse_lazy('pets:help')
     success_message = 'Ваша заявка успешно отправлена, ждите ответа!'
 
     def get_context_data(self, **kwargs):
+        """Возвращает в шаблон список животных в соответствии с категорией"""
         context = super().get_context_data(**kwargs)
         category_id = self.kwargs['category_id']
         pets = [pet.name for pet in Pet.objects.filter(category=category_id)]
@@ -50,6 +52,7 @@ class RequestForGuardianship(CreateView):
         return context
 
     def form_valid(self, form):
+        """Проверяет валидность формы и отправляет на почту информацию о запросе на опеку от пользователя"""
         if form.is_valid():
             feedback = form.save(commit=True)
             feedback_id = feedback.id
@@ -64,6 +67,7 @@ class PetsListView(TitleMixin, ListView):  # за ListView зарезервир�
     title = 'Store - Каталог'
 
     def get_queryset(self):
+        """Возвращает отфильтрованный список животных"""
         queryset = super(PetsListView, self).get_queryset()
         category_id = self.request.GET.get('category')
         gender = self.request.GET.get('gender')
@@ -79,10 +83,10 @@ class PetsListView(TitleMixin, ListView):  # за ListView зарезервир�
             queryset = queryset.filter(**filters)
         return queryset
 
-    def get_context_data(self, *, object_list=None, **kwargs):  # добавляем данные в контекст
+    def get_context_data(self, *, object_list=None, **kwargs):
+        """Передаёт в контекст данные о категориях и статусах для фильтрации"""
         context = super(PetsListView, self).get_context_data()
         context['categories'] = PetsCategory.objects.all()
-        # category_id = self.request.GET.get('category')
         context['statuses'] = PetStatus.objects.all()
         return context
 
@@ -91,6 +95,7 @@ class PetView(TemplateView):
     template_name = 'pets/pet.html'
 
     def get_context_data(self, **kwargs):
+        """Возвращает данные о питомце в соответствии с его слагом"""
         context = super().get_context_data(**kwargs)
         pet_name = kwargs['pet_name']
         context['pet'] = cache.get_or_set('pet', Pet.objects.get(slug=pet_name), 30)
@@ -101,6 +106,7 @@ class PetView(TemplateView):
 
 @login_required
 def basket_add(request, pet_id):
+    """Проверяет наличие питомца в корзине пользователя и при его отсутствии добавляет питомца"""
     pet = Pet.objects.all().get(id=pet_id)
     basket = Basket.objects.all().filter(user=request.user, pet=pet)
     if not basket.exists():
@@ -110,6 +116,7 @@ def basket_add(request, pet_id):
 
 @login_required
 def basket_remove(request, basket_id):
+    """Удаляет корзину пользователя"""
     basket = Basket.objects.get(id=basket_id)
     basket.delete()
     return HttpResponseRedirect(request.META['HTTP_REFERER'])

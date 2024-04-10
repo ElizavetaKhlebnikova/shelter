@@ -11,6 +11,7 @@ from common.views import TitleMixin
 from .forms import UserLoginForm, UserProfileForm, UserRegistrationForm
 from .models import EmailVerification, User
 from .tasks import send_email_verification
+from .services.verification import change_parameter_of_the_user_object
 
 
 class UserLoginView(LoginView):
@@ -28,6 +29,7 @@ class UserRegistrationView(TitleMixin, SuccessMessageMixin, CreateView):
     title = 'HappyVeganShelter - Регистрация'
 
     def form_valid(self, form):
+        """После проверки валидности формы сохраняет её и отправляет письмо для верификации пользователя"""
         if form.is_valid():
             feedback = form.save(commit=True)
             feedback_pk = feedback.pk
@@ -44,10 +46,11 @@ class UserProfileView(TitleMixin, LoginRequiredMixin, UpdateView):
     title = 'HappyVeganShelter - Личный кабинет'
 
     def get_object(self, queryset=None):
+        '''Генерирует профиль на основании данных пользователя'''
         queryset = self.get_queryset()
         user = queryset.get(
-            pk=self.request.user.id)  # вытаскиваем объект пользователя, по его primary key - это нужно для того, чтобы в роуте мы не прописывали pk (здесь он равен айдишнику)
-        return user  # строим на основании данных юзера его профиль
+            pk=self.request.user.id)
+        return user
 
 
 class EmailVerificationView(TitleMixin, TemplateView):
@@ -55,7 +58,19 @@ class EmailVerificationView(TitleMixin, TemplateView):
     template_name = 'users/email_verification.html'
 
     def get(self, request, *args, **kwargs):  # сюда прилетает code и email
-        """Написть функцию проверки наличия объекта верификации и функцию передачи параметра
+        '''Извлекает код, пользователя и объект EmailVerification, проверяет наличие объекта EmailVerification
+        и не истёк ли срок его действия'''
+        code = kwargs['code']
+        user = User.objects.get(email=kwargs['email'])
+        email_verifications = EmailVerification.objects.filter(user=user,
+                                                               code=code)
+        if email_verifications.exists() and not email_verifications.first().is_expired():
+            change_parameter_of_the_user_object(user)
+            return super(EmailVerificationView, self).get(request, *args, **kwargs)
+        return HttpResponseRedirect(reverse('/'))
+
+
+"""Написть функцию проверки наличия объекта верификации и функцию передачи параметра
          верификации для пользователя.
          Прописать строки документации сласскам и функциям.
          Создать логику обновления пароля.
@@ -63,14 +78,3 @@ class EmailVerificationView(TitleMixin, TemplateView):
          Создать отправку писем пользователям?
          Создать шаблон успешной отправки запроса на опеку.
          """
-        code = kwargs['code']
-        user = User.objects.get(email=kwargs['email'])
-        email_verifications = EmailVerification.objects.filter(user=user,
-                                                               code=code)  # ищем оъект, соответствующий параметрам user, code
-        if email_verifications.exists() and not email_verifications.first().is_expired():  # если таковой имеется, то:
-            user.is_verified_email = True  # меняем данный параметр объекта пользователя
-            user.save()  # сохраняем
-            return super(EmailVerificationView, self).get(request, *args, **kwargs)
-            # возвращаем супер для отображения шаблона и срабатывания логики
-        else:
-            return HttpResponseRedirect(reverse('/'))

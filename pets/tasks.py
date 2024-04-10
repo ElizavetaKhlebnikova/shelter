@@ -7,4 +7,5 @@ app = Celery('tasks', broker='redis://127.0.0.1:6379')
 
 @app.task
 def send_email_about_request_for_guardianship_task(request_pk):
+    """Отправляет письмо с запросом на опеку"""
     return send_email_about_request_for_guardianship(request_pk)
