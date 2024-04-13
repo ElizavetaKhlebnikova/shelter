@@ -1,5 +1,4 @@
 .container {
-  padding-top: 50px;
   padding-bottom: 100px;
   margin-bottom: 40px;
   margin-top: 40px;
@@ -179,7 +178,6 @@ input:not(#id_image, .btn) {
   padding: 20px;
   font-size: 30px;
   font-weight: 700;
-  background-color: #e2dcd9;
   font-family: "El Messiri";
 }
 

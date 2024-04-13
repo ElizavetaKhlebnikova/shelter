@@ -1,3 +1,8 @@
+.navbar.navbar-expand-lg.complex {
+  height: unset !important;
+  background-color: #ebdad4 !important;
+}
+
 .introdaction {
   height: 600px;
   display: flex;
@@ -7,7 +12,7 @@
   background-position: right;
   align-items: center;
   justify-content: space-evenly;
-  background-color: #e2dcd9 !important;
+  background-color: #ebdad4 !important;
   z-index: -1;
   .photos {
     height: 440px;

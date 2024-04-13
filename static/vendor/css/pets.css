@@ -1,8 +1,113 @@
 body {
-  background-image: url(../img/index/lepestki.png) !important;
+  background-image: none !important;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar.navbar-expand-lg.complex {
+  height: unset !important;
+  background-color: transparent;
+  background-image: none !important;
+  box-shadow: none;
+  .container-fluid {
+    box-shadow: none;
+    background-color: transparent;
+  }
+}
+
+.pet-filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid rgb(43, 42, 40, 0.3);
+  width: 90%;
 }
 
 .filter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pet-filter-row {
+  width: 61%;
+}
+
+.form-select {
+  background-color: #e8dbd500 !important;
+  border: none !important;
+  font-size: 1.2rem !important;
+  border-radius: none !important;
+  cursor: pointer;
+}
+
+.form-select:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+/* Цвет фона и текста элементов списка */
+.form-select option {
+  background-color: transparent; /* Темно-зеленый фон */
+}
+
+/* Цвет фона при наведении */
+.form-select option:hover {
+  background-color: transparent; /* Чуть более темный зеленый */
+}
+
+.form-select:focus {
+  box-shadow: none !important;
+  text-decoration: underline;
+}
+
+.filter-button {
+  margin-left: 13px;
+  input {
+    font-size: 1.2rem !important;
+    font-weight: 100 !important;
+    font-family: "Cormorant Garamond", serif !important;
+    width: 81px;
+    height: 36px;
+    border: none;
+    outline: none;
+    background: #2f2f2fab;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 40px;
+    text-align: center;
+    box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+  input:hover {
+    background-color: #25a9a0;
+    transition: 400ms;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 991px) {
+  .pet-filter {
+    flex-direction: column;
+    width: 100%;
+  }
+  .filter-button {
+    padding: 20px;
+  }
+}
+
+.row {
+  h1 {
+    text-align: center;
+    font-size: 22px;
+  }
+}
+
+/* .filter {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -47,7 +152,7 @@ body {
     transition: 0.5s;
     scale: 120%;
   }
-}
+} */
 
 .col-lg-13 {
   padding: 50px !important;
@@ -205,13 +310,10 @@ body {
   background-color: transparent !important;
 }
 
-@media screen and (min-width: 0px) and (max-width: 1040px) {
-  .col-lg-13 {
-    padding: 20px !important;
-  }
-}
-
 @media screen and (min-width: 0px) and (max-width: 770px) {
+  .pet-filter {
+    height: 320px;
+  }
   .filter {
     flex-direction: column;
   }
@@ -221,18 +323,12 @@ body {
     align-items: center;
     justify-content: space-between;
   }
-  .form-select {
-    width: 50% !important;
-  }
-  .filter-button {
-    padding: 10px;
-  }
 }
 @media screen and (min-width: 0px) and (max-width: 370px) {
   .one-filter {
     flex-direction: column;
   }
   .form-select {
-    width: 150px !important;
+    max-width: 200px !important;
   }
 }

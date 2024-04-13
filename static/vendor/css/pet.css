@@ -1,13 +1,19 @@
+.navbar.navbar-expand-lg.complex {
+  height: unset !important;
+  background-color: #ebdad4 !important;
+}
+
 .happy-images {
   display: flex;
-  height: 85vh;
+  height: fit-content;
+  padding: 50px;
   background-image: unset;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right;
   align-items: center;
   justify-content: space-evenly;
-  background-color: #e2dcd9 !important;
+  background-color: #ebdad4 !important;
   position: sticky;
 }
 

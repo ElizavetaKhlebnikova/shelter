@@ -11,33 +11,30 @@
 
 {% block content %}
 <!-- Page Content -->
-<div class="container" style="padding-top: 100px;">
 
-    <div class="row-к">
-
-
-        <form class='filter' method="GET" action="{% url 'pets:index' %}">
+<div class="container" >
+<div class="pet-filter" style="padding-top: 50px;">
+            <h1 class="h2">Каталог</h1>
+            <div class="pet-filter-rov">
+                <form class='filter' method="GET" action="{% url 'pets:index' %}">
             <div class="one-filter">
-                <label for="category">Вид животного:</label>
                 <select class='form-select' name="category" id="category">
-                    <option value="-" {% if request.GET.category == None %} selected {% endif %}>Не выбран</option>
+                    <option value="-" {% if request.GET.category == None %} selected {% endif %}>Все виды</option>
                     {% for category in categories %}
                             <option value={{category.id}} {% if  request.GET.category|add:"0" == category.id %} selected {% endif %} > {{ category.name }} </option>
                     {% endfor %}
                 </select>
             </div>
             <div class="one-filter">
-                <label for="gender">Пол:</label>
                 <select class='form-select' name="gender" id="gender">
-                    <option value="-" {% if request.GET.gender == None %} selected {% endif %}>Не выбран</option>
+                    <option value="-" {% if request.GET.gender == None %} selected {% endif %}>Любой пол</option>
                     <option value="m" {% if request.GET.gender == "m" %} selected {% endif %}> Мужской </option>
                     <option value="f" {% if request.GET.gender == "f" %} selected {% endif %}> Женский </option>
                 </select>
             </div>
             <div class="one-filter">
-                <label for="status_id">Статус:</label>
                 <select class='form-select' name="status" id="status">
-                    <option value="-" {% if request.GET.status == None %} selected {% endif %}>Не выбран</option>
+                    <option value="-" {% if request.GET.status == None %} selected {% endif %}>Любой статус</option>
                     {% for status in statuses %}
                             <option value={{status.id}} {% if  request.GET.status|add:"0" == status.id %} selected {% endif %}  > {{ status }} </option>
                     {% endfor %}
@@ -47,12 +44,16 @@
                 <input type="submit" value="Поиск">
             </div>
         </form>
-        <!-- /.col-lg-3 -->
+            </div>
+        </div>
 
         <div class="col-lg-13">
 
             <div class="row">
-
+                {% if object_list|length == 0 %}
+                    <h1>К сожалению, не нашлось соответствия по заданным вами параметрам поиска.<br>
+                    Попробуйте изменить запрос.</h1>
+                {% endif %}
                 {% for pet in object_list %}
                 <div class="col-lg-4 col-md-4 mb-3">
                     <div class="card h-100">

@@ -98,9 +98,9 @@ class PetView(TemplateView):
         """Возвращает данные о питомце в соответствии с его слагом"""
         context = super().get_context_data(**kwargs)
         pet_name = kwargs['pet_name']
-        context['pet'] = cache.get_or_set('pet', Pet.objects.get(slug=pet_name), 30)
-        context['history'] = cache.get_or_set('history', PetHistory.objects.filter(pet=context['pet']), 30)
-        context['images'] = cache.get_or_set('images', PetImage.objects.filter(pet=context['pet']), 30)
+        context['pet'] = cache.get_or_set(f'pet {pet_name}', Pet.objects.get(slug=pet_name), 30)
+        context['history'] = cache.get_or_set(f'history {pet_name}', PetHistory.objects.filter(pet=context['pet']), 30)
+        context['images'] = cache.get_or_set(f'images {pet_name}', PetImage.objects.filter(pet=context['pet']), 30)
         return context
 
 

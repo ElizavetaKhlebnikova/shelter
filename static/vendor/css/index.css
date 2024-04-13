@@ -13,7 +13,7 @@ body {
 
 .navbar.navbar-expand-lg.complex {
   height: unset !important;
-  background-color: #e2dcd9;
+  background-color: #ebdad4;
   background-image: none !important;
   box-shadow: none;
   .container-fluid {
@@ -29,7 +29,7 @@ body {
     display: flex;
     width: 100%;
     flex-direction: column;
-    background-color: #e2dcd9;
+    background-color: #ebdad4;
     box-shadow: 0px 0px 20px 30px #e2dcd9e6;
     background-image: url("../img/index/animals.png");
     background-size: contain;
@@ -48,7 +48,7 @@ body {
     display: flex;
     width: 100%;
     flex-direction: column;
-    background-color: #e2dcd9;
+    background-color: #ebdad4;
     box-shadow: 0px 0px 20px 30px #e2dcd9e6;
   }
   .happy-images {
