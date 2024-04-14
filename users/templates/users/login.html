@@ -48,6 +48,9 @@
                 <div class="form-wrapper">
                     {{ form.password }}
                 </div>
+                <div class="card-footer text-center">
+            <div class="small"><a class="registration" href="{% url 'users:password_reset' %}">Забыли пароль?</a></div>
+        </div>
                 <button class="button-background-move" role="button">
                     <input type="submit" value="Войти"/>
                 </button>
