@@ -37,9 +37,9 @@ class DonationView(TitleMixin, TemplateView):
 
 
 class RequestForGuardianship(CreateView):
-    template_name = 'pets/Guardianship.html'
+    template_name = 'pets/request_for_guardianship_form.html'
     form_class = RequestForGuardianshipForm
-    success_url = reverse_lazy('pets:help')
+    success_url = reverse_lazy('pets:request_for_guardianship_form_done')
     success_message = 'Ваша заявка успешно отправлена, ждите ответа!'
 
     def get_context_data(self, **kwargs):

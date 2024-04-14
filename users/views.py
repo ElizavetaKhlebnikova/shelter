@@ -96,5 +96,4 @@ class UserPasswordChangeDoneView(PasswordChangeDoneView):
 
 
 """Создать отправку писем пользователям?
-    Создать шаблон успешной отправки запроса на опеку.
     Тесты"""
