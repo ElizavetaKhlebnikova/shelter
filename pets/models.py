@@ -2,6 +2,7 @@ from django.db import models
 from pytils.translit import slugify
 
 from users.models import User
+from .services.sending_news import send_common_news_email
 
 
 # Create your models here.
@@ -108,6 +109,12 @@ class News(models.Model):
 
     def __str__(self):
         return f'Новость № {self.index_number}: {self.title}'
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.pet == None:
+            news = News.objects.get(pk=self.pk)
+            send_common_news_email(news)
 
 
 class OtherPets(models.Model):

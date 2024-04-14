@@ -45,10 +45,12 @@ class UserRegistrationForm(UserCreationForm):
         'class': 'form-control-cast',
         'placeholder': "Повторите пароль"
     }))
+    common_news = forms.BooleanField(label="Вы хотели бы получать наши новости?")
+    common_news.widget.attrs.update({'class': 'form-control-cast'})
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2')
+        fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2', 'common_news')
 
 
 class UserProfileForm(UserChangeForm):

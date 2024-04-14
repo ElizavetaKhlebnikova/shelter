@@ -151,6 +151,18 @@ select option[value=""][disabled] {
   display: none;
 }
 
+#id_common_news {
+  border: none;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  display: unset;
+  width: auto;
+  height: unset;
+  margin-bottom: unset;
+  background-color: unset;
+}
+
 .button-background-move {
   input {
     border: none;
