@@ -2,7 +2,6 @@ from django.db import models
 from pytils.translit import slugify
 
 from users.models import User
-from .services.sending_news import send_common_news_email
 
 
 # Create your models here.
@@ -92,30 +91,6 @@ class PetImage(models.Model):
 
     def __str__(self):
         return f'Фотография подопечного: {self.pet.name}'
-
-
-class News(models.Model):
-    index_number = models.IntegerField(verbose_name=u"Порядок отображения")
-    title = models.CharField(max_length=60, verbose_name=u"Заголовок новости")
-    text = models.TextField(max_length=400, verbose_name=u"Текст новости")
-    image = models.ImageField(upload_to='news_images', verbose_name=u"Фото")
-    connection = models.BooleanField(default=False, verbose_name=u"Нужна ссылка на подопечного?")
-    pet = models.ForeignKey(to=Pet, null=True, blank=True, on_delete=models.CASCADE,
-                            verbose_name=u"Подопечный, на которого даётся ссылка")
-
-    class Meta:
-        verbose_name = 'Новость'
-        verbose_name_plural = 'Новости'
-
-    def __str__(self):
-        return f'Новость № {self.index_number}: {self.title}'
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        if self.pet == None:
-            news = News.objects.get(pk=self.pk)
-            send_common_news_email(news)
-
 
 class OtherPets(models.Model):
     pets = models.CharField(max_length=20, verbose_name=u"Вид животного")

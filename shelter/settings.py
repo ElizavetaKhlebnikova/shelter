@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     'pets',
     'users',
+    'news',
 ]
 
 MIDDLEWARE = [

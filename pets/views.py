@@ -9,8 +9,9 @@ from django.views.generic.list import ListView
 from common.views import TitleMixin
 
 from .forms import RequestForGuardianshipForm
-from .models import (Basket, News, Pet, PetHistory, PetImage, PetsCategory,
+from .models import (Basket, Pet, PetHistory, PetImage, PetsCategory,
                      PetStatus)
+from news.models import News
 from .tasks import send_email_about_request_for_guardianship_task
 
 

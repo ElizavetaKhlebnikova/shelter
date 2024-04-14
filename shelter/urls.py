@@ -26,6 +26,7 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('pets/', include('pets.urls', namespace='pets')),
     path('users/', include('users.urls', namespace='users')),
+    path('news/', include('news.urls', namespace='news')),
 ]
 
 if settings.DEBUG:

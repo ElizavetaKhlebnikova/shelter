@@ -4,7 +4,7 @@ from django.conf import settings
 from ..models import User
 
 
-def send_common_news_email(news):
+def send_news_email(news):
     subject = news.title
     image = "http://127.0.0.1:8003/" + news.image.url
     data = {'news': news, 'image': image}
