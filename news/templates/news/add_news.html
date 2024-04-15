@@ -32,8 +32,10 @@
                 {% for f in form %}
                 <div class="form-wrapper" style="display: flex;
                                                 align-items: baseline;
-                                                justify-content: space-between;
-                                                width: 400px;">
+                                                justify-content: space-evenly;
+                                                width: 400px;
+                                                padding-top: 10px;
+                                                padding-bottom: 10px;">
                     <p>
                         <label class='form-label' for='{{ f.id_for_label}}'>{{ f.label }}</label>
                     </p>

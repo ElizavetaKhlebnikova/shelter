@@ -68,9 +68,11 @@ class Basket(models.Model):
 
 
 class PetHistory(models.Model):
-    pet = models.ForeignKey(to=Pet, on_delete=models.CASCADE, verbose_name=u"Кличка подопечного")
-    time = models.DateField(auto_now_add=False, verbose_name=u"Дата")
-    node = models.TextField(verbose_name=u"Новость из жизни подопечного")
+    pet = models.ForeignKey(to=Pet, on_delete=models.CASCADE, verbose_name=u"Кличка подопечного*")
+    title = models.CharField(max_length=60, verbose_name=u"Заголовок новости*", default=f'Новое событие в жизни')
+    date = models.DateField(auto_now_add=False, verbose_name=u"Дата*")
+    node = models.TextField(verbose_name=u"Новость из жизни подопечного*")
+    send_news = models.BooleanField(default=False, verbose_name=u"Отправить в почтовую рассылку")
 
     class Meta:
         verbose_name = 'История подопечного'

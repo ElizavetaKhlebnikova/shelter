@@ -95,5 +95,4 @@ class UserPasswordChangeDoneView(PasswordChangeDoneView):
 
 
 
-"""Создать отправку писем пользователям?
-    Тесты"""
+"""Тесты"""

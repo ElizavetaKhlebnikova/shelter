@@ -35,12 +35,13 @@
                 </li>
                 {% if user.is_superuser or user.is_staff %}
                 <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: rgb(0 0 0);">
+            Администрирование
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="nav-link active" aria-current="page" href="/admin">Админ-панель</a>
-            <li><a class="dropdown-item" href="{% url 'news:add_news'  %}">Добывить новость</a></li>
+            <li><a class="nav-link active" aria-current="page" href="/admin">Админ-панель</a></li>
+            <li><a class="nav-link active" href="{% url 'news:add_news'  %}">Добывить новость</a></li>
+              <li><a class="nav-link active" href="{% url 'news:add_pet_hystory'  %}">Добывить событие из жизни животного</a></li>
           </ul>
         </li>
                 {% endif %}
