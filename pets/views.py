@@ -64,7 +64,7 @@ class RequestForGuardianship(CreateView):
 class PetsListView(TitleMixin, ListView):  # за ListView зарезервировано название object_list
     model = Pet
     template_name = 'pets/pets.html'
-    paginate_by = 9
+    paginate_by = 8
     title = 'Store - Каталог'
 
     def get_queryset(self):
@@ -89,6 +89,10 @@ class PetsListView(TitleMixin, ListView):  # за ListView зарезервир�
         context = super(PetsListView, self).get_context_data()
         context['categories'] = PetsCategory.objects.all()
         context['statuses'] = PetStatus.objects.all()
+        if self.request.user and self.request.user.id!=None:
+            user = self.request.user
+            user_baskets = Basket.objects.filter(user=user)
+            context['user_pet_id'] = [basket.pet_id for basket in user_baskets]
         return context
 
 

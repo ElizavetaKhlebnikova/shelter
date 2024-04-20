@@ -72,10 +72,12 @@ class UserProfileForm(UserChangeForm):
     image = forms.ImageField(widget=forms.FileInput(attrs={
         'class': 'custom-file-input-cast',
     }), required=False)
+    common_news = forms.BooleanField(label="Вы хотели бы получать наши новости?")
+    common_news.widget.attrs.update({'class': 'form-control-cast'})
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'image', 'username', 'email')
+        fields = ('first_name', 'last_name', 'image', 'username', 'email', 'common_news')
 
 class UserPasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(label='Введите старый проль', widget=forms.PasswordInput(attrs={'class': 'form-control-cast'}))

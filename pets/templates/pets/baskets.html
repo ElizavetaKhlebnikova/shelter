@@ -1,39 +1,49 @@
 {% if baskets %}
 
-<h4 class="basket-title">
+<h4 class="basket-title" style="text-align: center;
+                                margin: 20px;
+                                font-weight: 600;">
     Я слежу за судьбой
 </h4>
 {% for basket in baskets %}
-<div class="col-lg-4 col-md-6 mb-3">
-    <div class="card h-100">
-        <a href="{% url 'pets:one_pet' pet_name=basket.pet.slug %}" class="card_image">
-            <img class="card-img-top"
-                 src="{{ basket.pet.image.url }}"
-                 alt="">
-        </a>
-        <div class="card-body">
-            <h4 class="card-title">
-                <a href="{% url 'pets:one_pet' pet_name=basket.pet.slug %}">{{ basket.pet.name }}</a>
-            </h4>
-            <h5>{% if basket.pet.gender == 'f' %}
-                Девочка
-                {% else %}
-                Мальчик
-                {% endif %}
-            </h5>
-            <div class="solid"></div>
+                <div class="col-lg-3 col-md-5 col-sm-5 mb-2">
 
-            <p class="card-text">{{ basket.pet.description }}</p>
-            <h5 class="status">{{ basket.pet.status }}</h5>
-        </div>
-        <div class="card-footer text-center">
-            <a href="{% url 'pets:basket_remove' basket.id %}">
-                <button>Перестать отслеживать судьбу</button>
-            </a>
-        </div>
-    </div>
-</div>
-{% endfor %}
+                    <div class="card h-100">
+                        <a href="{% url 'pets:one_pet' pet_name=basket.pet.slug %}" class="card_image">
+                            <img class="card-img-top"
+                                 src="{{ basket.pet.image.url }}"
+                                 alt="">
+                        </a>
+
+                            <div class="card-body">
+                                <a href="{% url 'pets:one_pet' pet_name=basket.pet.slug %}">
+                            <h4 class="card-title" style="margin: 5px;">
+                                <p style="margin-bottom: 0;">{{ basket.pet.name|title }}</p>
+                            </h4>
+                            <h5 style="margin: 5px;">{% if basket.pet.gender == 'f' %}
+                                (девочка)
+                                {% else %}
+                                (мальчик)
+                                {% endif %}
+                            </h5>
+                            <h5 class="status">{{ basket.pet.status }}</h5>
+                                    </a>
+                        </div>
+
+
+                        <div class="card-footer text-center">
+                            <a class='btn btn-outline-success' href="#">
+                                Отслеживать судьбу
+                            </a>
+                            <a {% if basket.pet.id in user_pet_id %}  href="{% url 'pets:basket_remove' basket.id %}" {% else %} href="{% url 'pets:basket_add' basket.pet.id %}" {%endif%} >
+                                <button class="heart" aria-label="heart" data-ico="❤️"
+                                    {% if basket.pet.id in user_pet_id %} style="--light: 1; --hue: 344deg" {%endif%} style="--hue: 344deg"></button>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
 
 
 <!--<div class="card mb-3">-->

@@ -6,7 +6,7 @@
 {% block css_additional %}
 <!-- Custom styles for this template -->
 <link href="{% static 'vendor/css/pets.css'%}" rel="stylesheet">
-
+<script src="{% static 'vendor/js/button.js'%}"></script>
 {% endblock %}
 
 {% block content %}
@@ -49,22 +49,25 @@
 
         <div class="col-lg-13">
 
-            <div class="row">
+            <div class="row" style="justify-content: center;">
                 {% if object_list|length == 0 %}
                     <h1>К сожалению, не нашлось соответствия по заданным вами параметрам поиска.<br>
                     Попробуйте изменить запрос.</h1>
                 {% endif %}
                 {% for pet in object_list %}
-                <div class="col-lg-4 col-md-4 mb-3">
+                <div class="col-lg-3 col-md-5 col-sm-5 mb-2">
+
                     <div class="card h-100">
                         <a href="{% url 'pets:one_pet' pet_name=pet.slug %}" class="card_image">
                             <img class="card-img-top"
                                  src="{{ pet.image.url }}"
                                  alt="">
                         </a>
-                        <div class="card-body">
+
+                            <div class="card-body">
+                                <a href="{% url 'pets:one_pet' pet_name=pet.slug %}">
                             <h4 class="card-title">
-                                <a href="{% url 'pets:one_pet' pet_name=pet.slug %}">{{ pet.name|title }}</a>
+                                <p>{{ pet.name|title }}</p>
                             </h4>
                             <h5>{% if pet.gender == 'f' %}
                                 (девочка)
@@ -75,13 +78,21 @@
 
                             <div class="solid"></div>
 
-                            <p class="card-text">{{ pet.description }}</p>
+                            <p class="card-text">{{ pet.description|truncatechars:40 }}</p>
                             <h5 class="status">{{ pet.status }}</h5>
+                                    </a>
                         </div>
+
+
                         <div class="card-footer text-center">
-                            <a class='btn btn-outline-success' href="{% url 'pets:basket_add' pet.id %}">
+                            <a class='btn btn-outline-success' href="#">
                                 Отслеживать судьбу
                             </a>
+                            <a {% if pet.id in user_pet_id %}  href="{% url 'pets:basket_remove' pet.id %}" {% else %} href="{% url 'pets:basket_add' pet.id %}" {%endif%} >
+                                <button class="heart" aria-label="heart" data-ico="❤️"
+                                    {% if pet.id in user_pet_id %} style="--light: 1; --hue: 344deg" {%endif%} style="--hue: 344deg"></button>
+                            </a>
+
                         </div>
                     </div>
                 </div>
@@ -131,6 +142,7 @@
         </div>
 
     </div>
+
 
 </div>
 

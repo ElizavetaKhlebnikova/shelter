@@ -10,6 +10,7 @@ from common.views import TitleMixin
 
 from .forms import UserLoginForm, UserProfileForm, UserRegistrationForm, UserPasswordChangeForm
 from .models import EmailVerification, User
+from pets.models import Basket
 from .tasks import send_email_verification, send_email_about_change_password_task
 from .services.verification import change_parameter_of_the_user_object
 
@@ -52,6 +53,13 @@ class UserProfileView(TitleMixin, LoginRequiredMixin, UpdateView):
         user = queryset.get(
             pk=self.request.user.id)
         return user
+    def get_context_data(self, *, object_list=None, **kwargs):
+        """Передаёт в контекст данные о категориях и статусах для фильтрации"""
+        context = super(UserProfileView, self).get_context_data()
+        user = self.request.user
+        user_baskets = Basket.objects.filter(user=user)
+        context['user_pet_id'] = [basket.pet_id for basket in user_baskets]
+        return context
 
 
 class EmailVerificationView(TitleMixin, TemplateView):
@@ -95,4 +103,5 @@ class UserPasswordChangeDoneView(PasswordChangeDoneView):
 
 
 
-"""Тесты"""
+"""Тесты
+    Отмена почтовой рассылки"""

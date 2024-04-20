@@ -1,233 +1,80 @@
-.container {
-  padding-bottom: 100px;
-  margin-bottom: 40px;
-  margin-top: 40px;
-}
-
-.profile {
-  backdrop-filter: blur(16px) saturate(180%);
-  background-color: #ffffffc2;
-  filter: drop-shadow(0 30px 10px rgba(0, 0, 0, 0.125));
-  box-shadow: 0px 0px 7px 8px #bdb5b88f;
+.fields {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: fit-content;
-  padding: 10px;
-  margin-top: 20px;
-}
-.custom-file-label {
-  padding: 10px;
+  justify-content: space-evenly;
+  width: 70%;
+  padding: 20px;
 }
 
-label {
-  font-weight: bold;
+input {
+  width: unset;
 }
-input:not(#id_image, .btn) {
-  border: 1px solid #333;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  display: block;
-  height: 30px;
-  padding: 0;
-  margin-bottom: 25px;
-  background-color: transparent;
-}
-
-.form-group {
-  padding: 10px;
+.form-wrapper {
   display: flex;
   align-items: baseline;
-  justify-content: space-around;
-  input {
-    width: 50%;
-  }
+  justify-content: space-between;
 }
-.button-background-move {
-  input {
-    border: none;
-    background-color: transparent;
-    font-size: 16px;
-    font-family: "Cormorant Garamond";
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 0 !important;
-  }
-  padding: 13px 20px 13px;
-  outline: 0;
-  border: 1px solid black;
-  cursor: pointer;
-  position: relative;
-  background-color: rgba(0, 0, 0, 0);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  margin-bottom: 20px;
+input {
+  margin-left: 10px;
 }
 
-.button-background-move:after {
-  content: "";
-  background-color: #70dcd4;
+.form-control-cast {
+  width: 170px;
+}
+.custom-file {
   width: 100%;
-  z-index: -1;
-  position: absolute;
-  height: 100%;
-  top: 7px;
-  left: 7px;
-  transition: 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.button-background-move:hover:after {
-  top: 0px;
-  left: 0px;
-}
-
-.small {
-  margin: 10px;
-  width: fit-content;
-
-  a {
-    text-decoration: none;
-    color: #000;
-    font-size: 16px;
-    font-family: "El Messiri";
-  }
-}
-.small:hover {
-  transition-duration: 0.5s;
-  scale: 110%;
-  a {
-    color: #419a93;
+.image-holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: fit-content !important;
+  img {
+    max-height: 370px;
   }
 }
 
-@media (min-width: 768px) {
-  .button-background-move {
-    padding: 13px 50px 13px;
+@media screen and (max-width: 767px) {
+  .inner {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-}
-
-.form-row {
-  .col-lg-6 {
-    padding: 10px;
+  .fields {
+    width: 80%;
+  }
+  label {
+    padding-right: 10px;
+  }
+  .form-wrapper {
+    flex-direction: column;
     align-items: center;
   }
 }
-.col-lg-6 {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
 
-.col-lg-13 {
-  padding: 50px !important;
-}
-.col-lg-4.col-md-4 {
-  margin-bottom: 60px !important;
-}
-
-.card.h-100 {
-  backdrop-filter: blur(16px) saturate(180%);
-  background-color: #ffffffc2;
-  filter: drop-shadow(0 30px 10px rgba(0, 0, 0, 0.125));
-  box-shadow: 0px 0px 7px 8px #bdb5b88f;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.status {
-  color: green;
-}
-
-.card_image {
-  display: block;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-}
-
-.card-img-top {
-  border-bottom-left-radius: 100px;
-  border-bottom-right-radius: 100px;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-@media (min-width: 992px) {
-  .col-lg-4 {
-    flex: 0 0 auto;
-    width: 0;
+@media screen and (min-width: 304px) and (max-width: 576px) {
+  .h-100 {
+    width: 18em !important;
+    height: unset !important;
   }
-}
-@media screen and (min-width: 768px) and (max-width: 992px) {
-  .col-md-4 {
-    width: 50% !important;
+  .col-lg-3.col-md-5.col-sm-5.mb-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
   }
 }
 
-.basket-title {
-  text-align: center;
-  padding: 20px;
-  font-size: 30px;
-  font-weight: 700;
-  font-family: "El Messiri";
-}
-
-.card-body {
-  font-size: 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: "Montserrat";
-  .status {
-    font-size: 16px;
-    color: #1d7672;
+@media screen and (max-width: 304px) {
+  .col-lg-13 {
+    padding: 0 !important;
   }
-  h5 {
-    margin-bottom: 0px;
-    font-size: 14px;
-  }
-  .solid {
-    margin: 10px;
-    width: 40px;
-    height: 1px;
-    border: solid;
-    border-width: 1px;
-  }
-}
-
-.card-footer {
-  background-color: transparent !important;
-  border-top: transparent !important;
-  padding-bottom: 20px !important;
-  a {
-    button {
-      background-color: #dea6c0;
-    }
-  }
-}
-
-.card-title {
-  font-size: 22px;
-  font-weight: 600;
-  a {
-    text-decoration: none;
-    font-family: "Bad Script";
-    color: black;
-  }
-}
-
-.card-title:hover,
-.card-title:active,
-.card-title:focus {
-  transition: 0.5s;
-  scale: 120%;
 }
