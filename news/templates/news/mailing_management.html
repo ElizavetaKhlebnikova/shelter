@@ -1,0 +1,98 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block css_additional %}
+<!-- Custom styles for this template -->
+<link href="{% static 'vendor/css/pets.css'%}" rel="stylesheet">
+<link href="{% static 'vendor/css/profile.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <main>
+        <div class="col-lg-3 menu">
+            <ul>
+                <li><a href="{% url 'users:profile'%}">Профиль</a></li>
+                <li><a href="{% url 'news:mailing_management'%}" style="color: black; font-weight: 600;">Управление почтовой рассылкой</a></li>
+                <li><a href="{% url 'users:favorites'%}">Мои любимцы</a></li>
+            </ul>
+        </div>
+        <div class="col-lg-8">
+            <div class="row" style="justify-content: center;">
+                <h4 class="basket-title" style="text-align: center;
+                                margin: 20px;
+                                font-weight: 600;">
+                    Управление почтовой рассылкой
+                </h4>
+
+            {% if object_list or user.common_news %}
+            <div class="unsubscribe" style="text-align: center;">
+                <p>Если вы желаете отписаться от всех новостей, нажмите <a class="link" href="{% url 'news:unsubscribe_from_all_news' %}">сюда</a>.</p>
+                {% if user.common_news %}
+                <p>Если вы желаете отписаться от общих новостей проекта, но продолжать получать новости о конкретных животных,
+                то нaжмите <a class="link" href="{% url 'news:unsubscribe_from_common_news' %}">сюда</a>.</p>
+                {% endif%}
+            </div>
+            {% endif%}
+
+            <div class="row" style="justify-content: center; text-align: center;">
+                {% if object_list|length == 0 %}
+                    {% if user.common_news %}
+                        <p>Сейчас вы не получаете новости о животных, но подписаны на общие новости проекта,
+                        если вы желаете оперативно узнавать о событиях из жизни определённых животных, то нажмите
+                        <a class="link" href="{% url 'pets:index' %}">сюда</a> и выбирайте, на кого подписаться.</p>
+                    {% else %}
+                        <p>Сейчас вы не получаете новости о животных.
+                        Если вы желаете оперативно узнавать о событиях из жизни определённых животных, то нажмите
+                        <a class="link" href="{% url 'pets:index' %}">сюда</a> и выбирайте, на кого подписаться.</p>
+                    {% endif %}
+                {% endif %}
+
+                {% for pet in object_list %}
+                <div class="col-lg-3 col-md-5 col-sm-5 mb-2" style="width: 40%;">
+
+                    <div class="card h-100">
+                        <a href="{% url 'pets:one_pet' pet_name=pet.slug %}" class="card_image">
+                            <img class="card-img-top"
+                                 src="{{ pet.image.url }}"
+                                 alt="">
+                        </a>
+
+                            <div class="card-body">
+                                <a href="{% url 'pets:one_pet' pet_name=pet.slug %}">
+                            <h4 class="card-title">
+                                <p>{{ pet.name|title }}</p>
+                            </h4>
+                            <h5>{% if pet.gender == 'f' %}
+                                (девочка)
+                                {% else %}
+                                (мальчик)
+                                {% endif %}
+                            </h5>
+
+                            <div class="solid"></div>
+                            <h5 class="status">{{ pet.status }}</h5>
+                                </a>
+                        </div>
+
+
+                        <div class="card-footer text-center">
+                            <a href="{% url 'news:pet_follower_remove' pet.id %}">
+                                <button class='btn btn-outline-success' style="background-color: #1baba4;">
+                                    Отменить подписку на новостную рассылку
+                                </button>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+{% endblock %}

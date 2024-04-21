@@ -78,3 +78,47 @@ input {
     padding: 0 !important;
   }
 }
+
+/* menu */
+main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+.menu {
+  padding-top: 20px;
+  ul {
+    list-style-type: none;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: #736666;
+  }
+
+  li {
+    transition-property: font-weight;
+    transition-duration: 200ms;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-family: "El Messiri";
+    padding-bottom: 5px;
+  }
+  a:hover {
+    width: fit-content;
+    background-image: url(../img/index/mazok6.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: 0.5s;
+    scale: 105%;
+    color: black;
+    font-weight: 600;
+  }
+}

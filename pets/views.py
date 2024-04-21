@@ -11,7 +11,7 @@ from common.views import TitleMixin
 from .forms import RequestForGuardianshipForm
 from .models import (Basket, Pet, PetHistory, PetImage, PetsCategory,
                      PetStatus)
-from news.models import News
+from news.models import News, PetSubscriber
 from .tasks import send_email_about_request_for_guardianship_task
 
 
@@ -89,10 +89,12 @@ class PetsListView(TitleMixin, ListView):  # за ListView зарезервир�
         context = super(PetsListView, self).get_context_data()
         context['categories'] = PetsCategory.objects.all()
         context['statuses'] = PetStatus.objects.all()
-        if self.request.user and self.request.user.id!=None:
+        if self.request.user and self.request.user.id != None:
             user = self.request.user
             user_baskets = Basket.objects.filter(user=user)
             context['user_pet_id'] = [basket.pet_id for basket in user_baskets]
+            user_pets = PetSubscriber.objects.filter(user=user)
+            context['subscriber_pet_id'] = [pet.pet_id for pet in user_pets]
         return context
 
 
@@ -112,16 +114,17 @@ class PetView(TemplateView):
 @login_required
 def basket_add(request, pet_id):
     """Проверяет наличие питомца в корзине пользователя и при его отсутствии добавляет питомца"""
-    pet = Pet.objects.all().get(id=pet_id)
-    basket = Basket.objects.all().filter(user=request.user, pet=pet)
+    pet = Pet.objects.get(id=pet_id)
+    basket = Basket.objects.filter(user=request.user, pet=pet)
     if not basket.exists():
         basket.create(user=request.user, pet=pet)
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 
 @login_required
-def basket_remove(request, basket_id):
+def basket_remove(request, pet_id):
     """Удаляет корзину пользователя"""
-    basket = Basket.objects.get(id=basket_id)
+    pet = Pet.objects.get(id=pet_id)
+    basket = Basket.objects.get(user=request.user, pet=pet)
     basket.delete()
     return HttpResponseRedirect(request.META['HTTP_REFERER'])

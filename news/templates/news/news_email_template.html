@@ -8,7 +8,7 @@
           rel="stylesheet">
     <link href="{% static 'vendor/css/base.css'%}" rel="stylesheet">
     <style>
-a {
+.nav-link {
   font-size: 20px;
   font-family: "Cormorant Garamond";
   font-weight: 700;
@@ -16,19 +16,27 @@ a {
   padding: 13px 20px 13px;
   outline: 0;
   background-color: #7a6363;
-    border: 1px solid black;
-    color: white;
+  border: 1px solid black;
+  color: white;
   cursor: pointer;
   position: relative;
   text-decoration: none;
   margin: 20px;
 }
 
+
     </style>
 </head>
 <body style="background-color: #dfd4d4e0; box-shadow: 0px 0px 7px 8px #bdb5b88f !important; text-align: center;">
-    <h1 style="font-family: 'Cormorant Garamond', serif;">{{news.title}}</h1>
-    <p style="font-family: 'Cormorant Garamond', serif;">{% if news.text %} {{news.text}} {% else %} {{news.node}} {% endif %}</p>
-    <a class="nav-link active" aria-current="page" href="http://127.0.0.1:8003/pets/my_help">Хочу помочь!</a>
+<h1 style="font-family: 'Cormorant Garamond', serif;">{{news.title}}</h1>
+<p style="font-family: 'Cormorant Garamond', serif;">{% if news.text %} {{news.text}} {% else %} {{news.node}} {% endif%}</p>
+<a class="nav-link active" aria-current="page" href="http://127.0.0.1:8003/pets/my_help">Хочу помочь!</a>
+<p style="font-family: 'Cormorant Garamond', serif; font-size: 14px">
+    Если вы желаете отписаться от всех новостей, нажмите <a class="link"
+                                                            href="http://127.0.0.1:8003/news/unsubscribe_from_all_news/{{user_email}}">сюда</a>.
+    <br>
+    Если вы желаете отписаться от общих новостей проекта, но продолжать получать новости о конкретных животных,
+    то нaжмите <a class="link" href="http://127.0.0.1:8003/news/unsubscribe_from_common_news/{{user_email}}">сюда</a>.
+</p>
 </body>
 </html>

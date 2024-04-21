@@ -280,6 +280,9 @@ body {
 }
 
 .btn.btn-outline-success {
+  font-size: 15px;
+  --bs-btn-padding-x: 0px;
+  --bs-btn-padding-y: 0px;
   background-color: #dea6c0;
   --bs-btn-color: #ffffff;
   --bs-btn-border-color: #1baba4;

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import News
+from .models import News, PetSubscriber
 from pets.models import PetHistory
 import datetime
 from django.forms.widgets import NumberInput
@@ -36,3 +36,5 @@ class PetHistoryForm(forms.ModelForm):
             field.widget.attrs.update({'class': 'form-control'})
         self.fields['pet'].widget.attrs.update({'class': 'form-select'})
         self.fields['send_news'].widget.attrs.update({'class': 'form-control-cast-new'})
+
+

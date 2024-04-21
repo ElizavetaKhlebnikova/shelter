@@ -1,0 +1,22 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block css_additional %}
+<!-- Custom styles for this template -->
+<link href="{% static 'vendor/css/auth.css'%}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+
+<main>
+<div class="authorisation">
+        <h1>Вы отписались от общих новостей HappyVeganShelter.</h1>
+        <p>Если вы передумаете, то можете подписаться вновь в личном кабинете.
+        <br>
+        Вам продолжат приходить новости о каждом конкретном животном из списка любимых.</p>
+        <a href="{% url 'users:profile' %}">Личный кабинет</a>
+</div>
+</main>
+{% endblock %}

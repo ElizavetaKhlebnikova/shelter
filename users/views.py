@@ -5,15 +5,17 @@ from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.list import ListView
 
 from common.views import TitleMixin
 
 from .forms import UserLoginForm, UserProfileForm, UserRegistrationForm, UserPasswordChangeForm
 from .models import EmailVerification, User
+from pets.models import Pet
+from news.models import PetSubscriber
 from pets.models import Basket
 from .tasks import send_email_verification, send_email_about_change_password_task
 from .services.verification import change_parameter_of_the_user_object
-
 
 
 class UserLoginView(LoginView):
@@ -53,13 +55,29 @@ class UserProfileView(TitleMixin, LoginRequiredMixin, UpdateView):
         user = queryset.get(
             pk=self.request.user.id)
         return user
+
     def get_context_data(self, *, object_list=None, **kwargs):
-        """Передаёт в контекст данные о категориях и статусах для фильтрации"""
+        """Передаёт в контекст данные о содержимом корзин и подписке на события в жизни животных"""
         context = super(UserProfileView, self).get_context_data()
         user = self.request.user
         user_baskets = Basket.objects.filter(user=user)
         context['user_pet_id'] = [basket.pet_id for basket in user_baskets]
+        user_pets = PetSubscriber.objects.filter(user=user)
+        context['subscriber_pet_id'] = [pet.pet_id for pet in user_pets]
         return context
+
+
+class UserPetsView(TitleMixin, LoginRequiredMixin, ListView):
+    model = Pet
+    template_name = 'pets/baskets.html'
+    paginate_by = 8
+    title = 'Happy vegan shelter - Управление почтовой рассылкой'
+
+    def get_queryset(self):
+        """Возвращает отфильтрованный список животных"""
+        queryset = super(UserPetsView, self).get_queryset()
+        queryset = [ps.pet for ps in Basket.objects.filter(user=self.request.user)]
+        return queryset
 
 
 class EmailVerificationView(TitleMixin, TemplateView):
@@ -77,6 +95,7 @@ class EmailVerificationView(TitleMixin, TemplateView):
             change_parameter_of_the_user_object(user)
             return super(EmailVerificationView, self).get(request, *args, **kwargs)
         return HttpResponseRedirect(reverse('/'))
+
 
 class UserPasswordResetView(PasswordResetView):
     template_name = 'users/password_reset_form.html'
@@ -98,10 +117,9 @@ class UserPasswordChangeView(TitleMixin, PasswordChangeView):
             send_email_about_change_password_task.delay(email=user_email)
         return super().form_valid(form)
 
+
 class UserPasswordChangeDoneView(PasswordChangeDoneView):
     template_name = 'users/password_change_done.html'
 
 
-
-"""Тесты
-    Отмена почтовой рассылки"""
+"""Тесты"""

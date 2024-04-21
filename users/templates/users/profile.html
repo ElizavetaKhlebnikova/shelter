@@ -17,103 +17,96 @@
 {% block content %}
 <main>
     {% if form.errors %}
-            <div
-                    class="alert-new"
-                    role="alert"
-            >
-                <ul>
-                    {% for field, errors in form.errors.items %}
-                    {% for error in errors%}
-                    <li>{{error}}</li>
-                    {%endfor%}
-                    {%endfor%}
-                </ul>
+    <div
+            class="alert-new"
+            role="alert"
+    >
+        <ul>
+            {% for field, errors in form.errors.items %}
+            {% for error in errors%}
+            <li>{{error}}</li>
+            {%endfor%}
+            {%endfor%}
+        </ul>
 
 
+        <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+        >
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+    <div class="col-lg-3 menu">
+        <ul>
+            <li><a href="{% url 'users:profile'%}" style="color: black; font-weight: 600;">Профиль</a></li>
+            <li><a href="{% url 'news:mailing_management'%}">Управление почтовой рассылкой</a></li>
+            <li><a href="{% url 'users:favorites'%}">Мои любимцы</a></li>
+        </ul>
+    </div>
 
-                <button
-                        type="button"
-                        class="close"
-                        data-dismiss="alert"
-                        aria-label="Close"
-                >
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            {% endif %}
-    <div class="authorisation" style="margin-bottom: 0;">
+    <div class="authorisation">
 
-            <form action="{% url 'users:profile'%}" method="post" enctype="multipart/form-data" style="padding-top: 20px;
+        <form action="{% url 'users:profile'%}" method="post" enctype="multipart/form-data" style="padding-top: 20px;
                                                                                                         padding-bottom: 20px;
                                                                                                        display: flex;
                                                                                                        flex-direction: column;
-                                                                                                       align-items: center;" >
+                                                                                                       align-items: center;">
 
-                <h3 class="form-title" style="padding-bottom: 20px;">Профиль</h3>
-                {% csrf_token %}
-                <div class="inner" style="justify-content: space-evenly;">
-                    <div class="image-holder">
-                        <img src="{% if user.image %} {{user.image.url}} {% else %} {% static 'vendor/img/users/default_avatar.jpg' %} {% endif %}">
-                        <div class="custom-file">
-                            <label class="custom-file-label" for="{{ form.image.id_for_label }}">
-                                Выберите изображение:
-                            </label>
-                            {{ form.image }}
-                        </div>
+            <h3 class="form-title" style="padding-bottom: 20px;">Профиль</h3>
+            {% csrf_token %}
+            <div class="inner" style="justify-content: space-evenly;">
+                <div class="image-holder">
+                    <img src="{% if user.image %} {{user.image.url}} {% else %} {% static 'vendor/img/users/default_avatar.jpg' %} {% endif %}">
+                    <div class="custom-file">
+                        <label class="custom-file-label" for="{{ form.image.id_for_label }}">
+                            Выберите изображение:
+                        </label>
+                        {{ form.image }}
+                    </div>
+                </div>
+
+                <div class="fields">
+                    <div class="form-wrapper">
+                        <label for="{{ form.first_name.id_for_label }}">Имя:</label>
+                        {{form.first_name}}
+                    </div>
+                    <div class="form-wrapper">
+                        <label for="{{ form.first_name.id_for_label }}">Фамилия:</label>
+                        {{form.last_name}}
                     </div>
 
-                    <div class="fields">
-                        <div class="form-wrapper">
-                            <label for="{{ form.first_name.id_for_label }}">Имя:</label>
-                            {{form.first_name}}
-                        </div>
-                        <div class="form-wrapper">
-                            <label for="{{ form.first_name.id_for_label }}">Фамилия:</label>
-                            {{form.last_name}}
-                        </div>
+                    <div class="form-wrapper">
+                        <label for="{{ form.first_name.id_for_label }}">Имя пользователя:</label>
+                        {{form.username}}
+                    </div>
+                    <div class="form-wrapper">
+                        <label for="{{ form.first_name.id_for_label }}">Электронная почта:</label>
+                        {{form.email}}
+                    </div>
 
-                        <div class="form-wrapper">
-                            <label for="{{ form.first_name.id_for_label }}">Имя пользователя:</label>
-                            {{form.username}}
-                        </div>
-                        <div class="form-wrapper">
-                            <label for="{{ form.first_name.id_for_label }}">Электронная почта:</label>
-                            {{form.email}}
-                        </div>
-
-                        <div class="form-wrapper" style="padding-bottom: 20px;
+                    <div class="form-wrapper" style="padding-bottom: 20px;
                                                          padding-bottom: 20px;
                                                          display: flex;
                                                          align-items: center;
                                                          justify-content: space-around;">
-                            {{form.common_news.label}}
-                            {{form.common_news}}
-                        </div>
-                        <p><a href="{% url 'users:password_change'%}">Изменить пароль</a> </p>
+                        {{form.common_news.label}}
+                        {{form.common_news}}
+                    </div>
+                    <p><a href="{% url 'users:password_change'%}">Изменить пароль</a></p>
 
-                        <button class="button-background-move" role="button">
-                            <input type="submit" value="Сохранить"/>
-                        </button>
-                        </div>
-
-
+                    <button class="button-background-move" role="button">
+                        <input type="submit" value="Сохранить"/>
+                    </button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
+    </div>
     </div>
 </main>
-
-
-    <div class="row" style="justify-content: space-between; --bs-gutter-x: 0;">
-
-
-        <div class="col-lg-13">
-
-            <div class="row" style="justify-content: center;">
-            {% include 'pets/baskets.html' %}
-            </div>
-        </div>
-    </div>
 </div>
 
 {% endblock %}

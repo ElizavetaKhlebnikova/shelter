@@ -4,13 +4,15 @@ from django.contrib.auth.views import (LogoutView, PasswordResetView, PasswordRe
 from django.urls import path,reverse_lazy
 
 from .views import (EmailVerificationView, UserLoginView, UserProfileView,
-                    UserRegistrationView, UserPasswordResetView, UserPasswordChangeView, UserPasswordChangeDoneView)
+                    UserRegistrationView, UserPasswordResetView, UserPasswordChangeView, UserPasswordChangeDoneView,
+                    UserPetsView)
 
 app_name = 'users'
 urlpatterns = [
     path('login/', UserLoginView.as_view(), name='login'),
     path('registration/', UserRegistrationView.as_view(), name='registration'),
     path('profile/', UserProfileView.as_view(), name='profile'),
+    path('favorites/', UserPetsView.as_view(), name='favorites'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('verify/<str:email>/<uuid:code>', EmailVerificationView.as_view(), name='email_verification'),
     #обновление пароля

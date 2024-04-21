@@ -6,3 +6,6 @@ body {
   background-image: url(../img/index/lepestki.png);
   background-repeat: repeat;
 }
+.container {
+  min-height: 275px;
+}

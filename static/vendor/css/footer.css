@@ -1,7 +1,6 @@
 footer {
-  position: relative;
-  left: 0;
-  bottom: 0;
+  position: absolute;
+  left: 0px;
   width: 100%;
   background-color: #db85b19c;
   box-shadow: 0 0 20px 0px #db85b19c;

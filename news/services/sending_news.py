@@ -2,8 +2,9 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.conf import settings
 from users.models import User
-from pets.models import PetHistory, Basket
-from ..models import News
+from pets.models import PetHistory
+from ..models import News, PetSubscriber
+
 
 
 def send_news_email(news_id):
@@ -24,11 +25,16 @@ def send_pet_hystory_node(hystory_node_id):
     news = PetHistory.objects.get(pk=hystory_node_id)
     subject = news.title
     data = {'news': news}
-    html_body = render_to_string('news/news_email_template.html', data)
 
-    baskets = Basket.objects.filter(pet=news.pet)
-    email_list = [basket.user.email for basket in baskets]
-    from_email = settings.EMAIL_HOST_USER
-    message = EmailMessage(subject, html_body, from_email, email_list)
-    message.content_subtype = 'html'
-    message.send()
+    pet_subscribers = PetSubscriber.objects.filter(pet=news.pet)
+    email_list = [pet_subscriber.user.email for pet_subscriber in pet_subscribers]
+
+    for email in email_list:
+        data['user_email'] = email
+        to_email = [email]
+        from_email = settings.EMAIL_HOST_USER
+        html_body = render_to_string('news/news_email_template.html', data)
+        print(data['user_email'])
+        message = EmailMessage(subject, html_body, from_email, to_email)
+        message.content_subtype = 'html'
+        message.send()

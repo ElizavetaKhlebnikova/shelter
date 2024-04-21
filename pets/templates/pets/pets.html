@@ -85,12 +85,24 @@
 
 
                         <div class="card-footer text-center">
-                            <a class='btn btn-outline-success' href="#">
-                                Отслеживать судьбу
+                            {% if pet.id in subscriber_pet_id %}
+                            <a href="{% url 'news:pet_follower_remove' pet.id %}">
+                                <button class='btn btn-outline-success' style="background-color: #1baba4;">
+                                    Отменить подписку на новостную рассылку
+                                </button>
                             </a>
+                            {% else %}
+                            <a href="{% url 'news:pet_follower_add' pet.id %}">
+                                <button class='btn btn-outline-success'>
+                                    Подписаться на новости обо мне
+                                </button>
+                            </a>
+                            {% endif %}
+
                             <a {% if pet.id in user_pet_id %}  href="{% url 'pets:basket_remove' pet.id %}" {% else %} href="{% url 'pets:basket_add' pet.id %}" {%endif%} >
                                 <button class="heart" aria-label="heart" data-ico="❤️"
-                                    {% if pet.id in user_pet_id %} style="--light: 1; --hue: 344deg" {%endif%} style="--hue: 344deg"></button>
+                                    {% if pet.id in user_pet_id %} style="--light: 1; --hue: 344deg" {%endif%} style="--hue: 344deg">
+                                </button>
                             </a>
 
                         </div>
