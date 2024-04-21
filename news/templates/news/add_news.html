@@ -6,7 +6,19 @@
 <link href="{% static 'vendor/css/auth.css'%}" rel="stylesheet">
 
 {% endblock %}
+{% block style %}
+@media screen and (max-width: 440px) {
+    .form-wrapper {
+        width: 80% !important;
+        flex-direction: column;
+    }
+    .authorisation {
+        margin: 0;
+        padding: 0;
+    }
+}
 
+{% endblock %}
 {% block content %}
 <main>
     {% if form.errors %}

@@ -115,8 +115,12 @@
     z-index: 1;
     height: 410px;
     min-width: 390px;
-    img {
+    .ph {
+      background-repeat: no-repeat;
+      background-size: cover;
       height: 100%;
+      width: 100%;
+      background-position: center;
     }
   }
 
@@ -212,12 +216,12 @@
   @media only screen and (min-width: 700px) and (max-width: 970px) {
     .slide-photo {
       position: absolute;
-      left: 4%;
+      height: 50%;
+      width: 100%;
       z-index: 1;
-      height: auto;
       max-width: 40%;
       min-width: auto;
-      top: 30%;
+      top: 20%;
       img {
         width: 100%;
         height: auto;

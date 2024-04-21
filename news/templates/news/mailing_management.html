@@ -10,7 +10,7 @@
 {% block content %}
 <div class="container">
     <main>
-        <div class="col-lg-3 menu">
+        <div class="col-lg-4 menu">
             <ul>
                 <li><a href="{% url 'users:profile'%}">Профиль</a></li>
                 <li><a href="{% url 'news:mailing_management'%}" style="color: black; font-weight: 600;">Управление почтовой рассылкой</a></li>
@@ -22,7 +22,7 @@
                 <h4 class="basket-title" style="text-align: center;
                                 margin: 20px;
                                 font-weight: 600;">
-                    Управление почтовой рассылкой
+                    УПРАВЛЕНИЕ ПОЧТОВОЙ РАССЫЛКОЙ
                 </h4>
 
             {% if object_list or user.common_news %}
@@ -76,7 +76,7 @@
                         </div>
 
 
-                        <div class="card-footer text-center">
+                        <div class="card-footer text-center" style="background-image: url({{pet.image.url}});">
                             <a href="{% url 'news:pet_follower_remove' pet.id %}">
                                 <button class='btn btn-outline-success' style="background-color: #1baba4;">
                                     Отменить подписку на новостную рассылку

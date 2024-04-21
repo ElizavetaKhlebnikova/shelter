@@ -15,10 +15,15 @@ def send_news_email(news_id):
     html_body = render_to_string('news/news_email_template.html', data)
     users = User.objects.filter(common_news=True)
     email_list = [user.email for user in users]
-    from_email = settings.EMAIL_HOST_USER
-    message = EmailMessage(subject, html_body, from_email, email_list)
-    message.content_subtype = 'html'  # this is required because there is no plain text email message
-    message.send()
+
+    for email in email_list:
+        data['user_email'] = email
+        to_email = [email]
+        from_email = settings.EMAIL_HOST_USER
+        html_body = render_to_string('news/news_email_template.html', data)
+        message = EmailMessage(subject, html_body, from_email, to_email)
+        message.content_subtype = 'html'
+        message.send()
 
 
 def send_pet_hystory_node(hystory_node_id):
@@ -34,7 +39,6 @@ def send_pet_hystory_node(hystory_node_id):
         to_email = [email]
         from_email = settings.EMAIL_HOST_USER
         html_body = render_to_string('news/news_email_template.html', data)
-        print(data['user_email'])
         message = EmailMessage(subject, html_body, from_email, to_email)
         message.content_subtype = 'html'
         message.send()

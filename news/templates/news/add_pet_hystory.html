@@ -7,9 +7,17 @@
 {% endblock %}
 
 {% block style %}
-.form-control {
-    width: fit-content;
+@media screen and (max-width: 440px) {
+    .form-wrapper {
+        width: 80% !important;
+        flex-direction: column;
+    }
+    .authorisation {
+        margin: 0;
+        padding: 0;
+    }
 }
+
 {% endblock %}
 {% block content %}
 
