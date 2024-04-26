@@ -28,7 +28,7 @@ class IndexView(TitleMixin, TemplateView):
 
 class DonationView(TitleMixin, TemplateView):
     template_name = 'pets/donation.html'
-    title = 'моя помощь'
+    title = 'HappyVeganShelter - моя помощь'
 
     def get_context_data(self, **kwargs):
         """Возвращает в шаблон объект range для отображения фотографий RabbitStones"""
@@ -37,11 +37,12 @@ class DonationView(TitleMixin, TemplateView):
         return context
 
 
-class RequestForGuardianship(CreateView):
+class RequestForGuardianship(TitleMixin, CreateView):
     template_name = 'pets/request_for_guardianship_form.html'
     form_class = RequestForGuardianshipForm
     success_url = reverse_lazy('pets:request_for_guardianship_form_done')
     success_message = 'Ваша заявка успешно отправлена, ждите ответа!'
+    title = 'HappyVeganShelter - заявка на опеку'
 
     def get_context_data(self, **kwargs):
         """Возвращает в шаблон список животных в соответствии с категорией"""

@@ -94,7 +94,7 @@ class PetImage(models.Model):
     def __str__(self):
         return f'Фотография подопечного: {self.pet.name}'
 
-class OtherPets(models.Model):
+class OtherPet(models.Model):
     pets = models.CharField(max_length=20, verbose_name=u"Вид животного")
 
     def __str__(self):
@@ -113,6 +113,6 @@ class RequestForGuardianship(models.Model):
         ('home', 'дом')
     )
     goal = models.CharField(max_length=20, choices=goals, verbose_name=u"Кем вы готовы стать для животного?")
-    other_pets = models.ManyToManyField(to=OtherPets, verbose_name=u"Если у вас уже есть питомцы, укажите, какие:")
+    other_pets = models.ManyToManyField(to=OtherPet, verbose_name=u"Если у вас уже есть питомцы, укажите, какие:")
     other_pet = models.CharField(max_length=256, verbose_name=u"Укажите вид вашего питомца", null=True, blank=True)
     conditions = models.BooleanField(verbose_name=u"Готовы ли вы выполнить все условия?")

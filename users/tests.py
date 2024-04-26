@@ -94,8 +94,6 @@ class UserRegistrationViewTestCase(TestCase):
         self.assertTrue(User.objects.filter(username=username).exists())
         self.assertEqual(User.objects.count(), 1)
 
-        # check creating of email verification
-
     def test_user_registration_post_name_error(self):
         username = self.data['username']
         User.objects.create(username=username)
@@ -111,7 +109,6 @@ class UserRegistrationViewTestCase(TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertContains(response, 'Пользователь с таким Email уже существует.', html=True)
-        # UserRegistrationViewTestCase.test_user_registration_post_email_error
 
 
 class UserLoginViewTestCase(TestCase):

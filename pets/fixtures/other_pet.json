@@ -1,0 +1,1 @@
+[{"model": "pets.otherpet", "pk": 1, "fields": {"pets": "Кошка/кот"}}, {"model": "pets.otherpet", "pk": 2, "fields": {"pets": "Собака"}}, {"model": "pets.otherpet", "pk": 3, "fields": {"pets": "Кролик"}}, {"model": "pets.otherpet", "pk": 4, "fields": {"pets": "Нет животных"}}, {"model": "pets.otherpet", "pk": 5, "fields": {"pets": "Другое (напишу ниже)"}}]
