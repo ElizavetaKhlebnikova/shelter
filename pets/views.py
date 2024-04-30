@@ -66,7 +66,7 @@ class PetsListView(TitleMixin, ListView):  # за ListView зарезервир�
     model = Pet
     template_name = 'pets/pets.html'
     paginate_by = 8
-    title = 'Store - Каталог'
+    title = 'HappyVeganShelter - животные'
 
     def get_queryset(self):
         """Возвращает отфильтрованный список животных"""

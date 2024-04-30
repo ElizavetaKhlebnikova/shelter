@@ -71,7 +71,7 @@ class UserPetsView(TitleMixin, LoginRequiredMixin, ListView):
     model = Pet
     template_name = 'pets/baskets.html'
     paginate_by = 8
-    title = 'Happy vegan shelter - Управление почтовой рассылкой'
+    title = 'Happy vegan shelter - мои любимцы'
 
     def get_queryset(self):
         """Возвращает отфильтрованный список животных"""

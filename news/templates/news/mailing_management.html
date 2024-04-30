@@ -1,6 +1,6 @@
 {% extends 'basic.html' %}
 {% load static %}
-
+{% block title %} {{ title }} {% endblock %}
 {% block css_additional %}
 <!-- Custom styles for this template -->
 <link href="{% static 'vendor/css/pets.css'%}" rel="stylesheet">
