@@ -4,9 +4,6 @@ from pytils.translit import slugify
 from users.models import User
 
 
-# Create your models here.
-
-
 class PetsCategory(models.Model):
     name = models.CharField(max_length=128)
     image = models.ImageField(upload_to='category_images', verbose_name=u"Фото категории", null=True, blank=True, )
@@ -79,7 +76,7 @@ class PetHistory(models.Model):
         verbose_name_plural = 'Истории подопечных'
 
     def __str__(self):
-        return f'Событие из жизни подопечного: {self.pet.name} | Дата: {self.time}'
+        return f'Событие из жизни подопечного: {self.pet.name} | Дата: {self.date}'
 
 
 class PetImage(models.Model):
@@ -93,6 +90,7 @@ class PetImage(models.Model):
 
     def __str__(self):
         return f'Фотография подопечного: {self.pet.name}'
+
 
 class OtherPet(models.Model):
     pets = models.CharField(max_length=20, verbose_name=u"Вид животного")
