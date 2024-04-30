@@ -83,7 +83,7 @@ input {
 main {
   display: flex;
   align-items: flex-start;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   flex-direction: row;
 }
 
