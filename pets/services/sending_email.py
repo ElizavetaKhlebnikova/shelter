@@ -1,12 +1,12 @@
 from django.conf import settings
 from django.core.mail import send_mail
 
-# from ..models import RequestForGuardianship
+from ..models import RequestForGuardianship
 
 
 def send_email_about_request_for_guardianship(request_pk):
     """Генерирует текст письма с информацией о запросе на опеку и отправляет владельцу сайта"""
-    # request_for_guardianship = RequestForGuardianship.objects.get(pk=request_pk)
+    request_for_guardianship = RequestForGuardianship.objects.get(pk=request_pk)
     subject = 'У вас новая заявка на опеку'
     message = 'Дата создания обращения: {}\nПользователь: {}\nEmail: {}\nГород: {}\nЦель запроса: {}\nПитомец: {}\nГотовность выполнения условий: {}'.format(
         request_for_guardianship.created,
