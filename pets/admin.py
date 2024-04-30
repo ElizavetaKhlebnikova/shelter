@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
 from .models import (Basket, OtherPet, Pet, PetHistory, PetImage,
                      PetsCategory, PetStatus, RequestForGuardianship)
 
@@ -15,10 +14,10 @@ admin.site.register(OtherPet)
 @admin.register(Pet)
 class PetAdmin(admin.ModelAdmin):
     list_display = ('name', 'gender', 'category', 'is_hospitalized', 'status')
-    search_fields = ('name', )
+    search_fields = ('name',)
 
 
 class BasketAdmin(admin.TabularInline):
     model = Basket
-    fields = ('pet', )
+    fields = ('pet',)
     extra = 0
