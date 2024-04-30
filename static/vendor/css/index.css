@@ -562,13 +562,13 @@ div.container.about {
   padding-bottom: 90px;
 }
 
-.adv-row {
+.advantages-row {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.adv-text {
+.advantages-text {
   padding: 15px;
   background-color: #e2dcd9d6;
   height: max-content;
@@ -634,18 +634,18 @@ li.heart {
     height: max-content;
     padding-bottom: 90px;
   }
-  .adv-row {
+  .advantages-row {
     align-items: center;
     height: auto;
   }
-  .adv-photos {
+  .advantages-photos {
     height: 500px;
   }
   .pets-images {
     height: 100%;
     width: 45vh;
   }
-  .adv-text {
+  .advantages-text {
     font-size: 18px;
   }
 }
@@ -654,11 +654,11 @@ li.heart {
   .advantages {
     height: auto;
   }
-  .adv-row {
+  .advantages-row {
     flex-direction: column;
     height: auto;
   }
-  .adv-photos {
+  .advantages-photos {
     height: 400px;
   }
   .pets-images {
@@ -672,7 +672,7 @@ li.heart {
       width: auto;
     }
   }
-  .adv-text {
+  .advantages-text {
     font-size: 18px;
     margin-top: 30px;
   }
@@ -682,7 +682,7 @@ li.heart {
   .advantages {
     height: auto;
   }
-  .adv-row {
+  .advantages-row {
     flex-direction: column;
     height: auto;
   }
@@ -690,7 +690,7 @@ li.heart {
     height: 100vh !important;
     width: auto !important;
   }
-  .adv-text {
+  .advantages-text {
     font-size: 18px;
     margin-top: 30px;
   }
