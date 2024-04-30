@@ -1,11 +1,11 @@
 {% extends 'basic.html' %}
 {% load static %}
-{% block title %}  {% endblock %}
+{% block title %} HappyVeganShelter - {{pet.name}} {% endblock %}
 
 {% block css_additional %}
 <!-- Custom styles for this template -->
-<link href="{% static 'vendor/css/pet.css'%}" rel="stylesheet">
 
+<link href="{% static 'vendor/css/pet.css'%}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -32,6 +32,7 @@
 </div>
 
 <div class="history">
+    {% if images|length > 0 %}
     {% if images|length == 1 %}
     <div class="photos">
         {% for image in images %}
@@ -39,7 +40,7 @@
         {% endfor %}
     </div>
     {% else %}
-    <div class="photos" style="width: 150%;">
+    <div class="photos">
         <div class="pet image">
             <div class='slider' id="news">
                 {% for n in images %}
@@ -70,6 +71,7 @@
         </div>
     </div>
 
+    {% endif %}
     {% endif %}
     <div class="history-list">
         {% if history %}
