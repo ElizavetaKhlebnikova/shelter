@@ -10,8 +10,7 @@ from ..models import News, PetSubscriber
 def send_news_email(news_id):
     news = News.objects.get(pk=news_id)
     subject = news.title
-    image = "http://127.0.0.1:8003/" + news.image.url
-    data = {'news': news, 'image': image}
+    data = {'news': news}
     html_body = render_to_string('news/news_email_template.html', data)
     users = User.objects.filter(common_news=True)
     email_list = [user.email for user in users]
