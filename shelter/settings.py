@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_dump_load_utf8',
+    'rest_framework',
+    'rest_framework.authtoken',
 
     'sass_processor',
     'django_filters',
@@ -71,6 +73,7 @@ INSTALLED_APPS = [
     'pets',
     'users',
     'news',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -230,4 +233,12 @@ CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}'
 CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}'
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
-USE_I18N = True
+# REST framework
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 4,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}

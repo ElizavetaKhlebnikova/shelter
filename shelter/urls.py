@@ -18,6 +18,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
+from rest_framework.authtoken import views
+
 from pets.views import IndexView
 
 admin.site.site_header = "Администрирование"
@@ -27,6 +29,8 @@ urlpatterns = [
     path('pets/', include('pets.urls', namespace='pets')),
     path('users/', include('users.urls', namespace='users')),
     path('news/', include('news.urls', namespace='news')),
+    path('api/', include('api.urls', namespace='api')),
+    path('api-token-auth/', views.obtain_auth_token),
 ]
 
 if settings.DEBUG:
