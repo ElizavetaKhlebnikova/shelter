@@ -33,7 +33,7 @@ class Pet(models.Model):
     description = models.TextField(verbose_name=u"Описание")
     image = models.ImageField(upload_to='pet_images', verbose_name=u"Фото животного", null=True, blank=True, )
     category = models.ForeignKey(to=PetsCategory, on_delete=models.CASCADE, verbose_name=u"Вид животного")
-    slug = models.SlugField(default='', null=True, blank=True, )
+    slug = models.SlugField(default='', null=True, blank=True, unique=True)
     needs = models.TextField(verbose_name=u"Нужды в настоящий момент", null=True, blank=True, )
     MALE = 'm'
     FEMALE = 'f'
