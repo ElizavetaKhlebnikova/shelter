@@ -1,5 +1,6 @@
 from django.db import models
 from pytils.translit import slugify
+from django.urls import reverse
 
 from users.models import User
 
@@ -53,9 +54,13 @@ class Pet(models.Model):
 
     def save(self, *args, **kwargs):
         """Генерирует слаг на основании клички и вида животного"""
-        string = self.name + '_' + self.category.name
+        string = self.name + '-' + self.category.name
         self.slug = slugify(string)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('pets:one_pet',
+                       args=[self.slug])
 
 
 class Basket(models.Model):

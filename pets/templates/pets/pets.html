@@ -58,14 +58,14 @@
                 <div class="col-lg-3 col-md-5 col-sm-5 mb-2">
 
                     <div class="card h-100">
-                        <a href="{% url 'pets:one_pet' pet_name=pet.slug %}" class="card_image">
+                        <a href="{{ pet.get_absolute_url }}" class="card_image">
                             <img class="card-img-top"
                                  src="{{ pet.image.url }}"
                                  alt="">
                         </a>
 
                             <div class="card-body">
-                                <a href="{% url 'pets:one_pet' pet_name=pet.slug %}">
+                                <a href="{{ pet.get_absolute_url }}">
                             <h4 class="card-title">
                                 <p>{{ pet.name|title }}</p>
                             </h4>

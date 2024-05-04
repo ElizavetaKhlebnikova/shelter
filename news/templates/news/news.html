@@ -47,7 +47,7 @@
                             <img src='{{n.image.url}}' alt=''>
                         </div>
                     {% if n.connection %}
-                    <a href="{% url 'pets:one_pet' pet_name=n.pet.slug %}">
+                    <a href="{{ n.pet.get_absolute_url }}">
                         <div class="btn btn-one">
                            <span>Узнать больше</span>
                         </div>
