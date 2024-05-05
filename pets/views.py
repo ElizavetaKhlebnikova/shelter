@@ -13,6 +13,7 @@ from .models import (Basket, Pet, PetHistory, PetImage, PetsCategory,
                      PetStatus)
 from news.models import News, PetSubscriber
 from .tasks import send_email_about_request_for_guardianship_task
+from .services.changing_the_basket import create_or_update_the_basket
 
 
 class IndexView(TitleMixin, TemplateView):
@@ -114,11 +115,8 @@ class PetView(TemplateView):
 
 @login_required
 def basket_add(request, pet_id):
-    """Проверяет наличие питомца в корзине пользователя и при его отсутствии добавляет питомца"""
-    pet = Pet.objects.get(id=pet_id)
-    basket = Basket.objects.filter(user=request.user, pet=pet)
-    if not basket.exists():
-        basket.create(user=request.user, pet=pet)
+    """добавляет питомца в любимцы пользователя"""
+    create_or_update_the_basket(pet_id, request.user)
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 

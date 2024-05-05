@@ -1,11 +1,13 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAdminUser, IsAuthenticated, AllowAny
 from rest_framework import status
 from rest_framework.response import Response
 
-from pets.models import Pet, Basket
-from pets.serializers import PetSerializer, BasketSerializer
+from pets.models import Pet, Basket, RequestForGuardianship
+from pets.serializers import PetSerializer, BasketSerializer, RequestForGuardianshipSerializer
 from pets.services.changing_the_basket import create_or_update_the_basket
+from pets.tasks import send_email_about_request_for_guardianship_task
 
 class PetModelViewSet(ModelViewSet):
     queryset = Pet.objects.all()
@@ -40,3 +42,24 @@ class BascketModelViewSet(ModelViewSet):
         except KeyError:
             return Response({'pet_id': 'Данное поле является обязательным'},
                             status=status.HTTP_400_BAD_REQUEST)
+
+
+class RequestForGuardianshipAPIView(APIView):
+    permission_classes = (AllowAny, )
+    serializer_class = RequestForGuardianshipSerializer
+
+    def get(self, request, format=None):
+        snippet = RequestForGuardianship.objects.all()
+        serializer = RequestForGuardianshipSerializer(snippet, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        serializer = RequestForGuardianshipSerializer(data=request.data)
+        if serializer.is_valid():
+            feedback = serializer.save()
+            # data = serializer_class.validated_data
+            # feedback_id = data.get('id')
+            feedback_id = feedback.id
+            send_email_about_request_for_guardianship_task.delay(feedback_id)
+            return Response({'status': 'sent'}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

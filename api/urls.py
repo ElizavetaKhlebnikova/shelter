@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework import routers
 
-from .views import PetModelViewSet, BascketModelViewSet
+from .views import PetModelViewSet, BascketModelViewSet, RequestForGuardianshipAPIView
 
 app_name = 'api'
 
@@ -11,4 +11,6 @@ router.register(r'baskets', BascketModelViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('request-for-guardianship/', RequestForGuardianshipAPIView.as_view()),
+    # path('request-for-guardianship/<int:pk>/', RequestForGuardianshipAPIView.as_view()),
     ]
