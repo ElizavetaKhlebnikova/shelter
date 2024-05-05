@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from pets.models import Pet, PetsCategory, PetStatus
+from pets.models import Pet, PetsCategory, PetStatus, Basket
 
 
 class PetSerializer(serializers.ModelSerializer):
@@ -10,10 +10,17 @@ class PetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
         fields = ('id',
-                 'name',
-                 'description',
-                 'image',
-                 'category',
-                 'is_hospitalized',
-                 'gender',
-                 'status')
+                  'name',
+                  'description',
+                  'image',
+                  'category',
+                  'is_hospitalized',
+                  'gender',
+                  'status')
+
+class BasketSerializer(serializers.ModelSerializer):
+    pet = PetSerializer()
+    class Meta:
+        model = Basket
+        fields = ("id", "pet", "created_timestamp")
+        read_only_fields = ('created_timestamp', )
