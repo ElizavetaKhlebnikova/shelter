@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_dump_load_utf8',
     'rest_framework',
+    'drf_spectacular',
     'rest_framework.authtoken',
 
     'sass_processor',
@@ -240,5 +241,11 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 4,
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-    ]
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Shelter Project",
+    "DESCRIPTION": "An animal rescue project",
+    "VERSION": "1.0.0"
 }

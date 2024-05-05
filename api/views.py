@@ -13,6 +13,7 @@ from pets.services.changing_the_basket import create_or_update_the_basket
 from pets.tasks import send_email_about_request_for_guardianship_task
 from users.tasks import send_email_verification
 
+
 class PetModelViewSet(ModelViewSet):
     queryset = Pet.objects.all()
     serializer_class = PetSerializer

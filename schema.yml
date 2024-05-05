@@ -1,0 +1,650 @@
+openapi: 3.0.3
+info:
+  title: Shelter Project
+  version: 1.0.0
+  description: An animal rescue project
+paths:
+  /api-token-auth/:
+    post:
+      operationId: api_token_auth_create
+      tags:
+      - api-token-auth
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+          description: ''
+  /api/baskets/:
+    get:
+      operationId: api_baskets_list
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Basket'
+          description: ''
+    post:
+      operationId: api_baskets_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Basket'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Basket'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Basket'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Basket'
+          description: ''
+  /api/baskets/{id}/:
+    get:
+      operationId: api_baskets_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this basket.
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Basket'
+          description: ''
+    put:
+      operationId: api_baskets_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this basket.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Basket'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Basket'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Basket'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Basket'
+          description: ''
+    patch:
+      operationId: api_baskets_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this basket.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBasket'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBasket'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBasket'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Basket'
+          description: ''
+    delete:
+      operationId: api_baskets_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this basket.
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/pets/:
+    get:
+      operationId: api_pets_list
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPetList'
+          description: ''
+    post:
+      operationId: api_pets_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Pet'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+          description: ''
+  /api/pets/{id}/:
+    get:
+      operationId: api_pets_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this подопечный.
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+          description: ''
+    put:
+      operationId: api_pets_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this подопечный.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Pet'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+          description: ''
+    patch:
+      operationId: api_pets_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this подопечный.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPet'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPet'
+      security:
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+          description: ''
+    delete:
+      operationId: api_pets_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this подопечный.
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/register/:
+    post:
+      operationId: api_register_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistration'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserRegistration'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserRegistration'
+        required: true
+      security:
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRegistration'
+          description: ''
+  /api/request-for-guardianship/:
+    get:
+      operationId: api_request_for_guardianship_retrieve
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestForGuardianship'
+          description: ''
+    post:
+      operationId: api_request_for_guardianship_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestForGuardianship'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RequestForGuardianship'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RequestForGuardianship'
+        required: true
+      security:
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestForGuardianship'
+          description: ''
+components:
+  schemas:
+    AuthToken:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+          title: Имя пользователя
+        password:
+          type: string
+          writeOnly: true
+          title: Пароль
+        token:
+          type: string
+          readOnly: true
+          title: Токен
+      required:
+      - password
+      - token
+      - username
+    Basket:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        pet:
+          $ref: '#/components/schemas/Pet'
+        created_timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_timestamp
+      - id
+      - pet
+    GenderEnum:
+      enum:
+      - m
+      - f
+      type: string
+      description: |-
+        * `m` - Мальчик
+        * `f` - Девочка
+    GoalEnum:
+      enum:
+      - None
+      - foster care
+      - home
+      type: string
+      description: |-
+        * `None` - не выбрано
+        * `foster care` - передержка
+        * `home` - дом
+    PaginatedPetList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pet'
+    PatchedBasket:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        pet:
+          $ref: '#/components/schemas/Pet'
+        created_timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedPet:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Кличка животного
+          maxLength: 256
+        description:
+          type: string
+          title: Описание
+        image:
+          type: string
+          format: uri
+          nullable: true
+          title: Фото животного
+        category:
+          type: string
+        is_hospitalized:
+          type: boolean
+          title: Находится в стационаре
+        gender:
+          allOf:
+          - $ref: '#/components/schemas/GenderEnum'
+          title: Пол животного
+        status:
+          type: string
+    Pet:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Кличка животного
+          maxLength: 256
+        description:
+          type: string
+          title: Описание
+        image:
+          type: string
+          format: uri
+          nullable: true
+          title: Фото животного
+        category:
+          type: string
+        is_hospitalized:
+          type: boolean
+          title: Находится в стационаре
+        gender:
+          allOf:
+          - $ref: '#/components/schemas/GenderEnum'
+          title: Пол животного
+        status:
+          type: string
+      required:
+      - category
+      - description
+      - id
+      - name
+      - status
+    RequestForGuardianship:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user_name:
+          type: string
+          title: Имя пользователя
+          maxLength: 256
+        email:
+          type: string
+          format: email
+          title: Электронная почта для связи
+          maxLength: 254
+        pet:
+          type: string
+          title: Кличка подопечного
+          maxLength: 256
+        city:
+          type: string
+          title: Город проживания
+          maxLength: 256
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        goal:
+          allOf:
+          - $ref: '#/components/schemas/GoalEnum'
+          title: Кем вы готовы стать для животного?
+        other_pets:
+          type: array
+          items:
+            type: integer
+            title: 'Если у вас уже есть питомцы, укажите, какие:'
+          title: 'Если у вас уже есть питомцы, укажите, какие:'
+        other_pet:
+          type: string
+          nullable: true
+          title: Укажите вид вашего питомца
+          maxLength: 256
+        conditions:
+          type: boolean
+          title: Готовы ли вы выполнить все условия?
+      required:
+      - city
+      - conditions
+      - created
+      - email
+      - goal
+      - id
+      - other_pets
+      - pet
+      - user_name
+    UserRegistration:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          title: Имя пользователя
+          description: Обязательное поле. Не более 150 символов. Только буквы, цифры
+            и символы @/./+/-/_.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        first_name:
+          type: string
+          title: Имя
+          maxLength: 150
+        last_name:
+          type: string
+          title: Фамилия
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          writeOnly: true
+          title: Пароль
+          maxLength: 128
+        password1:
+          type: string
+          writeOnly: true
+      required:
+      - email
+      - id
+      - password
+      - password1
+      - username
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
